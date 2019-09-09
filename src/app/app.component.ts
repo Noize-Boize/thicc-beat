@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as Tone from 'tone';
 
+//note frequencies
 var cFreq = 262;
 var dFreq = 293.66;
 var eFreq = 329.63;
@@ -9,8 +10,10 @@ var gFreq = 392;
 var aFreq = 440;
 var bFreq = 493.88;
 
+//what octave you're in
 var octave = 1;
 
+//source oscillators
 var c = new Tone.FatOscillator(cFreq*octave,"sine").toMaster();
 var d = new Tone.FatOscillator(dFreq*octave, "sine").toMaster();
 var e = new Tone.FatOscillator(eFreq*octave, "sine").toMaster();
@@ -19,11 +22,12 @@ var g = new Tone.FatOscillator(gFreq*octave, "sine").toMaster();
 var a = new Tone.FatOscillator(aFreq*octave,"sine").toMaster();
 var b = new Tone.FatOscillator(bFreq*octave, "sine").toMaster();
 
-
+//instruments
 var ms = new Tone.MembraneSynth().toMaster();
 var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 
+//loops
 Tone.Transport.bpm.value = 140;
 var loopB = new Tone.Loop(kickF, "4n").start(0);
 var loopC = new Tone.Loop(cymF, "16n").start(0);
@@ -33,7 +37,7 @@ Tone.Transport.start();
 Tone.Transport.stop();
 
 
-
+//callback functions
 function kickF(time){
   ms.triggerAttackRelease('c1','4n',time);
 }
