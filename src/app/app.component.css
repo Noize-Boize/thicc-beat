@@ -1,0 +1,38 @@
+
+.instrument{
+    background: white;
+    height: 100px;
+    width: 100px;
+    margin: 10px;
+    border-style: solid;
+    text-align: center;
+}
+
+#thing{
+    height:auto;
+    width:auto;
+    margin: 10px;
+    border:10px;
+    border-style: double;
+    border-radius: 10%;
+    padding: 10px;
+    position: relative;
+}
+
+#sampler{
+
+
+}
+
+#sequencer{
+
+}
+
+#waveform{
+
+}
+
+button{
+  margin: 5px;
+
+}
