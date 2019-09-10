@@ -27,16 +27,17 @@ var ms = new Tone.MembraneSynth().toMaster();
 var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 var ps = new Tone.PluckSynth().toMaster();
+var sampler = new Tone.Sampler({
+	"C3" : "C3.[mp3|ogg]"
+},samplerStart).toMaster();
 
 //loops
 Tone.Transport.bpm.value = 140;
 //loop takes callback function to play over and over and a time. 4n is a quarter note
-var loopB = new Tone.Loop(kickF, "4n").start(0);
-var loopC = new Tone.Loop(cymF, "16n").start(0);
-var loopD = new Tone.Loop(hhF,"8n").start(0);
-
-Tone.Transport.start();
-Tone.Transport.stop();
+//var loopB = new Tone.Loop(kickF, "4n").start(0);
+//var loopC = new Tone.Loop(cymF, "16n").start(0);
+//var loopD = new Tone.Loop(hhF,"8n").start(0);
+var loopK = new Tone.Loop(quadKick,"16n");
 
 
 //callback functions
@@ -50,9 +51,22 @@ function hhF(time){
   //hh.triggerAttackRelease('b4','8n',time);
   hh.triggerAttackRelease('g4','8n',time);
 }
+function quadKick(time){
+  ps.triggerAttackRelease('c4','16n',time);
+}
+function samplerStart(time){
+  sampler.triggerAttack("C3");
+
+}
 
 
 
+function argh(){
+  Tone.Transport.start().scheduleRepeat(quadKick,"16n","0m","4n");
+
+  //Tone.Transport.start();
+  //loopK.start().stop('4n');
+}
 
 
 @Component({
@@ -63,18 +77,16 @@ function hhF(time){
 
 export class AppComponent {
 
-  onClick(){
-    //var crusher = new Tone.BitCrusher(4).toMaster();
-    //var reverb = new Tone.Freeverb().toMaster();
-    //osc.start();
+  startLoop(){
+    argh();
+
 
   }
 
   stopIt(){
-    //osc.stop();
-
-
+    Tone.Transport.stop(0);
   }
+
 
   playC(){
     c.start();
@@ -89,7 +101,6 @@ export class AppComponent {
     d.stop();},2000);
 
   }
-
   playE(){
     e.start();
 
@@ -97,38 +108,33 @@ export class AppComponent {
     e.stop();},2000);
 
   }
-
-    playF(){
+  playF(){
       f.start();
       setTimeout(function(){
       f.stop();},2000);
 
     }
-
-    playG(){
+  playG(){
       g.start();
 
       setTimeout(function(){
       g.stop();},2000);
 
     }
-
-    playA(){
+  playA(){
       a.start();
 
       setTimeout(function(){
       a.stop();},2000);
 
     }
-
-    playB(){
+  playB(){
       b.start();
       setTimeout(function(){
       b.stop();},2000);
 
     }
-
-    octaveUp(){
+  octaveUp(){
       octave++;
       console.log("octave up");
       c.frequency.value = octave*cFreq;
@@ -139,8 +145,7 @@ export class AppComponent {
       a.frequency.value = octave*aFreq;
       b.frequency.value = octave*bFreq;
     }
-
-    octaveDown(){
+  octaveDown(){
       octave--;
       console.log("octave down");
       c.frequency.value = octave*cFreq;
@@ -150,6 +155,9 @@ export class AppComponent {
       g.frequency.value = octave*gFreq;
       a.frequency.value = octave*aFreq;
       b.frequency.value = octave*bFreq;
+    }
+  logPosition(){
+      console.log(Tone.Transport.position);
     }
 
 
