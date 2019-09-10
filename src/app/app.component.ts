@@ -26,9 +26,11 @@ var b = new Tone.FatOscillator(bFreq*octave, "sine").toMaster();
 var ms = new Tone.MembraneSynth().toMaster();
 var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
+var ps = new Tone.PluckSynth().toMaster();
 
 //loops
 Tone.Transport.bpm.value = 140;
+//loop takes callback function to play over and over and a time. 4n is a quarter note
 var loopB = new Tone.Loop(kickF, "4n").start(0);
 var loopC = new Tone.Loop(cymF, "16n").start(0);
 var loopD = new Tone.Loop(hhF,"8n").start(0);
@@ -44,11 +46,13 @@ function kickF(time){
 function cymF(time){
   cy.triggerAttackRelease('e2','16n',time);
 }
-
 function hhF(time){
-  hh.triggerAttackRelease('b4','8n',time);
+  //hh.triggerAttackRelease('b4','8n',time);
   hh.triggerAttackRelease('g4','8n',time);
 }
+
+
+
 
 
 @Component({
@@ -129,11 +133,11 @@ export class AppComponent {
       console.log("octave up");
       c.frequency.value = octave*cFreq;
       d.frequency.value = octave*dFreq;
-      d.frequency.value = octave*eFreq;
-      d.frequency.value = octave*fFreq;
-      d.frequency.value = octave*gFreq;
-      d.frequency.value = octave*aFreq;
-      d.frequency.value = octave*bFreq;
+      e.frequency.value = octave*eFreq;
+      f.frequency.value = octave*fFreq;
+      g.frequency.value = octave*gFreq;
+      a.frequency.value = octave*aFreq;
+      b.frequency.value = octave*bFreq;
     }
 
     octaveDown(){
@@ -141,11 +145,13 @@ export class AppComponent {
       console.log("octave down");
       c.frequency.value = octave*cFreq;
       d.frequency.value = octave*dFreq;
-      d.frequency.value = octave*eFreq;
-      d.frequency.value = octave*fFreq;
-      d.frequency.value = octave*gFreq;
-      d.frequency.value = octave*aFreq;
-      d.frequency.value = octave*bFreq;
+      e.frequency.value = octave*eFreq;
+      f.frequency.value = octave*fFreq;
+      g.frequency.value = octave*gFreq;
+      a.frequency.value = octave*aFreq;
+      b.frequency.value = octave*bFreq;
     }
+
+
 
   }
