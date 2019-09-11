@@ -28,9 +28,16 @@ var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 var ps = new Tone.PluckSynth().toMaster();
 
-var player = new Tone.Player("./assets/audio.wav").toMaster();
+//var player = new Tone.Player("./assets/audio.wav").toMaster();
 //play as soon as the buffer is loaded
-player.autostart = true;
+//player.autostart = true;
+
+var sampler = new Tone.Sampler({
+	"C3" : "./assets/audio.wav",
+  "D3" : "./assets/audio.mp3",
+  "E3" : "./assets/C3.mp3",
+}).toMaster();
+
 
 
 //loops
@@ -69,7 +76,6 @@ function argh(){
   //Tone.Transport.start();
   //loopK.start().stop('4n');
 }
-
 
 @Component({
   selector: 'app-root',
@@ -158,5 +164,11 @@ export class AppComponent {
     }
 
 
+    sample1(){
+      sampler.triggerAttack("C3");
+    }
+    sample2(){
+      sampler.triggerAttack("E3");
+    }
 
   }
