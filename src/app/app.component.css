@@ -7,7 +7,18 @@
     border-style: solid;
     text-align: center;
 }
-
+.pad{
+  background: black;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  border-style: dashed;
+  text-align: center;
+  text-decoration-color: white;
+}
+.pad:hover{
+background: blue;
+}
 #thing{
     height:auto;
     width:auto;
@@ -20,7 +31,8 @@
 }
 
 #sampler{
-
+  height: auto;
+  width: auto;
 
 }
 

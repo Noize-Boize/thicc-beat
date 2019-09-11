@@ -27,9 +27,11 @@ var ms = new Tone.MembraneSynth().toMaster();
 var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 var ps = new Tone.PluckSynth().toMaster();
-var sampler = new Tone.Sampler({
-	"C3" : "C3.[mp3|ogg]"
-},samplerStart).toMaster();
+
+var player = new Tone.Player("audio.mp3").toMaster();
+//play as soon as the buffer is loaded
+player.autostart = true;
+
 
 //loops
 Tone.Transport.bpm.value = 140;
@@ -54,10 +56,10 @@ function hhF(time){
 function quadKick(time){
   ps.triggerAttackRelease('c4','16n',time);
 }
-function samplerStart(time){
-  sampler.triggerAttack("C3");
 
-}
+//function playerStart(time){
+//  player.start();
+//}
 
 
 
@@ -79,15 +81,10 @@ export class AppComponent {
 
   startLoop(){
     argh();
-
-
   }
-
   stopIt(){
     Tone.Transport.stop(0);
   }
-
-
   playC(){
     c.start();
 
