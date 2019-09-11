@@ -37,7 +37,6 @@ button{
   margin: 5px;
 
 }
-/*this is just a test change */
 
 
 
@@ -59,13 +58,15 @@ button{
   margin-top: 25px;
 }
 
-#audio-bank{
-  position: absolute;
-  background-color: blue;
-  height: 87%;
-  width: 25%;
-  top: 15px;
-  left: 10px;
+.audio-bank{
+  background-color: lightblue;
+  height: 50px;
+  width: 40%;
+  margin-left: 20px;
+  border: 1px solid saddlebrown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sampler-pad-box {
