@@ -28,7 +28,7 @@ var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 var ps = new Tone.PluckSynth().toMaster();
 
-var player = new Tone.Player("audio.mp3").toMaster();
+var player = new Tone.Player("./assets/audio.wav").toMaster();
 //play as soon as the buffer is loaded
 player.autostart = true;
 
