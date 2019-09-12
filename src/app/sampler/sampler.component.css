@@ -4,14 +4,6 @@
   height: auto;
   width: auto;
 }
-.instrument{
-    background: white;
-    height: 100px;
-    width: 100px;
-    margin: 10px;
-    border-style: solid;
-    text-align: center;
-}
 .pad{
   background: white;
   height: 50px;
@@ -24,38 +16,13 @@
   text-decoration-color: white;
 }
 .pad:hover{
-background: blue;
+  background: blue;
 }
 
 /*ID's*/
-#thing{
-    height:auto;
-    width:auto;
-    margin: 10px;
-    border:10px;
-    border-style: double;
-    border-radius: 5%;
-    padding: 10px;
-    position: relative;
-}
-
-#sampler{
-  height: 220px;
-  width: 190px;
-  border-style: solid;
-  /*absolute position made it enclose the pads but still messed it up*/
-  /*position: absolute;*/
-  position: relative;
-  padding: 2px;
-  text-align: center;
-}
-
-#sequencer{
-  position: relative;
-}
-
-#waveform{
-  position: relative;
+#samplerEffects{
+  border-width: 2px;
+  border-style: groove;
 }
 
 /*divs*/
