@@ -5,20 +5,23 @@ HEY BITCH!
 
   <div class="instrument" id="sampler">
 SAMPLER
+<div class="row">
+  <span class="pad" (click) = sample1()>  1 </span>
+  <span class="pad" (click) = sample2()>  2 </span>
+  <span class="pad" (click) = sample3()>  3 </span>
+</div>
 
-<hr>
-<span class="pad" (click) = sample1()>  note </span>
-<span class="pad" (click) = sample2()>  note </span>
-<span class="pad">  note </span>
-<hr>
-<span class="pad">  note </span>
-<span class="pad">  note </span>
-<span class="pad">  note </span>
-<hr>
-<span class="pad">  note </span>
-<span class="pad">  note </span>
-<span class="pad">  note </span>
+<div class="row">
+  <span class="pad" (click) = sample4()>  4 </span>
+  <span class="pad" (click) = sample5()>  5 </span>
+  <span class="pad" (click) = sample6()>  6 </span>
+</div>
 
+<div class="row">
+  <span class="pad" (click) = sample7()>  7 </span>
+  <span class="pad" (click) = sample8()>  8 </span>
+  <span class="pad" (click) = sample9()>  9 </span>
+</div>
 
   </div>
 
@@ -38,7 +41,7 @@ WAVEFORM
 <button type="button" (click) = "playG()">G</button>
 <button type="button" (click) = "playA()">A</button>
 <button type="button" (click) = "playB()">B</button>
-<hr>
+
 </div>
 
 <button type="button" (click) = octaveUp()>OCT UP</button>

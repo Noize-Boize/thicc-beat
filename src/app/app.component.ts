@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import * as Tone from 'tone';
 
+
+Tone.Transport.bpm.value = 140;
+
 //note frequencies
 var cFreq = 262;
 var dFreq = 293.66;
@@ -28,24 +31,37 @@ var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 var ps = new Tone.PluckSynth().toMaster();
 
+//Example of a simple Player
 //var player = new Tone.Player("./assets/audio.wav").toMaster();
 //play as soon as the buffer is loaded
 //player.autostart = true;
 
+//Sampler
 var sampler = new Tone.Sampler({
-	"C3" : "./assets/audio.wav",
-  "D3" : "./assets/audio.mp3",
-  "E3" : "./assets/C3.mp3",
+  //call sampler.triggerAttack("note") to execute audio file associated w it
+  //should be able to incorporate sharps so we have up to 12 triggerable audio files
+	"C3" : "BACKGROUNDMUSIC.mp3",
+  "D3" : "DOLPHIN.mp3",
+  "E3" : "FART.mp3",
+  "F3" : "RUBBER DUCK.mp3",
+  "G3" : "SCREAM.mp3",
+  "A3" : "SPLAT.mp3",
+  "B3" : "TOASTY.mp3",
+  "C4" : "NOPE.mp3",
+	"D4" : "HEY WHAT HAPPENED.mp3",
+},{
+  //this is prepended to all the other paths
+  "baseUrl": "./assets/audioSamples/"
 }).toMaster();
 
 
 
 //loops
-Tone.Transport.bpm.value = 140;
 //loop takes callback function to play over and over and a time. 4n is a quarter note
-//var loopB = new Tone.Loop(kickF, "4n").start(0);
-//var loopC = new Tone.Loop(cymF, "16n").start(0);
-//var loopD = new Tone.Loop(hhF,"8n").start(0);
+//call loopname.start(0); to start it immediately
+var loopB = new Tone.Loop(kickF, "4n");
+var loopC = new Tone.Loop(cymF, "16n");
+var loopD = new Tone.Loop(hhF,"8n");
 var loopK = new Tone.Loop(quadKick,"16n");
 
 
@@ -85,12 +101,17 @@ function argh(){
 
 export class AppComponent {
 
+  //attached to the Test button for testing something quick
   startLoop(){
     argh();
   }
+
+  //stop the Transport
   stopIt(){
     Tone.Transport.stop(0);
   }
+
+  //play oscillator note
   playC(){
     c.start();
 
@@ -159,16 +180,40 @@ export class AppComponent {
       a.frequency.value = octave*aFreq;
       b.frequency.value = octave*bFreq;
     }
+
+  //log position of the transport
   logPosition(){
       console.log(Tone.Transport.position);
     }
 
 
-    sample1(){
-      sampler.triggerAttack("C3");
-    }
-    sample2(){
-      sampler.triggerAttack("E3");
-    }
+    //Sample triggers
+  sample1(){
+    sampler.triggerAttack("C3");
+  }
+  sample2(){
+    sampler.triggerAttack("D3");
+  }
+  sample3(){
+    sampler.triggerAttack("E3");
+  }
+  sample4(){
+    sampler.triggerAttack("F3");
+  }
+  sample5(){
+    sampler.triggerAttack("G3");
+  }
+  sample6(){
+    sampler.triggerAttack("A3");
+  }
+  sample7(){
+    sampler.triggerAttack("B3");
+  }
+  sample8(){
+    sampler.triggerAttack("C4");
+  }
+  sample9(){
+    sampler.triggerAttack("D4");
+  }
 
   }

@@ -1,4 +1,8 @@
-
+.row{
+  margin: 1px;
+  height: auto;
+  width: auto;
+}
 .instrument{
     background: white;
     height: 100px;
@@ -8,12 +12,14 @@
     text-align: center;
 }
 .pad{
-  background: black;
-  height: 20px;
-  width: 20px;
+  background: white;
+  height: 50px;
+  width: 50px;
   margin: 5px;
   border-style: dashed;
   text-align: center;
+  font-size: 20pt;
+  font-family: monospace;
   text-decoration-color: white;
 }
 .pad:hover{
@@ -31,17 +37,21 @@ background: blue;
 }
 
 #sampler{
-  height: auto;
-  width: auto;
-
+  height: 220px;
+  width: 190px;
+  border-style: solid;
+  /*absolute position made it enclose the pads but still messed it up*/
+  /*position: absolute;*/
+  position: relative;
+  padding: 2px;
 }
 
 #sequencer{
-
+  position: relative;
 }
 
 #waveform{
-
+  position: relative;
 }
 
 button{
