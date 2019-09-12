@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import * as Tone from 'tone';
 
 
-Tone.Transport.bpm.value = 140;
 
 //note frequencies
 var cFreq = 262;
@@ -25,35 +24,11 @@ var g = new Tone.FatOscillator(gFreq*octave, "sine").toMaster();
 var a = new Tone.FatOscillator(aFreq*octave,"sine").toMaster();
 var b = new Tone.FatOscillator(bFreq*octave, "sine").toMaster();
 
-//instruments
+//some instruments
 var ms = new Tone.MembraneSynth().toMaster();
 var cy = new Tone.Synth().toMaster();
 var hh = new Tone.Synth().toMaster();
 var ps = new Tone.PluckSynth().toMaster();
-
-//Example of a simple Player
-//var player = new Tone.Player("./assets/audio.wav").toMaster();
-//play as soon as the buffer is loaded
-//player.autostart = true;
-
-//Sampler
-var sampler = new Tone.Sampler({
-  //call sampler.triggerAttack("note") to execute audio file associated w it
-  //should be able to incorporate sharps so we have up to 12 triggerable audio files
-	"C3" : "BACKGROUNDMUSIC.mp3",
-  "D3" : "DOLPHIN.mp3",
-  "E3" : "FART.mp3",
-  "F3" : "RUBBER DUCK.mp3",
-  "G3" : "SCREAM.mp3",
-  "A3" : "SPLAT.mp3",
-  "B3" : "TOASTY.mp3",
-  "C4" : "NOPE.mp3",
-	"D4" : "HEY WHAT HAPPENED.mp3",
-},{
-  //this is prepended to all the other paths
-  "baseUrl": "./assets/audioSamples/"
-}).toMaster();
-
 
 
 //loops
@@ -63,7 +38,6 @@ var loopB = new Tone.Loop(kickF, "4n");
 var loopC = new Tone.Loop(cymF, "16n");
 var loopD = new Tone.Loop(hhF,"8n");
 var loopK = new Tone.Loop(quadKick,"16n");
-
 
 //callback functions
 function kickF(time){
@@ -80,12 +54,9 @@ function quadKick(time){
   ps.triggerAttackRelease('c4','16n',time);
 }
 
-//function playerStart(time){
-//  player.start();
-//}
 
 
-
+//a testing function to play with
 function argh(){
   Tone.Transport.start().scheduleRepeat(quadKick,"16n","0m","4n");
 
@@ -98,6 +69,7 @@ function argh(){
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 
 export class AppComponent {
 
@@ -114,49 +86,38 @@ export class AppComponent {
   //play oscillator note
   playC(){
     c.start();
-
     setTimeout(function(){
     c.stop();},2000);
-
   }
   playD(){
     d.start();
     setTimeout(function(){
     d.stop();},2000);
-
   }
   playE(){
     e.start();
-
     setTimeout(function(){
     e.stop();},2000);
-
   }
   playF(){
       f.start();
       setTimeout(function(){
       f.stop();},2000);
-
     }
   playG(){
       g.start();
-
       setTimeout(function(){
       g.stop();},2000);
-
     }
   playA(){
       a.start();
-
       setTimeout(function(){
       a.stop();},2000);
-
     }
   playB(){
       b.start();
       setTimeout(function(){
       b.stop();},2000);
-
     }
   octaveUp(){
       octave++;
@@ -186,34 +147,5 @@ export class AppComponent {
       console.log(Tone.Transport.position);
     }
 
-
-    //Sample triggers
-  sample1(){
-    sampler.triggerAttack("C3");
-  }
-  sample2(){
-    sampler.triggerAttack("D3");
-  }
-  sample3(){
-    sampler.triggerAttack("E3");
-  }
-  sample4(){
-    sampler.triggerAttack("F3");
-  }
-  sample5(){
-    sampler.triggerAttack("G3");
-  }
-  sample6(){
-    sampler.triggerAttack("A3");
-  }
-  sample7(){
-    sampler.triggerAttack("B3");
-  }
-  sample8(){
-    sampler.triggerAttack("C4");
-  }
-  sample9(){
-    sampler.triggerAttack("D4");
-  }
 
   }

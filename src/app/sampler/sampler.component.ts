@@ -1,15 +1,106 @@
 import { Component, OnInit } from '@angular/core';
+import * as Tone from 'tone';
+
+
+
+//Sampler
+var sampler = new Tone.Sampler({
+  //call sampler.triggerAttack("note") to execute audio file associated w it
+  //should be able to incorporate sharps so we have up to 12 triggerable audio files
+	"C3" : "BACKGROUNDMUSIC.mp3",
+  "D3" : "DOLPHIN.mp3",
+  "E3" : "FART.mp3",
+  "F3" : "RUBBER DUCK.mp3",
+  "G3" : "SCREAM.mp3",
+  "A3" : "SPLAT.mp3",
+  "B3" : "TOASTY.mp3",
+  "C4" : "NOPE.mp3",
+	"D4" : "HEY WHAT HAPPENED.mp3",
+},{
+  //this is prepended to all the other paths
+  "baseUrl": "./../../assets/audioSamples/"
+}).toMaster();
+
+//sampler effects
+var chorus = new Tone.Chorus(
+{frequency : 4 ,
+delayTime : 3.5 ,
+depth : 5 ,
+type : "sine" ,
+spread : 200
+}).toMaster();
+var phaser = new Tone.Phaser().toMaster();
+var reverb = new Tone.Reverb(
+{decay : 10 ,
+preDelay : 0.01
+}).toMaster();
+var pitch = new Tone.PitchShift(
+{
+pitch : -24 ,
+windowSize : 0.1 ,
+delayTime : 0 ,
+feedback : 0,
+wet: 1,
+}
+).toMaster();
+
 
 @Component({
   selector: 'app-sampler',
   templateUrl: './sampler.component.html',
   styleUrls: ['./sampler.component.css']
 })
+
 export class SamplerComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  //Sample triggers
+sample1(){
+  sampler.triggerAttack("C3");
+}
+sample2(){
+  sampler.triggerAttack("D3");
+}
+sample3(){
+  sampler.triggerAttack("E3");
+}
+sample4(){
+  sampler.triggerAttack("F3");
+}
+sample5(){
+  sampler.triggerAttack("G3");
+}
+sample6(){
+  sampler.triggerAttack("A3");
+}
+sample7(){
+  sampler.triggerAttack("B3");
+}
+sample8(){
+  sampler.triggerAttack("C4");
+}
+sample9(){
+  sampler.triggerAttack("D4");
+}
+
+//sampler effects
+chorusON(){
+  sampler.connect(chorus);
+}
+reverbON(){
+  sampler.connect(reverb);
+}
+pitchON(){
+  sampler.disconnect(Tone.Master)
+  sampler.connect(pitch);
+}
+
+
+
+
 
 }
