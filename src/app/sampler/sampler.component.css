@@ -23,6 +23,8 @@
 #samplerEffects{
   border-width: 2px;
   border-style: groove;
+  height: 200px;
+  width: 250px;
 }
 
 /*divs*/

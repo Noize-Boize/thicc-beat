@@ -7,7 +7,7 @@ import * as Tone from 'tone';
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
   //should be able to incorporate sharps so we have up to 12 triggerable audio files
-	"C3" : "BACKGROUNDMUSIC.mp3",
+	"C3" : "EXPLOSION.mp3",
   "D3" : "DOLPHIN.mp3",
   "E3" : "FART.mp3",
   "F3" : "RUBBER DUCK.mp3",
@@ -20,6 +20,9 @@ var sampler = new Tone.Sampler({
   //this is prepended to all the other paths
   "baseUrl": "./../../assets/audioSamples/"
 }).toMaster();
+
+//player for background music
+var player = new Tone.Player("./../../assets/audioSamples/BACKGROUNDMUSIC.mp3").toMaster();
 
 //sampler effects
 var chorus = new Tone.Chorus(
@@ -89,14 +92,38 @@ sample9(){
 
 //sampler effects
 chorusON(){
+	sampler.disconnect(Tone.Master);
   sampler.connect(chorus);
 }
+chorusOFF(){
+	sampler.disconnect(chorus);
+	sampler.connect(Tone.Master);
+}
 reverbON(){
+	sampler.disconnect(Tone.Master);
   sampler.connect(reverb);
 }
+reverbOFF(){
+	sampler.disconnect(reverb);
+	sampler.connect(Tone.Master);
+}
 pitchON(){
-  sampler.disconnect(Tone.Master)
+  sampler.disconnect(Tone.Master);
   sampler.connect(pitch);
+}
+pitchOFF(){
+	sampler.disconnect(pitch);
+	sampler.connect(Tone.Master);
+}
+
+BGON(){
+	player.start();
+}
+BGOFF(){
+	player.stop();
+}
+BG3(){
+	sampler.triggerAttack('E1');
 }
 
 
