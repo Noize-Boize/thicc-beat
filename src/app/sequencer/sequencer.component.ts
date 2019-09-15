@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Tone from 'tone';
 
 @Component({
   selector: 'app-sequencer',

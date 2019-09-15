@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Tone from 'tone';
 
-
-
 //Sampler
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
@@ -39,7 +37,7 @@ preDelay : 0.01
 }).toMaster();
 var pitch = new Tone.PitchShift(
 {
-pitch : -24 ,
+pitch : -12 ,
 windowSize : 0.1 ,
 delayTime : 0 ,
 feedback : 0,
@@ -116,18 +114,19 @@ pitchOFF(){
 	sampler.connect(Tone.Master);
 }
 
+//background music
 BGON(){
 	player.start();
 }
 BGOFF(){
 	player.stop();
 }
-BG3(){
-	sampler.triggerAttack('E1');
+
+//adjust playback rate
+adjustPlayback(time){
+	console.log(time);
+	player.playbackRate = time;
 }
-
-
-
 
 
 }

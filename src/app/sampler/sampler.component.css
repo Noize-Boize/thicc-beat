@@ -25,10 +25,20 @@
   border-style: groove;
   height: 200px;
   width: 250px;
+  background-color: green;
+}
+
+#backgroundMusic{
+  background-color: blue;
+  height:auto;
+  width: auto;
+}
+
+#pads{
+  background-color: green;
 }
 
 /*divs*/
 button{
   margin: 5px;
-
 }
