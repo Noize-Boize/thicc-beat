@@ -5,7 +5,7 @@ import * as Tone from 'tone';
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
   //should be able to incorporate sharps so we have up to 12 triggerable audio files
-	"C3" : "EXPLOSION.mp3",
+	"C3" : "EVERYBODY PUT YOUR HANDS IN THE AIR.mp3",
   "D3" : "DOLPHIN.mp3",
   "E3" : "FART.mp3",
   "F3" : "RUBBER DUCK.mp3",
@@ -21,7 +21,6 @@ var sampler = new Tone.Sampler({
 
 //player for background music
 var player = new Tone.Player("./../../assets/audioSamples/BACKGROUNDMUSIC.mp3").toMaster();
-
 //sampler effects
 var chorus = new Tone.Chorus(
 {frequency : 4 ,
@@ -32,7 +31,7 @@ spread : 200
 }).toMaster();
 var phaser = new Tone.Phaser().toMaster();
 var reverb = new Tone.Reverb(
-{decay : 10 ,
+{decay : 3,
 preDelay : 0.01
 }).toMaster();
 var pitch = new Tone.PitchShift(
@@ -54,10 +53,12 @@ wet: 1,
 
 export class SamplerComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {
   }
+
 
   //Sample triggers
 sample1(){
@@ -98,12 +99,10 @@ chorusOFF(){
 	sampler.connect(Tone.Master);
 }
 reverbON(){
-	sampler.disconnect(Tone.Master);
   sampler.connect(reverb);
 }
 reverbOFF(){
 	sampler.disconnect(reverb);
-	sampler.connect(Tone.Master);
 }
 pitchON(){
   sampler.disconnect(Tone.Master);
@@ -123,10 +122,7 @@ BGOFF(){
 }
 
 //adjust playback rate
-adjustPlayback(time){
-	console.log(time);
-	player.playbackRate = time;
-}
+
 
 
 }
