@@ -1,1 +1,46 @@
-<p>sampler works!</p>
+SAMPLER
+
+<span id = "pads">
+  <div class="row">
+    <span class="pad" (click) = sample1()>  1 </span>
+    <span class="pad" (click) = sample2()>  2 </span>
+    <span class="pad" (click) = sample3()>  3 </span>
+  </div>
+  <div class="row">
+    <span class="pad" (click) = sample4()>  4 </span>
+    <span class="pad" (click) = sample5()>  5 </span>
+    <span class="pad" (click) = sample6()>  6 </span>
+  </div>
+  <div class="row">
+    <span class="pad" (click) = sample7()>  7 </span>
+    <span class="pad" (click) = sample8()>  8 </span>
+    <span class="pad" (click) = sample9()>  9 </span>
+  </div>
+</span>
+
+<span>
+  <div id = "samplerEffects">
+    CHORUS:
+    <button type="button" (click) = chorusON()>ON</button>
+    <button type="button" (click) = chorusOFF()>OFF</button>
+    <br>
+    REVERB:
+    <button type="button" (click) = reverbON()>ON</button>
+    <button type="button" (click) = reverbOFF()>OFF</button>
+    <br>
+    PITCH SHIFT:
+    <button type="button" (click) = pitchON()>ON</button>
+    <button type="button" (click) = pitchOFF()>OFF</button>
+  </div>
+</span>
+
+<span>
+
+  <div id = "backgroundMusic">
+    Background Music:
+    <span class="pad" (click) = BGON()>  ON </span>
+    <span class="pad" (click) = BGOFF()>  OFF </span>
+
+
+    </div>
+</span>
