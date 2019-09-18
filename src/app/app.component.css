@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 * { padding: 0; margin: 0;}
+=======
+/*classes*/
+>>>>>>> 6bdd30a66a5100111f66a51838536128b609a36e
 .instrument{
     background: white;
     height: 100px;
@@ -9,30 +13,55 @@
     text-align: center;
 }
 
+/*ID's*/
 #thing{
     height:auto;
     width:auto;
     margin: 10px;
     border:10px;
     border-style: double;
-    border-radius: 10%;
+    border-radius: 5%;
     padding: 10px;
     position: relative;
 }
 
 #sampler{
-
+  height: auto;
+  width: 40%;
+  border-style: solid;
+  /*absolute position made it enclose the pads but still messed it up*/
+  /*position: absolute;*/
+  position: relative;
+  padding: 2px;
+  text-align: center;
 
 }
 
 #sequencer{
-
+  position: relative;
+  width: auto;
+  height: 300px;
 }
 
 #waveform{
+  position: absolute;
+  top: 40px;
+  left: 42%;
+  width: 55%;
+  height: 400px;
+  border: 2px solid black;
 
 }
 
+#testButtons{
+  background-color: white;
+  position: absolute;
+  margin: 10px;
+  border-width: 3px;
+  border-style: solid;
+}
+
+/*divs*/
 button{
   margin: 5px;
 

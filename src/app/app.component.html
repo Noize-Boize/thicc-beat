@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 
 
 
@@ -22,4 +23,44 @@
   <div id = "sampler-audio-wave"></div>
 
 
+=======
+<!--The instrument is the thing-->
+<div id = "thing">
+
+  <div class="instrument" id="sampler">
+<!--put sampler tag here-->
+<app-sampler></app-sampler>
+  </div>
+
+  <div class="instrument" id="waveform">
+WAVEFORM
+<app-waveform></app-waveform>
+  </div>
+
+  <div class="instrument" id="sequencer">
+SEQUENCER
+<app-sequencer></app-sequencer>
+  </div>
+
+</div>
+
+<div class = "testbuttons" id = "testButtons">
+  Test buttons:
+  <br>
+  <button type="button" (click) = "playC()">C</button>
+  <button type="button" (click) = "playD()">D</button>
+  <button type="button" (click) = "playE()">E</button>
+  <button type="button" (click) = "playF()">F</button>
+  <button type="button" (click) = "playG()">G</button>
+  <button type="button" (click) = "playA()">A</button>
+  <button type="button" (click) = "playB()">B</button>
+  <br>
+  <button type="button" (click) = octaveUp()>OCT UP</button>
+  <button type="button" (click) = octaveDown()>OCT DOWN</button>
+
+  <button type="button" (click) = startLoop()>Test</button>
+  <button type="button" (click) = stopIt()>Stop</button>
+  <button type="button" (click) = logPosition()>log</button>
+  <br>
+>>>>>>> 6bdd30a66a5100111f66a51838536128b609a36e
 </div>
