@@ -59,9 +59,9 @@ button{
 }
 
 .audio-bank{
-  background-color: lightblue;
+  background-color: blue;
   height: 50px;
-  width: 10%;
+  width: 40%;
   margin-left: 20px;
   border: 1px solid saddlebrown;
   display: flex;
@@ -70,7 +70,7 @@ button{
 }
 
 .sampler-pad-box {
-  position: absolute;
+  
   display: grid;
   grid-template-columns: auto auto auto;
   background-color: blue;
@@ -82,18 +82,19 @@ button{
 }
 
 .sampler-pads {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30%;
   background-color: red;
   margin-left: 10px;
   margin-top: 10px;
-  border-radius: 12px;;
+  border-radius: 12px;
 }
 .sampler-pads:hover{
   background-color: #ff6666
 }
 
 #sampler-audio-wave{
+  display: none;
   background-color: blue;
   position: absolute;
   top: 15px;

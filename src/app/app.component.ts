@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as Tone from 'tone';
 import { CommonModule } from '@angular/common';
 
@@ -146,9 +146,19 @@ export class AppComponent {
       d.frequency.value = octave*bFreq;
     }
 
-    drop(event: CdkDragDrop<string[]>)
-    {
-      moveItemInArray(this.artists,event.previousIndex,event.currentIndex);
+    drop(event: CdkDragDrop<string[]>) {
+      if ( event.previousContainer !== event.container && event.previousContainer.id == 'cdk-drop-list-0') {
+
+
+        // This will grab element from audio bank and assign it to the target pad button.
+        event.container.data[event.currentIndex] = event.previousContainer.data[event.previousIndex]
+
+
+      }
+      else {
+          moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      }
+
     }
 
 
@@ -162,5 +172,17 @@ export class AppComponent {
     'F',
     'G'
   ];
+
+    alteArtists = [
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P'
+    ];
 
   }
