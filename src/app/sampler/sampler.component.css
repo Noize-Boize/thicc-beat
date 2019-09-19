@@ -20,6 +20,11 @@
 }
 
 /*ID's*/
+#colordiv{
+  background-color: blue;
+  height: 100%;
+  width: 100%;
+}
 #samplerEffects{
   border-width: 2px;
   border-style: groove;
@@ -36,6 +41,14 @@
 
 #pads{
   background-color: green;
+
+}
+
+#audioBank {
+  background-color: lightblue;
+  overflow-y: auto;
+  height: 100px;
+  width: 250px;
 }
 
 /*divs*/

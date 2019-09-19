@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-
-* { padding: 0; margin: 0;}
-=======
 /*classes*/
->>>>>>> 6bdd30a66a5100111f66a51838536128b609a36e
 .instrument{
     background: white;
     height: 100px;
@@ -99,7 +94,7 @@ button{
 }
 
 .sampler-pad-box {
-  
+
   display: grid;
   grid-template-columns: auto auto auto;
   background-color: blue;

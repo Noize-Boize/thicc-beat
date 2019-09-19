@@ -2,21 +2,26 @@ SAMPLER
 
 <span id = "pads">
   <div class="row">
-    <span class="pad" (click) = sample1()>  1 </span>
-    <span class="pad" (click) = sample2()>  2 </span>
-    <span class="pad" (click) = sample3()>  3 </span>
+    <span class="pad" id = "C3" (click)=sendId($event) (click) = playSound()>  1 </span>
+    <span class="pad" id = "D3" (click)=sendId($event) (click) = playSound()>  2 </span>
+    <span class="pad" id = "E3" (click)=sendId($event) (click) = playSound()>  3 </span>
   </div>
   <div class="row">
-    <span class="pad" (click) = sample4()>  4 </span>
-    <span class="pad" (click) = sample5()>  5 </span>
-    <span class="pad" (click) = sample6()>  6 </span>
+    <span class="pad" id = "F3" (click)=sendId($event) (click) = playSound()>  4 </span>
+    <span class="pad" id = "G3" (click)=sendId($event) (click) = playSound()>  5 </span>
+    <span class="pad" id = "A3" (click)=sendId($event) (click) = playSound()>  6 </span>
   </div>
   <div class="row">
-    <span class="pad" (click) = sample7()>  7 </span>
-    <span class="pad" (click) = sample8()>  8 </span>
-    <span class="pad" (click) = sample9()>  9 </span>
+    <span class="pad" id = "B4" (click)=sendId($event) (click) = playSound()>  7 </span>
+    <span class="pad" id = "C4" (click)=sendId($event) (click) = playSound()>  8 </span>
+    <span class="pad" id = "D4" (click)=sendId($event) (click) = playSound()>  9 </span>
   </div>
 </span>
+
+
+<div id = audioBank>
+  <div class = "soundList" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >{{sound}}</div>
+</div>
 
 <span>
   <div id = "samplerEffects">

@@ -149,46 +149,5 @@ export class AppComponent {
       console.log(Tone.Transport.position);
     }
 
-<<<<<<< HEAD
-    drop(event: CdkDragDrop<string[]>) {
-      if ( event.previousContainer !== event.container && event.previousContainer.id == 'cdk-drop-list-0') {
-
-
-        // This will grab element from audio bank and assign it to the target pad button.
-        event.container.data[event.currentIndex] = event.previousContainer.data[event.previousIndex]
-
-
-      }
-      else {
-          moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      }
-
-    }
-
-
-
-    artists = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G'
-  ];
-
-    alteArtists = [
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P'
-    ];
-=======
->>>>>>> 6bdd30a66a5100111f66a51838536128b609a36e
 
   }

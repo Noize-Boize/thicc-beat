@@ -1,29 +1,4 @@
 
-<<<<<<< HEAD
-
-
-
-<div id = "sampler-box" style = "display: flex">
-
-  <div cdkDropList  [cdkDropListData] = "artists"
-                    [cdkDropListConnectedTo] = "secondList" #firstList = "cdkDropList"
-                    (cdkDropListDropped) = "drop($event)" style = "width: 30%">
-
-    <div class = "audio-bank" *ngFor="let artist of artists" cdkDrag>{{artist}}</div>
-  </div>
-
-  <div cdkDropList [cdkDropListData] = "alteArtists"
-                   [cdkDropListConnectedTo] = "firstList" #secondList = "cdkDropList"
-                   (cdkDropListDropped) = "drop($event)" class = "sampler-pad-box" style = "width: 60%">
-    <div class = "sampler-pads"  (click) = "playC()"
-                 *ngFor = "let artist of alteArtists; index as i" ckdDrag>{{artist}}</div>
-
-  </div>
-
-  <div id = "sampler-audio-wave"></div>
-
-
-=======
 <!--The instrument is the thing-->
 <div id = "thing">
 
@@ -62,5 +37,4 @@ SEQUENCER
   <button type="button" (click) = stopIt()>Stop</button>
   <button type="button" (click) = logPosition()>log</button>
   <br>
->>>>>>> 6bdd30a66a5100111f66a51838536128b609a36e
 </div>
