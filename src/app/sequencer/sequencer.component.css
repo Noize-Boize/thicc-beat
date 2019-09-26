@@ -1,0 +1,44 @@
+:host {
+    display: inline-block;
+                      width: 100%;
+                      height: 120px;
+  }
+  
+  #container {
+    width: 100%;
+                      height: 100%;
+                      display: flex;
+  }
+  
+  .column {
+    flex: 1;
+                      display: flex;
+                      flex-direction: column;
+  }
+  
+  .column.highlight {
+    background-color: var(--color-gray);
+  }
+  
+  .column.highlight .row {
+    transition-duration: 0.4s;
+  }
+  
+  .column.highlight .row.filled {
+    transition: background-color 0.1s;
+  }
+  
+  .column.highlight .row.filled {
+    background-color: white;
+  }
+  
+  .row {
+    flex: 1;
+                      margin: 1px;
+                      background-color: var(--color-light-gray);
+                      transition: background-color 0s;
+  }
+  
+  .row.filled {
+    background-color: var(--color-teal);
+  }
