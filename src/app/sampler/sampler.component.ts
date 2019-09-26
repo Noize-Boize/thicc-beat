@@ -50,11 +50,79 @@ wet: 1,
   templateUrl: './sampler.component.html',
   styleUrls: ['./sampler.component.css']
 })
+
 export class SamplerComponent implements OnInit {
+
 
   constructor() { }
 
   ngOnInit() {
   }
+
+
+  //Sample triggers
+sample1(){
+  sampler.triggerAttack("C3");
+}
+sample2(){
+  sampler.triggerAttack("D3");
+}
+sample3(){
+  sampler.triggerAttack("E3");
+}
+sample4(){
+  sampler.triggerAttack("F3");
+}
+sample5(){
+  sampler.triggerAttack("G3");
+}
+sample6(){
+  sampler.triggerAttack("A3");
+}
+sample7(){
+  sampler.triggerAttack("B3");
+}
+sample8(){
+  sampler.triggerAttack("C4");
+}
+sample9(){
+  sampler.triggerAttack("D4");
+}
+
+//sampler effects
+chorusON(){
+	sampler.disconnect(Tone.Master);
+  sampler.connect(chorus);
+}
+chorusOFF(){
+	sampler.disconnect(chorus);
+	sampler.connect(Tone.Master);
+}
+reverbON(){
+  sampler.connect(reverb);
+}
+reverbOFF(){
+	sampler.disconnect(reverb);
+}
+pitchON(){
+  sampler.disconnect(Tone.Master);
+  sampler.connect(pitch);
+}
+pitchOFF(){
+	sampler.disconnect(pitch);
+	sampler.connect(Tone.Master);
+}
+
+//background music
+BGON(){
+	player.start();
+}
+BGOFF(){
+	player.stop();
+}
+
+//adjust playback rate
+
+
 
 }
