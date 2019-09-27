@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Tone from 'tone';
 
+
 //Sampler
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it

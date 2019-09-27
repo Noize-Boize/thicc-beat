@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as WaveSurfer from 'wavesurfer.js';
+
 
 @Component({
   selector: 'app-waveform',
