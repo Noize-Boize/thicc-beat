@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as WaveSurfer from 'wavesurfer.js';
 
 import * as Tone from 'tone';
-import * as WaveSurfer from 'wavesurfer.js';
 
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
