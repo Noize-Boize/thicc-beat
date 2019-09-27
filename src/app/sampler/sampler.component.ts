@@ -129,7 +129,7 @@ export class SamplerComponent implements OnInit {
 }
 
 
-  constructor() { }
+
 
   ngOnInit() {
   }
@@ -156,35 +156,6 @@ getSound(sound){
 playSound(){
 	console.log("playSound");
 	sampler.triggerAttack(clickedId).toMaster();
-}
-
-  //Sample triggers
-sample1(){
-  sampler.triggerAttack("C3");
-}
-sample2(){
-  sampler.triggerAttack("D3");
-}
-sample3(){
-  sampler.triggerAttack("E3");
-}
-sample4(){
-  sampler.triggerAttack("F3");
-}
-sample5(){
-  sampler.triggerAttack("G3");
-}
-sample6(){
-  sampler.triggerAttack("A3");
-}
-sample7(){
-  sampler.triggerAttack("B3");
-}
-sample8(){
-  sampler.triggerAttack("C4");
-}
-sample9(){
-  sampler.triggerAttack("D4");
 }
 
 //sampler effects

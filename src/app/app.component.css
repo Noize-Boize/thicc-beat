@@ -18,6 +18,9 @@
     border-radius: 5%;
     padding: 10px;
     position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
+    
 }
 
 #sampler{
