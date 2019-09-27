@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as Tone from 'tone';
+import { CommonModule } from '@angular/common';
 
 
 

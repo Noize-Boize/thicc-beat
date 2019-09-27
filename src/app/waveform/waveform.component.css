@@ -1,0 +1,33 @@
+/*classes*/
+.waveTrackBox{
+  background-color: orange;
+  width: 200px;
+  height: 300px;
+  position: relative;
+}
+
+.loadTracks {
+  background-color: lightblue;
+  width: 200px;
+  height: auto;
+  position: relative;
+  left: 0px;
+}
+.loadTracks:hover{
+  background-color: blue;
+}
+
+
+/*id*/
+
+#wavePlay {
+  background-color: pink;
+  width: 50px;
+}
+#wavePlay:hover{
+  background-color: blue;
+}
+
+#file {
+  display: none;
+}

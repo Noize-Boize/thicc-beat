@@ -2,3 +2,18 @@
 <div id="waveform">
     <button type="button" (click) = initWavesurfer()> WAVEFORM</button>
   </div>
+
+
+
+<div class = "waveTrackBox"> loaded tracks can be seen here
+  <div class = "userTracks" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
+    {{sound}}</div>
+
+</div>
+
+<div class = "loadTracks">
+  <label for="file">Choose File</label>
+  <input type="file"
+          id="file"
+          (change) = "loadFile($event.target.files)" ></div>
+<div id = "wavePlay" (click) = playTrack(file)>play</div>
