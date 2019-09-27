@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as Tone from 'tone';
 
+
 var clickedId = "B5";
-var path = "./../../assets/audioSamples/";
+var path = "./../../assets/audioSamples/"
 
 //Sampler
 var sampler = new Tone.Sampler({
@@ -10,12 +11,12 @@ var sampler = new Tone.Sampler({
   //should be able to incorporate sharps so we have up to 12 triggerable audio files
 	"C3" : "EVERYBODY PUT YOUR HANDS IN THE AIR.mp3",
   "D3" : "DOLPHIN.mp3",
-  "E3" : "FART.mp3",
+  "E3" : "EPIC CHOIR SUSPENSE.mp3",
   "F3" : "RUBBER DUCK.mp3",
   "G3" : "SCREAM.mp3",
   "A3" : "SPLAT.mp3",
   "B3" : "TOASTY.mp3",
-  "C4" : "NOPE.mp3",
+  "C4" : "RECORD SCRATCH.mp3",
 	"D4" : "HEY WHAT HAPPENED.mp3",
 	"B5" : "NOPE.mp3", //This is a default for the global variable. please dont touch it.
 },{
