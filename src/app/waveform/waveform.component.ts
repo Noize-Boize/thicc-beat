@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as WaveSurfer from 'wavesurfer.js';
 
 import * as Tone from 'tone';
 import * as WaveSurfer from 'wavesurfer.js';
@@ -24,6 +25,19 @@ export class WaveformComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+  initWavesurfer(){
+    var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'violet',
+      progressColor: 'purple'
+    });
+
+  wavesurfer.load('../assets/test.mp3');
+    
+  wavesurfer.on('ready', function () {
+    wavesurfer.play();
+});
   }
 
   loadFile(file){
