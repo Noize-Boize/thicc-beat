@@ -7,7 +7,6 @@ import { SamplerComponent } from './sampler/sampler.component';
 import { SequencerComponent } from './sequencer/sequencer.component';
 import { WaveformComponent } from './waveform/waveform.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -21,7 +20,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
