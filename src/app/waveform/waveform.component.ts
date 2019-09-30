@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as WaveSurfer from 'wavesurfer.js';
 
 import * as Tone from 'tone';
 import * as WaveSurfer from 'wavesurfer.js';
@@ -34,7 +33,7 @@ export class WaveformComponent implements OnInit {
     });
 
   wavesurfer.load('../assets/test.mp3');
-    
+
   wavesurfer.on('ready', function () {
     wavesurfer.play();
 });
