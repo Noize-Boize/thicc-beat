@@ -21,7 +21,7 @@ SAMPLER
 
 
 <div id = audioBank>
-  
+
   <div class = "soundList" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >{{sound}}</div>
 </div>
 
@@ -30,24 +30,26 @@ SAMPLER
     CHORUS:
     <button type="button" (click) = chorusON()>ON</button>
     <button type="button" (click) = chorusOFF()>OFF</button>
+    <span id='chorusSlider'></span>
     <br>
     REVERB:
     <button type="button" (click) = reverbON()>ON</button>
     <button type="button" (click) = reverbOFF()>OFF</button>
+    <span id='reverbSlider'></span>
     <br>
     PITCH SHIFT:
     <button type="button" (click) = pitchON()>ON</button>
     <button type="button" (click) = pitchOFF()>OFF</button>
+    <span id='pitchSlider'></span>
   </div>
 </span>
 
 <span>
-
   <div id = "backgroundMusic">
     Background Music:
     <span class="pad" (click) = BGON()>  ON </span>
     <span class="pad" (click) = BGOFF()>  OFF </span>
-
-
+    <br>
+    <span id="playbackDial"></span>
     </div>
 </span>

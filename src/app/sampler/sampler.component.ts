@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Tone from 'tone';
+import * as Nexus from 'nexusui';
+
 
 
 var clickedId = "B5";
@@ -53,6 +55,7 @@ wet: 1,
 ).toMaster();
 
 
+
 @Component({
   selector: 'app-sampler',
   templateUrl: './sampler.component.html',
@@ -84,8 +87,8 @@ export class SamplerComponent implements OnInit {
 'EVIL LAUGH.mp3',
 'RECORD SCRATCH #2.mp3',
 'HA GAY.mp3',
-'SAD MUSIC #2.mp3',
-'LIGHTSABER #2.mp3',
+'SAD MUSIC 2.mp3',
+'LIGHTSABER 2.mp3',
 'RECORD SCRATCH.mp3',
 'HA HA (NELSON).mp3',
 'EVERYBODY PUT YOUR HANDS IN THE AIR.mp3',
@@ -94,28 +97,28 @@ export class SamplerComponent implements OnInit {
 'QUAD.mp3',
 'YOU SUCK.mp3',
 'NOPE.mp3',
-'PUNCH #2.mp3',
+'PUNCH 2.mp3',
 'DING.mp3',
 'SAD MUSIC.mp3',
 'SWOOSH.mp3',
-'FAIL #2.mp3',
+'FAIL 2.mp3',
 'TOMAHAWK HITMARKER.mp3',
 'I GOTTA BAD FEELING ABOUT THIS (HAN SOLO).mp3',
 'VICTORY.mp3',
 'DSR SLOW MO.mp3',
 'RELOADING.mp3',
 'ILLUMINATI.mp3',
-'SWOOSH #3.mp3',
+'SWOOSH 3.mp3',
 'WILHELM.mp3',
-'SWOOSH #2.mp3',
+'SWOOSH 2.mp3',
 'SPLAT.mp3',
 'RUBBER DUCK.mp3',
 'HEAVENLY CHOIR.mp3',
-'SUSPENSE #1.mp3',
+'SUSPENSE 1.mp3',
 'SCREAM.mp3',
 'SUDDEN SUSPENSE.mp3',
 'THROWING KNIFE HITMARKER.mp3',
-'SUSPENSE #2.mp3',
+'SUSPENSE 2.mp3',
 'SLIP.mp3',
 'BOOM SWOOSH.mp3',
 'GET OVER HERE.mp3',
@@ -131,9 +134,56 @@ export class SamplerComponent implements OnInit {
 
 
 
-
   ngOnInit() {
-  }
+		var playbackDial = new Nexus.Dial('#playbackDial',{
+  'size': [40,40],
+  'interaction': 'radial', // "radial", "vertical", or "horizontal"
+  'mode': 'relative', // "absolute" or "relative"
+  'min': 0,
+  'max': 3,
+  'step': 0.1,
+  'value': 1
+})
+		var chorusSlider = new Nexus.Slider('#chorusSlider',{
+    'size': [100,20],
+    'mode': 'relative',  // 'relative' or 'absolute'
+    'min': 0,
+    'max': 100,
+    'step': 1,
+    'value': 0
+})
+		var reverbSlider = new Nexus.Slider('#reverbSlider',{
+    'size': [100,20],
+    'mode': 'relative',  // 'relative' or 'absolute'
+    'min': 0,
+    'max': 100,
+    'step': 1,
+    'value': 0
+})
+		var pitchSlider = new Nexus.Slider('#pitchSlider',{
+    'size': [100,20],
+    'mode': 'relative',  // 'relative' or 'absolute'
+    'min': 0,
+    'max': 100,
+    'step': 1,
+    'value': 0
+})
+		playbackDial.on('change',function(v) {
+		  // v holds the new numeric value of the dial
+			player.playbackRate = v;
+		});
+		chorusSlider.on('change',function(v){
+			chorus.depth = v;
+		});
+		reverbSlider.on('change',function(v){
+			reverb.decay = v;
+		});
+		pitchSlider.on('on',function(v){
+			pitch.feedback =v;
+		});
+
+
+}
 
 sendId(event){
 
@@ -190,8 +240,6 @@ BGON(){
 BGOFF(){
 	player.stop();
 }
-
-//adjust playback rate
 
 
 
