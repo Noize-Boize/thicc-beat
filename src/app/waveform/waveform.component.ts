@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as Tone from 'tone';
-import * as WaveSurfer from 'wavesurfer.js';
 
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
 var item = null;
-var loadedTrack = document.getElementById("file");
+var loadedTrackPath = window.URL;
+
 
 
 
@@ -25,15 +25,33 @@ export class WaveformComponent implements OnInit {
 
   ngOnInit() {
   }
+  initWavesurfer(){
+    var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: 'violet',
+      progressColor: 'purple'
+    });
+
+  wavesurfer.load(loadedTrackPath);
+
+  wavesurfer.on('ready', function () {
+    wavesurfer.play();
+});
+  }
 
   loadFile(file){
     if (file != null){
       console.log("here in playTrack: not null")
-      var path = "./../../assets/audioSamples/"+file[0].name;
+      //var path = "localhost:4200/"+file[0];
+      var path = window.URL.createObjectURL(file[0]);
+      loadedTrackPath = path;
       wavePlayer.load(path);
       //wavePlayer.load("./../../assets/audioSamples/HEY WHAT HAPPENED.mp3")
       //console.log(file[0].webkitRelativePath.concat(file[0].name));
-      console.log(path);
+      //console.log(path);
+      console.log(path)
+      //console.log("webkitRelativePath: "+file[0].webkitRelativePath)
+
     }
     else{
       console.log("here in playTrack: null")
@@ -41,13 +59,14 @@ export class WaveformComponent implements OnInit {
   }
 
   playTrack(){
-    if(loadedTrack == null)
+    if(loadedTrackPath == window.URL)
     {
-      console.log("Track is null")
-      console.log(loadedTrack);
+      console.log("Track is default")
+      console.log(loadedTrackPath);
+      wavePlayer.start();
     }
     else{
-      wavePlayer.load(loadedTrack);
+      wavePlayer.load(loadedTrackPath);
       wavePlayer.start();
     }
   }
