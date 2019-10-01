@@ -31,3 +31,50 @@
 #file {
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Style the buttonBox */
+.buttonBox {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the buttonBox */
+.buttonBox button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.buttonBox button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current buttonBoxlink class */
+.buttonBox button.active {
+  background-color: #ccc;
+}
+
+/* Style the buttonBox content */
+.list {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}

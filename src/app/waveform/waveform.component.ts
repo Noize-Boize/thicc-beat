@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as Tone from 'tone';
-
+import * as WaveSurfer from 'wavesurfer.js';
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
 var item = null;
 var loadedTrackPath = window.URL;
+
 
 
 
@@ -19,11 +20,20 @@ var loadedTrackPath = window.URL;
 
 export class WaveformComponent implements OnInit {
 
+  public loadedTracks: Array<string>;
+
+  public trackSamples: Array<string>;
+
   constructor() {
+
+    this.loadedTracks = ['track1','track2','track3','track4',];
+
+    this.trackSamples = ['sample1','sample2','sample3',];
 
    }
 
   ngOnInit() {
+    //document.getElementById("defaultOpen").click();
   }
   initWavesurfer(){
     var wavesurfer = WaveSurfer.create({
@@ -41,35 +51,71 @@ export class WaveformComponent implements OnInit {
 
   loadFile(file){
     if (file != null){
+
       console.log("here in playTrack: not null")
-      //var path = "localhost:4200/"+file[0];
+
       var path = window.URL.createObjectURL(file[0]);
+
       loadedTrackPath = path;
+
       wavePlayer.load(path);
-      //wavePlayer.load("./../../assets/audioSamples/HEY WHAT HAPPENED.mp3")
-      //console.log(file[0].webkitRelativePath.concat(file[0].name));
-      //console.log(path);
-      console.log(path)
-      //console.log("webkitRelativePath: "+file[0].webkitRelativePath)
+
+      console.log(path);
 
     }
     else{
-      console.log("here in playTrack: null")
+
+      console.log("here in playTrack: null");
+
     }
   }
 
   playTrack(){
+
     if(loadedTrackPath == window.URL)
     {
+
       console.log("Track is default")
+
       console.log(loadedTrackPath);
+
       wavePlayer.start();
     }
-    else{
+    else
+    {
+
       wavePlayer.load(loadedTrackPath);
+
       wavePlayer.start();
+
     }
   }
+
+showList(evt, cityName) {
+    var i, list, trackBox;
+    list = document.getElementsByClassName("list");
+    for (i = 0; i < list.length; i++) {
+      list[i].style.display = "none";
+    }
+    trackBox = document.getElementsByClassName("trackBox");
+    for (i = 0; i < trackBox.length; i++) {
+      trackBox[i].className = trackBox[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    console.log(list.length)
+    console.log(trackBox.length)
+  }
+
+
+  loadToWaveForm(track)
+  {
+    console.log(track);
+  }
+  applyToPad(sample){
+    console.log(sample);
+  }
+
 
 
 
