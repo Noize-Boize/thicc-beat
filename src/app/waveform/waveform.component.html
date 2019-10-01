@@ -13,12 +13,12 @@
 
 
   <div id = "trackList" class = "list">
-    <div id = "tracks" *ngFor = "let track of loadedTracks" (click) = "loadToWaveForm(track)" >
+    <div id = "tracks" class = "listElements" *ngFor = "let track of loadedTracks" (click) = "loadToWaveForm(track)" >
       {{track}}</div> <!-- add the correct click function create a list to be served -->
   </div>
 
   <div id = "sampleList" class = "list">
-    <div id = "samples" *ngFor = "let sample of trackSamples" (click) = "applyToPad(sample)" >
+    <div id = "samples" class = "listElements" *ngFor = "let sample of trackSamples" (click) = "applyToPad(sample)" >
       {{sample}}</div> <!-- add the correct click function create a list to be served -->
   </div>
 

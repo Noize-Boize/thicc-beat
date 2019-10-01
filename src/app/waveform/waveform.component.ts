@@ -5,7 +5,7 @@ import * as WaveSurfer from 'wavesurfer.js';
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
 var item = null;
-var loadedTrackPath = window.URL;
+var loadedTrackPath = "";
 
 
 
@@ -72,7 +72,7 @@ export class WaveformComponent implements OnInit {
 
   playTrack(){
 
-    if(loadedTrackPath == window.URL)
+    if(loadedTrackPath == "")
     {
 
       console.log("Track is default")
@@ -103,8 +103,6 @@ showList(evt, cityName) {
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
-    console.log(list.length)
-    console.log(trackBox.length)
   }
 
 
