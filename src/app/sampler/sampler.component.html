@@ -19,11 +19,11 @@ SAMPLER
   <div id="waveform1"></div>
 </span>
 
+  <div id = audioBank>
+    <div class = "soundList" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >{{sound}}</div>
+  </div>
 
-<div id = audioBank>
 
-  <div class = "soundList" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >{{sound}}</div>
-</div>
 
 <span>
   <div id = "samplerEffects">

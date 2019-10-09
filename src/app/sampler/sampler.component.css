@@ -5,7 +5,7 @@
   width: auto;
 }
 .pad{
-  background: white;
+  background: null;
   height: 50px;
   width: 50px;
   margin: 5px;
@@ -20,7 +20,7 @@
 }
 
 .soundList{
-  
+
 }
 
 /*ID's*/
@@ -51,8 +51,9 @@
 #audioBank {
   background-color: lightblue;
   overflow-y: auto;
-  height: 100px;
+  height: 300px;
   width: 250px;
+  position:relative;
 }
 
 /*divs*/

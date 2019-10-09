@@ -85,7 +85,7 @@ export class SamplerComponent implements OnInit {
 'TO INFINITY AND BEYOND.mp3',
 'ZACH GALIFIANAKIS LAUGH.mp3',
 'EVIL LAUGH.mp3',
-'RECORD SCRATCH #2.mp3',
+'RECORD SCRATCH 2.mp3',
 'HA GAY.mp3',
 'SAD MUSIC 2.mp3',
 'LIGHTSABER 2.mp3',
@@ -181,7 +181,7 @@ export class SamplerComponent implements OnInit {
 		pitchSlider.on('on',function(v){
 			pitch.feedback =v;
 		});
-
+		
 
 }
 
