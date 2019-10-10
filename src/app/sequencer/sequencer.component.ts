@@ -20,7 +20,12 @@ export class SequencerComponent implements OnInit {
 
   ngOnInit() {
 
+    Tone.Transport.loop = true;
+    Tone.Transport.loopStart="0:0:0";
+    Tone.Transport.loopEnd ="4:0:0";
+    Tone.Transport.bpm.value = 120;
 
+    Tone.Transport.start();
   }
 
   //(not added)pass in 1. sampler value(C4) 2. point on transport(0:0:0)
@@ -28,7 +33,7 @@ export class SequencerComponent implements OnInit {
   activate(cellId){
     var toggleValue = this.getSeqCellVal(cellId);
     if(toggleValue == 0){
-      document.getElementById(cellId).style.backgroundColor = "yellow";
+      document.getElementById(cellId).style.backgroundColor = "#faed27";
       this.setSeqCellVal(cellId);
       console.log(sequencerToggle);
       //schedule value on transport
