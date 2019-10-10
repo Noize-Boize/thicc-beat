@@ -20,6 +20,7 @@ export class SequencerComponent implements OnInit {
 
   ngOnInit() {
 
+    //future problem. Need a universal transport or sync this one
     Tone.Transport.loop = true;
     Tone.Transport.loopStart="0:0:0";
     Tone.Transport.loopEnd ="4:0:0";
