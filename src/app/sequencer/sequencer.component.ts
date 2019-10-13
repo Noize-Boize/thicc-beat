@@ -32,7 +32,7 @@ export class SequencerComponent implements OnInit {
   activate(cellId){
     //get clicked cells current toggle matrix value (engaged or not)
     var toggleValue = this.getSeqCellVal(cellId);
-    //if it was off when you pressed the box
+    //if it was off when you pressed the box, engage that box
     if(toggleValue == 0){
       document.getElementById(cellId).style.backgroundColor = "#faed27";
       this.setSeqCellVal(cellId);
