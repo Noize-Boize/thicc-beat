@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-=======
 import * as WaveSurfer from 'wavesurfer.js';
 import * as Tone from 'tone';
 
@@ -11,7 +9,6 @@ var loadedTrackPath = "";
 
 
 
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-waveform',
@@ -24,8 +21,6 @@ export class WaveformComponent implements OnInit {
 
   ngOnInit() {
   }
-<<<<<<< Updated upstream
-=======
   initWavesurfer(){
     var wavesurfer = WaveSurfer.create({
       container: '#waveform',
@@ -73,6 +68,5 @@ export class WaveformComponent implements OnInit {
   }
 
 
->>>>>>> Stashed changes
 
 }
