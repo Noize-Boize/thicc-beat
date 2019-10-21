@@ -5,7 +5,7 @@ import * as Tone from 'tone';
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
 var item = null;
-var loadedTrackPath = window.URL;
+var loadedTrackPath = "";
 
 
 
