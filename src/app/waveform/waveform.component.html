@@ -6,6 +6,7 @@
 
 
 <div class = "waveTrackBox">
+<<<<<<< HEAD
   <div class = "buttonBox">
     <button class = "trackBox" (click) = "showList($event, 'trackList')" id ="defaultOpen">Tracks</button>
     <button class = "trackBox" (click) = "showList($event, 'sampleList')">Samples</button>
@@ -21,8 +22,18 @@
     <div id = "samples" class = "listElements" *ngFor = "let sample of trackSamples" (click) = "applyToPad(sample)" >
       {{sample}}</div> <!-- add the correct click function create a list to be served -->
   </div>
+=======
+  <button class = "trackBox" (click) = "openList($event, 'tracks')" id ="defaultOpen">Tracks</button>
+  <button class = "trackBox" (click) = "openList($event, 'samples')">Samples</button>
+>>>>>>> master
 
 </div>
+
+<div id = "tracks" class = "list" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
+  {{sound}}</div> <!-- add the correct click function create a list to be served -->
+
+<div id = "samples" class = "list" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
+  {{sound}}</div> <!-- add the correct click function create a list to be served -->
 
 <div class = "loadTracks">
   <label for="file">Choose File</label>

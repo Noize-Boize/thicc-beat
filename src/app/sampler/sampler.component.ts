@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Tone from 'tone';
+import * as Nexus from 'nexusui';
+
 
 
 var clickedId = "B5";
@@ -51,6 +53,7 @@ feedback : 0,
 wet: 1,
 }
 ).toMaster();
+
 
 
 @Component({
@@ -131,9 +134,56 @@ export class SamplerComponent implements OnInit {
 
 
 
-
   ngOnInit() {
-  }
+		var playbackDial = new Nexus.Dial('#playbackDial',{
+  'size': [40,40],
+  'interaction': 'radial', // "radial", "vertical", or "horizontal"
+  'mode': 'relative', // "absolute" or "relative"
+  'min': 0,
+  'max': 3,
+  'step': 0.1,
+  'value': 1
+})
+		var chorusSlider = new Nexus.Slider('#chorusSlider',{
+    'size': [100,20],
+    'mode': 'relative',  // 'relative' or 'absolute'
+    'min': 0,
+    'max': 100,
+    'step': 1,
+    'value': 0
+})
+		var reverbSlider = new Nexus.Slider('#reverbSlider',{
+    'size': [100,20],
+    'mode': 'relative',  // 'relative' or 'absolute'
+    'min': 0,
+    'max': 100,
+    'step': 1,
+    'value': 0
+})
+		var pitchSlider = new Nexus.Slider('#pitchSlider',{
+    'size': [100,20],
+    'mode': 'relative',  // 'relative' or 'absolute'
+    'min': 0,
+    'max': 100,
+    'step': 1,
+    'value': 0
+})
+		playbackDial.on('change',function(v) {
+		  // v holds the new numeric value of the dial
+			player.playbackRate = v;
+		});
+		chorusSlider.on('change',function(v){
+			chorus.depth = v;
+		});
+		reverbSlider.on('change',function(v){
+			reverb.decay = v;
+		});
+		pitchSlider.on('on',function(v){
+			pitch.feedback =v;
+		});
+		
+
+}
 
 sendId(event){
 
@@ -190,8 +240,6 @@ BGON(){
 BGOFF(){
 	player.stop();
 }
-
-//adjust playback rate
 
 
 
