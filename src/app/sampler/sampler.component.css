@@ -5,7 +5,7 @@
   width: auto;
 }
 .pad{
-  background: white;
+  background: null;
   height: 50px;
   width: 50px;
   margin: 5px;
@@ -19,7 +19,16 @@
   background: blue;
 }
 
+.soundList{
+
+}
+
 /*ID's*/
+#colordiv{
+  background-color: blue;
+  height: 100%;
+  width: 100%;
+}
 #samplerEffects{
   border-width: 2px;
   border-style: groove;
@@ -36,6 +45,15 @@
 
 #pads{
   background-color: green;
+
+}
+
+#audioBank {
+  background-color: lightblue;
+  overflow-y: auto;
+  height: 300px;
+  width: 250px;
+  position:relative;
 }
 
 /*divs*/

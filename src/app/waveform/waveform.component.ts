@@ -15,9 +15,13 @@ var loadedTrackPath = "";
   templateUrl: './waveform.component.html',
   styleUrls: ['./waveform.component.css']
 })
+
+
 export class WaveformComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+   }
 
   ngOnInit() {
   }
@@ -45,6 +49,7 @@ export class WaveformComponent implements OnInit {
       //wavePlayer.load("./../../assets/audioSamples/HEY WHAT HAPPENED.mp3")
       //console.log(file[0].webkitRelativePath.concat(file[0].name));
       //console.log(path);
+      //console.log(path)
       //console.log(path)
       //console.log("webkitRelativePath: "+file[0].webkitRelativePath)
 

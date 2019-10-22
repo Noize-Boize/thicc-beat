@@ -1,6 +1,6 @@
 /*classes*/
 .instrument{
-    background: white;
+    background: null;
     height: 100px;
     width: 100px;
     margin: 10px;
@@ -13,16 +13,20 @@
     height:auto;
     width:auto;
     margin: 10px;
-    border:10px;
+    border:15px;
     border-style: double;
     border-radius: 5%;
     padding: 10px;
     position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
+
 }
 
 #sampler{
   height: auto;
   width: 40%;
+  border: 5px;
   border-style: solid;
   /*absolute position made it enclose the pads but still messed it up*/
   /*position: absolute;*/
@@ -36,6 +40,8 @@
   position: relative;
   width: auto;
   height: 300px;
+  border: 5px;
+  border-style: solid;
 }
 
 #waveform{
@@ -44,7 +50,7 @@
   left: 42%;
   width: 55%;
   height: 400px;
-  border: 2px solid black;
+  border: 5px solid black;
 
 }
 
@@ -60,4 +66,70 @@
 button{
   margin: 5px;
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#sampler-box {
+  background-color: #666666;
+  position: relative;
+  height: 350px;
+  width: 50%;
+  margin-left: 13px;
+  margin-top: 25px;
+}
+
+.audio-bank{
+  background-color: blue;
+  height: 50px;
+  width: 40%;
+  margin-left: 20px;
+  border: 1px solid saddlebrown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sampler-pad-box {
+
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: blue;
+  height: 56%;
+  width: 25%;
+  top: 15px;
+  left: 30%;
+  margin: 15px;
+}
+
+.sampler-pads {
+  height: 30px;
+  width: 30%;
+  background-color: red;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 12px;
+}
+.sampler-pads:hover{
+  background-color: #ff6666
+}
+
+#sampler-audio-wave{
+  display: none;
+  background-color: blue;
+  position: absolute;
+  top: 15px;
+  margin-right: 15px;
+  right: 0px;
+  height: 56%;
+  width: 30%;
 }

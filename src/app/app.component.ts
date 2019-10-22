@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as Tone from 'tone';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -58,7 +60,13 @@ function quadKick(time){
 
 //a testing function to play with
 function argh(){
-  Tone.Transport.start().scheduleRepeat(quadKick,"16n","0m","4n");
+  Tone.Transport.loop = true;
+  Tone.Transport.loopStart="0:0:0";
+  Tone.Transport.loopEnd ="4:0:0";
+  Tone.Transport.bpm.value = 120;
+
+  Tone.Transport.start();
+
 
   //Tone.Transport.start();
   //loopK.start().stop('4n');

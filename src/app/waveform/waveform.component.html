@@ -1,1 +1,25 @@
 <p>waveform works!</p>
+<div id="waveform">
+    <button type="button" (click) = initWavesurfer()> WAVEFORM</button>
+  </div>
+
+
+
+<div class = "waveTrackBox">
+  <button class = "trackBox" (click) = "openList($event, 'tracks')" id ="defaultOpen">Tracks</button>
+  <button class = "trackBox" (click) = "openList($event, 'samples')">Samples</button>
+
+</div>
+
+<div id = "tracks" class = "list" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
+  {{sound}}</div> <!-- add the correct click function create a list to be served -->
+
+<div id = "samples" class = "list" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
+  {{sound}}</div> <!-- add the correct click function create a list to be served -->
+
+<div class = "loadTracks">
+  <label for="file">Choose File</label>
+  <input type="file"
+          id="file"
+          (change) = "loadFile($event.target.files)" ></div>
+<div id = "wavePlay" (click) = playTrack()>play</div>

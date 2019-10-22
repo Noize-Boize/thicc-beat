@@ -2,45 +2,54 @@ SAMPLER
 
 <span id = "pads">
   <div class="row">
-    <span class="pad" (click) = sample1()>  C3 </span>
-    <span class="pad" (click) = sample2()>  D3 </span>
-    <span class="pad" (click) = sample3()>  E3 </span>
+    <span class="pad" id = "C3" (click)=sendId($event) (click) = playSound()>  1 </span>
+    <span class="pad" id = "D3" (click)=sendId($event) (click) = playSound()>  2 </span>
+    <span class="pad" id = "E3" (click)=sendId($event) (click) = playSound()>  3 </span>
   </div>
   <div class="row">
-    <span class="pad" (click) = sample4()>  F3 </span>
-    <span class="pad" (click) = sample5()>  G3 </span>
-    <span class="pad" (click) = sample6()>  A3 </span>
+    <span class="pad" id = "F3" (click)=sendId($event) (click) = playSound()>  4 </span>
+    <span class="pad" id = "G3" (click)=sendId($event) (click) = playSound()>  5 </span>
+    <span class="pad" id = "A3" (click)=sendId($event) (click) = playSound()>  6 </span>
   </div>
   <div class="row">
-    <span class="pad" (click) = sample7()>  B3 </span>
-    <span class="pad" (click) = sample8()>  C4 </span>
-    <span class="pad" (click) = sample9()>  D4 </span>
+    <span class="pad" id = "B4" (click)=sendId($event) (click) = playSound()>  7 </span>
+    <span class="pad" id = "C4" (click)=sendId($event) (click) = playSound()>  8 </span>
+    <span class="pad" id = "D4" (click)=sendId($event) (click) = playSound()>  9 </span>
   </div>
+  <div id="waveform1"></div>
 </span>
+
+  <div id = audioBank>
+    <div class = "soundList" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >{{sound}}</div>
+  </div>
+
+
 
 <span>
   <div id = "samplerEffects">
     CHORUS:
     <button type="button" (click) = chorusON()>ON</button>
     <button type="button" (click) = chorusOFF()>OFF</button>
+    <span id='chorusSlider'></span>
     <br>
     REVERB:
     <button type="button" (click) = reverbON()>ON</button>
     <button type="button" (click) = reverbOFF()>OFF</button>
+    <span id='reverbSlider'></span>
     <br>
     PITCH SHIFT:
     <button type="button" (click) = pitchON()>ON</button>
     <button type="button" (click) = pitchOFF()>OFF</button>
+    <span id='pitchSlider'></span>
   </div>
 </span>
 
 <span>
-
   <div id = "backgroundMusic">
     Background Music:
     <span class="pad" (click) = BGON()>  ON </span>
     <span class="pad" (click) = BGOFF()>  OFF </span>
-
-
+    <br>
+    <span id="playbackDial"></span>
     </div>
 </span>
