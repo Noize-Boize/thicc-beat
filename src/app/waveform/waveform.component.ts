@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as WaveSurfer from 'wavesurfer.js'
 import * as Tone from 'tone';
 
 
@@ -59,7 +59,7 @@ export class WaveformComponent implements OnInit {
   }
 
   playTrack(){
-    if(loadedTrackPath == window.URL)
+    if(loadedTrackPath == "")
     {
       console.log("Track is default")
       console.log(loadedTrackPath);
