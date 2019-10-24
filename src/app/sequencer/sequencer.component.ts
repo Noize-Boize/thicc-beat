@@ -23,14 +23,16 @@ var sampler = new Tone.Sampler({
   "baseUrl": "./../../assets/audioSamples/"
 }).toMaster();
 
-var synth = new Tone.Synth().toMaster();
+var synth1 = new Tone.Synth().toMaster();
+var synth2 = new Tone.Synth().toMaster();
 
 var seq = new Tone.Sequence(function(time, note)
 {
 
-  synth.triggerAttackRelease(note,'8n',time);
+  synth1.triggerAttackRelease(note,'8n',time);
+
   //sampler.triggerAttack(note);
-}, ['C4','D6','E3','F6'], "4n");
+}, ['C4',['C2','','E3','F2',''],'E3','F6',['C2','A2','','F4','G3']], "4n");
 
 
 
