@@ -28,8 +28,8 @@ var synth = new Tone.Synth().toMaster();
 var seq = new Tone.Sequence(function(time, note)
 {
 
-  //synth.triggerAttackRelease(note,'8n',time);
-  sampler.triggerAttack(note);
+  synth.triggerAttackRelease(note,'8n',time);
+  //sampler.triggerAttack(note);
 }, ['C4','D6','E3','F6'], "4n");
 
 
