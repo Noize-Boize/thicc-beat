@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as Tone from 'tone';
+import * as WaveSurfer from 'wavesurfer.js';
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
 var item = null;
@@ -32,19 +33,6 @@ export class WaveformComponent implements OnInit {
 
   ngOnInit() {
     //document.getElementById("defaultOpen").click();
-  }
-  initWavesurfer(){
-    var wavesurfer = WaveSurfer.create({
-      container: '#waveform',
-      waveColor: 'violet',
-      progressColor: 'purple'
-    });
-
-  wavesurfer.load(loadedTrackPath);
-
-  wavesurfer.on('ready', function () {
-    wavesurfer.play();
-});
   }
   initWavesurfer(){
     var wavesurfer = WaveSurfer.create({
