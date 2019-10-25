@@ -8,15 +8,19 @@ Tone.Transport.start();
 // 1D array with 16 columnss
 var sequencerMatrix = new Array(16);
 
+var c4Array = new Array(16);
+var d4Array = new Array(16);
+var e4Array = new Array(16);
+var f4Array = new Array(16);
+
 // loop over 1D array to create 16x4 2D Array
 for(var i=0;i<16;i++){
   sequencerMatrix[i] = [false,false,false,false];
+  c4Array[i] = '';
+  d4Array[i] = '';
+  e4Array[i] = '';
+  f4Array[i] = '';
 }
-
-var c4Array = ['','','','','','','','','','','','','','','',''];
-var d4Array = ['','','','','','','','','','','','','','','',''];
-var e4Array = ['','','','','','','','','','','','','','','',''];
-var f4Array = ['','','','','','','','','','','','','','','',''];
 
 var sampler = new Tone.Sampler({
   "C4" : "kick 3.wav",
@@ -28,6 +32,7 @@ var sampler = new Tone.Sampler({
 }).toMaster();
 
 var synth1 = new Tone.Synth().toMaster();
+
 var synth2 = new Tone.Synth().toMaster();
 
 var seq1 = new Tone.Sequence(function(time, note)
@@ -40,7 +45,7 @@ var seq1 = new Tone.Sequence(function(time, note)
 
   }
 
-}, c4Array, "4n");
+}, c4Array, "16n");
 
 var seq2 = new Tone.Sequence(function(time, note)
 {
@@ -50,7 +55,7 @@ var seq2 = new Tone.Sequence(function(time, note)
   else{
     sampler.triggerAttack(note);
   }
-}, d4Array, "4n");
+}, d4Array, "16n");
 
 var seq3 = new Tone.Sequence(function(time, note)
 {
@@ -60,7 +65,7 @@ var seq3 = new Tone.Sequence(function(time, note)
   else{
     sampler.triggerAttack(note);
   }
-}, e4Array, "4n");
+}, e4Array, "16n");
 
 var seq4 = new Tone.Sequence(function(time, note)
 {
@@ -70,7 +75,7 @@ var seq4 = new Tone.Sequence(function(time, note)
   else{
     sampler.triggerAttack(note);
   }
-}, f4Array, "4n");
+}, f4Array, "16n");
 
 
 
