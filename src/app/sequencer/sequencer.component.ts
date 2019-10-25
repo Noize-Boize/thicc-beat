@@ -13,27 +13,64 @@ for(var i=0;i<16;i++){
   sequencerMatrix[i] = [false,false,false,false];
 }
 
+var c4Array = ['','','','','','','','','','','','','','','',''];
+var d4Array = ['','','','','','','','','','','','','','','',''];
+var e4Array = ['','','','','','','','','','','','','','','',''];
+var f4Array = ['','','','','','','','','','','','','','','',''];
 
 var sampler = new Tone.Sampler({
-  "C4" : "ILLUMINATI.mp3",
-  "D4" : "RECORD SCRATCH.mp3",
-  "E4" : "NOPE",
-  "F4" : "SCREAM"
+  "C4" : "kick 3.wav",
+  "D4" : "crash hit.wav",
+  "E4" : "kick snare.wav",
+  "F4" : "high hats.wav"
 },{
-  "baseUrl": "./../../assets/audioSamples/"
+  "baseUrl": "./../../assets/JakeAudioSample/"
 }).toMaster();
 
 var synth1 = new Tone.Synth().toMaster();
 var synth2 = new Tone.Synth().toMaster();
 
-var seq = new Tone.Sequence(function(time, note)
+var seq1 = new Tone.Sequence(function(time, note)
 {
 
-  synth1.triggerAttackRelease(note,'8n',time);
+  if(!note){
+  }
+  else{
+    sampler.triggerAttack(note);
 
-  //sampler.triggerAttack(note);
-}, ['C4',['C2','','E3','F2',''],'E3','F6',['C2','A2','','F4','G3']], "4n");
+  }
 
+}, c4Array, "4n");
+
+var seq2 = new Tone.Sequence(function(time, note)
+{
+
+  if(!note){
+  }
+  else{
+    sampler.triggerAttack(note);
+  }
+}, d4Array, "4n");
+
+var seq3 = new Tone.Sequence(function(time, note)
+{
+
+  if(!note){
+  }
+  else{
+    sampler.triggerAttack(note);
+  }
+}, e4Array, "4n");
+
+var seq4 = new Tone.Sequence(function(time, note)
+{
+
+  if(!note){
+  }
+  else{
+    sampler.triggerAttack(note);
+  }
+}, f4Array, "4n");
 
 
 
@@ -49,36 +86,36 @@ export class SequencerComponent implements OnInit {
   public columns: Array<string>;
   constructor() {
 
-    var keys = new Tone.Players({
-              "A" : "./HA HA (NELSON).mp3",
-              "C#" : "./HA HA (NELSON).mp3",
-              "E" : "./HA HA (NELSON).mp3",
-              "F#" : "./HA HA (NELSON).mp3",
-              }, {
-              "volume" : -10,
-              "fadeOut" : "64n",
-              }).toMaster();
-    var noteNames = ["F#", "E", "C#", "A"];
     this.notes = ['C4','D4','E4','F4'];
 
     this.columns = ['00','01','02','03','04','05','06','07',
                     '08','09','10','11','12','13','14','15'];
-
-
 
    }
 
   ngOnInit() {
   }
 
-  playSound(){
-    console.log("in playSound");
+  play(){
+    if(seq1.state=="stopped"){
+      seq1.start();
+      seq2.start();
+      seq3.start();
+      seq4.start();
+    }
+    else
+    {
+      seq1.stop();
+      seq2.stop();
+      seq3.stop();
+      seq4.stop();
+    }
+    return;
   }
+
 
   toggleCell(event)
   {
-    console.log('here in toggleCell ',event.target.attributes.id.textContent);
-
     var id = event.target.attributes.id.textContent;
 
     if(id.length == 7)
@@ -97,36 +134,69 @@ export class SequencerComponent implements OnInit {
 
       var note = id.slice(4);
     }
-
-    console.log('id length is: ',id.length);
-
-    console.log('x is: ',x,' y is: ',y,' note is: ',note);
-
     var cellValue = sequencerMatrix[x][y];
 
     if(cellValue == false)
     {
       document.getElementById(id).style.backgroundColor = "#faed27";
+      this.changeArrayValue(note,x,y,false);
 
-      seq.start();
     }
     else
     {
       document.getElementById(id).style.backgroundColor = "black";
-
-      seq.stop();
+      this.changeArrayValue(note,x,y,true);
 
     }
-
     sequencerMatrix[x][y] = !sequencerMatrix[x][y];
+  }
 
-    console.log(sequencerMatrix[x][y]);
+  changeArrayValue(note,x,y,boolean){
 
-
-
-
-
-
+    switch(note){
+      case 'C4':
+        if(boolean == true)
+        {
+          seq1.remove(x);
+        }
+        else
+        {
+            seq1.add(x,note);
+        }
+        break;
+      case 'D4':
+        if(boolean == true)
+        {
+          seq2.remove(x);
+        }
+        else
+        {
+            seq2.add(x,note);
+        }
+        break;
+      case 'E4':
+        if(boolean == true)
+        {
+          seq3.remove(x);
+        }
+        else
+        {
+            seq3.add(x,note);
+        }
+        break;
+      case 'F4':
+        if(boolean == true)
+        {
+          seq4.remove(x);
+        }
+        else
+        {
+            seq4.add(x,note);
+        }
+        break;
+      default:
+        break;
+    }
   }
 
 }
