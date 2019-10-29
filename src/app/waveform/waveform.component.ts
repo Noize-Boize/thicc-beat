@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import * as WaveSurfer from 'wavesurfer.js'
+import * as WaveSurfer from 'wavesurfer.js';
+import RegionPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.min.js';
+import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js';
+import CursorPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.cursor.min.js';
+
 import * as Tone from 'tone';
 
 
 var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaster();
 var item = null;
 var loadedTrackPath = "";
+var counter = 0;
 
 
 
@@ -29,14 +34,34 @@ export class WaveformComponent implements OnInit {
     var wavesurfer = WaveSurfer.create({
       container: '#waveform',
       waveColor: 'violet',
-      progressColor: 'purple'
+      progressColor: 'purple',
+      plugins: [
+        RegionPlugin.create(),
+        TimelinePlugin.create({
+          container:"#wave-timeline"
+        })
+        
+      ]
     });
-
-  wavesurfer.load(loadedTrackPath);
+    if(counter>0){
+      wavesurfer.destroy();
+    }
+  wavesurfer.load('../assets/test.mp3');
 
   wavesurfer.on('ready', function () {
+    wavesurfer.enableDragSelection({});
     wavesurfer.play();
 });
+  wavesurfer.on('region-click', function() {
+    console.log(Object.keys(wavesurfer.regions.list)[0]);
+    wavesurfer.regions.list[Object.keys(wavesurfer.regions.list)[Object.keys(wavesurfer.regions.list).length-1]].playLoop();
+
+  });
+  wavesurfer.on('dblclick', function(){
+    wavesurfer.play();
+  });
+counter++;
+
   }
 
   loadFile(file){

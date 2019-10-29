@@ -1,8 +1,4 @@
 <p>waveform works!</p>
-<div id="waveform">
-    <button type="button" (click) = initWavesurfer()> WAVEFORM</button>
-  </div>
-
 
 
 <div class = "waveTrackBox">
@@ -23,3 +19,12 @@
           id="file"
           (change) = "loadFile($event.target.files)" ></div>
 <div id = "wavePlay" (click) = playTrack()>play</div>
+<button type="button" (click) = initWavesurfer()> WAVEFORM</button>
+
+<div>
+    <div id="waveform">
+        <div id='wave-timeline'></div>
+        
+      </div>
+    </div>
+    
