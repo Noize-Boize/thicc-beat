@@ -14,20 +14,80 @@
   left: 0px;
 }
 .loadTracks:hover{
-  background-color: blue;
+  background-color: #04c9b2;
 }
 
 
 /*id*/
 
 #wavePlay {
-  background-color: pink;
+  background-color: #c17afa;
   width: 50px;
 }
 #wavePlay:hover{
-  background-color: blue;
+  background-color: #794c9e;
 }
 
 #file {
   display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Style the buttonBox */
+.buttonBox {
+  overflow: hidden;
+  border: 1px solid #FF8C00;
+  background-color: #orange;
+}
+
+/* Style the buttons inside the buttonBox */
+.buttonBox button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.buttonBox button:hover {
+  background-color: #fc9803;
+}
+
+/* Create an active/current buttonBoxlink class */
+.buttonBox button.active {
+  background-color: #fc8003;
+}
+
+/* Style the buttonBox content */
+.list {
+  display: none;
+  padding: 6px 12px;
+  /*border: 1px solid #ccc;*/
+  border-top: none;
+}
+
+.listElements {
+
+}
+
+.listElements:hover{
+  background-color: #fc9803;
+}
+
+.listElements.active{
+  background-color: #fc8003;
+  /* doesn't work because the list elements are not being set to active anywhere */
 }

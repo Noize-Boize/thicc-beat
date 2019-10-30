@@ -69,7 +69,6 @@ export class SamplerComponent implements OnInit {
 
 
 	this.sounds = [
-'FART.mp3',
 'FAIL SOUND EFFECT.mp3',
 'PUNCH.mp3',
 'DRUM ROLL.mp3',
@@ -93,6 +92,7 @@ export class SamplerComponent implements OnInit {
 'HA HA (NELSON).mp3',
 'EVERYBODY PUT YOUR HANDS IN THE AIR.mp3',
 'INCEPTION FOG HORN.mp3',
+'FART.mp3',
 'MGS ALERT.mp3',
 'QUAD.mp3',
 'YOU SUCK.mp3',
