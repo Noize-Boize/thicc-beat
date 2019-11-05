@@ -1,13 +1,22 @@
 <p>waveform works!</p>
-<div id="waveform">
-    <button type="button" (click) = initWavesurfer()> WAVEFORM</button>
-  </div>
-
 
 
 <div class = "waveTrackBox">
-  <button class = "trackBox" (click) = "openList($event, 'tracks')" id ="defaultOpen">Tracks</button>
-  <button class = "trackBox" (click) = "openList($event, 'samples')">Samples</button>
+  <div class = "buttonBox">
+    <button class = "trackBox" (click) = "showList($event, 'trackList')" id ="defaultOpen">Tracks</button>
+    <button class = "trackBox" (click) = "showList($event, 'sampleList')">Samples</button>
+  </div>
+
+
+  <div id = "trackList" class = "list">
+    <div id = "tracks" class = "listElements" *ngFor = "let track of loadedTracks" (click) = "loadToWaveForm(track)" >
+      {{track}}</div> <!-- add the correct click function create a list to be served -->
+  </div>
+
+  <div id = "sampleList" class = "list">
+    <div id = "samples" class = "listElements" *ngFor = "let sample of trackSamples" (click) = "applyToPad(sample)" >
+      {{sample}}</div> <!-- add the correct click function create a list to be served -->
+  </div>
 
 </div>
 
@@ -23,3 +32,12 @@
           id="file"
           (change) = "loadFile($event.target.files)" ></div>
 <div id = "wavePlay" (click) = playTrack()>play</div>
+<button type="button" (click) = initWavesurfer()> WAVEFORM</button>
+
+<div>
+    <div id="waveform">
+        <div id='wave-timeline'></div>
+        
+      </div>
+    </div>
+    

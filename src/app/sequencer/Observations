@@ -1,0 +1,25 @@
+The sequencer works as is. I would like to find a way to combine the note arrays
+into one single 2d array and remove the sequencerMatrix entirely.
+
+currently there is a single sampler object that is used to play the sample sounds
+over 3 Sequence objects. There is a way to combine these into a single Sequence
+object, but it will take some additional HTML that I think shaun has on his sequence branch.
+
+
+-- An observation on the length of sampled sounds in the sequencer --
+
+The constructor of a Sequence object in Tonejs is as follows.
+  new Tone.Sequence(a,b,c)
+
+  a = callback function
+  b = array of notes
+  c = time signature of notes
+
+  the sequence object will step through the array of notes b and play audio file
+  associated with that note at time interval c regardless even if the previous audio
+  file has finished playing. Over time this will cause a build up that will
+  degrade the sound quality after few loops of the sequencer have completed.
+
+  The quick solution is to limit sounds intended for the sequencer to a standard
+  time constraint. Based on the samples that are associated with the sequencer now
+  I think sequencer bound audio files should be 1 second or less in length.

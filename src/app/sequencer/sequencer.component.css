@@ -21,6 +21,9 @@ div #seqContainer{
     display: flex;
     flex-direction: column;
 }
+.playButton {
+  
+}
 
 #seqContainer {
     width: 100%;
