@@ -11,10 +11,10 @@ var path = "./../../assets/audioSamples/"
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
   //should be able to incorporate sharps so we have up to 12 triggerable audio files
-	"C3" : "cam-smpkick.wav",
-  "D3" : "cam-smphat.wav",
-  "E3" : "cam-smpblip1.wav",
-  "F3" : "cam-smpblip2.wav",
+	"C4" : "cam-smpkick.wav",
+  "D4" : "cam-smphat.wav",
+  "E4" : "cam-smpblip1.wav",
+  "F4" : "cam-smpblip2.wav",
 
 	"B5" : "NOPE.mp3", //This is a default for the global variable. please dont touch it.
 },{
