@@ -11,15 +11,11 @@ var path = "./../../assets/audioSamples/"
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
   //should be able to incorporate sharps so we have up to 12 triggerable audio files
-	"C3" : "EVERYBODY PUT YOUR HANDS IN THE AIR.mp3",
-  "D3" : "DOLPHIN.mp3",
-  "E3" : "EPIC CHOIR SUSPENSE.mp3",
-  "F3" : "RUBBER DUCK.mp3",
-  "G3" : "SCREAM.mp3",
-  "A3" : "SPLAT.mp3",
-  "B3" : "TOASTY.mp3",
-  "C4" : "RECORD SCRATCH.mp3",
-	"D4" : "HEY WHAT HAPPENED.mp3",
+	"C3" : "cam-smpkick.wav",
+  "D3" : "cam-smphat.wav",
+  "E3" : "cam-smpblip1.wav",
+  "F3" : "cam-smpblip2.wav",
+
 	"B5" : "NOPE.mp3", //This is a default for the global variable. please dont touch it.
 },{
   //this is prepended to all the other paths
@@ -68,68 +64,7 @@ export class SamplerComponent implements OnInit {
 	constructor(){
 
 
-	this.sounds = [
-'FAIL SOUND EFFECT.mp3',
-'PUNCH.mp3',
-'DRUM ROLL.mp3',
-'DUN DUN DUNNN.mp3',
-'LIGHTSABER.mp3',
-'EXPLOSION.mp3',
-'HEY WHAT HAPPENED.mp3',
-'FALLING.mp3',
-'FAIL.mp3',
-'DENIED.mp3',
-'TOASTY.mp3',
-'MONSTER KILL.mp3',
-'TO INFINITY AND BEYOND.mp3',
-'ZACH GALIFIANAKIS LAUGH.mp3',
-'EVIL LAUGH.mp3',
-'RECORD SCRATCH 2.mp3',
-'HA GAY.mp3',
-'SAD MUSIC 2.mp3',
-'LIGHTSABER 2.mp3',
-'RECORD SCRATCH.mp3',
-'HA HA (NELSON).mp3',
-'EVERYBODY PUT YOUR HANDS IN THE AIR.mp3',
-'INCEPTION FOG HORN.mp3',
-'FART.mp3',
-'MGS ALERT.mp3',
-'QUAD.mp3',
-'YOU SUCK.mp3',
-'NOPE.mp3',
-'PUNCH 2.mp3',
-'DING.mp3',
-'SAD MUSIC.mp3',
-'SWOOSH.mp3',
-'FAIL 2.mp3',
-'TOMAHAWK HITMARKER.mp3',
-'I GOTTA BAD FEELING ABOUT THIS (HAN SOLO).mp3',
-'VICTORY.mp3',
-'DSR SLOW MO.mp3',
-'RELOADING.mp3',
-'ILLUMINATI.mp3',
-'SWOOSH 3.mp3',
-'WILHELM.mp3',
-'SWOOSH 2.mp3',
-'SPLAT.mp3',
-'RUBBER DUCK.mp3',
-'HEAVENLY CHOIR.mp3',
-'SUSPENSE 1.mp3',
-'SCREAM.mp3',
-'SUDDEN SUSPENSE.mp3',
-'THROWING KNIFE HITMARKER.mp3',
-'SUSPENSE 2.mp3',
-'SLIP.mp3',
-'BOOM SWOOSH.mp3',
-'GET OVER HERE.mp3',
-'DOLPHIN.mp3',
-'FUS RO DAH.mp3',
-'EPIC CHOIR SUSPENSE.mp3',
-'SAY WHAT.mp3',
-'BOXING GLOVES BY JULIO KLADNIEW.mp3',
-'BACKGROUNDMUSIC.mp3',
-'THROWING.mp3',
-];
+	this.sounds = [];
 }
 
 
@@ -232,15 +167,5 @@ pitchOFF(){
 	sampler.disconnect(pitch);
 	sampler.connect(Tone.Master);
 }
-
-//background music
-BGON(){
-	player.start();
-}
-BGOFF(){
-	player.stop();
-}
-
-
 
 }

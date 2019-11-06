@@ -12,12 +12,12 @@ for(var i=0;i<4;i++){
 }
 
 var sampler = new Tone.Sampler({
-  "C4" : "kick 3.wav",
-  "D4" : "crash hit.wav",
-  "E4" : "kick snare.wav",
-  "F4" : "high hats.wav"
+  "C4" : "cam-kick.wav",
+  "D4" : "cam-bass.wav",
+  "E4" : "cam-snare.wav",
+  "F4" : "cam-clap.wav"
 },{
-  "baseUrl": "./../../assets/JakeAudioSample/"
+  "baseUrl": "./../../assets/CamAudioSample/"
 }).toMaster();
 
 var seq = new Tone.Sequence(function(time, col)
