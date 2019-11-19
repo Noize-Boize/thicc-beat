@@ -6,6 +6,8 @@ import * as Nexus from 'nexusui'
 
 Tone.Transport.start();
 
+var seqBPM = Tone.Transport.bpm;
+
 // 1D array with 16 columnss
 var sequencerMatrix = new Array(4);
 
@@ -45,13 +47,9 @@ export class SequencerComponent implements OnInit {
 
   ngOnInit()
   {
-    // var playButton = new Nexus.Button('#play-button',{
-    //   'size': [80,80],
-    //   'mode': 'toggle',
-    //   'state': false
-    // })
-    // playButton.colorize("accent","#e22");
-    // playButton.colorize("fill","#hhh");
+    var sliderBPM = new Nexus.Slider("#sliderBPM", {
+      'size': [120,0], 'mode': 'relative', 'min': 60, 
+      'max': 240, 'step': .5,'value': 80});
 
   }
   public notes: Array<string>;
@@ -76,6 +74,10 @@ export class SequencerComponent implements OnInit {
       console.log('play stopped');
     }
     return;
+  }
+
+  bpm(){
+
   }
 
   toggleCell(event)
