@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import * as Tone from 'tone';
 
+import * as Nexus from 'nexusui'
+
 Tone.Transport.start();
 
 // 1D array with 16 columnss
@@ -12,12 +14,12 @@ for(var i=0;i<4;i++){
 }
 
 var sampler = new Tone.Sampler({
-  "C4" : "kick 3.wav",
-  "D4" : "crash hit.wav",
-  "E4" : "kick snare.wav",
-  "F4" : "high hats.wav"
+  "C4" : "BD-ER1-908-uhhhhhhh.wav",
+  "D4" : "HH-ER1-909open.wav",
+  "E4" : "cam-clap.wav",
+  "F4" : "cam-snare.wav"
 },{
-  "baseUrl": "./../../assets/JakeAudioSample/"
+  "baseUrl": "./../../assets/CamAudioSample/"
 }).toMaster();
 
 var seq = new Tone.Sequence(function(time, col)
@@ -43,6 +45,13 @@ export class SequencerComponent implements OnInit {
 
   ngOnInit()
   {
+    // var playButton = new Nexus.Button('#play-button',{
+    //   'size': [80,80],
+    //   'mode': 'toggle',
+    //   'state': false
+    // })
+    // playButton.colorize("accent","#e22");
+    // playButton.colorize("fill","#hhh");
 
   }
   public notes: Array<string>;
