@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as Tone from 'tone';
-
 import * as Nexus from 'nexusui'
 
 Tone.Transport.start();
-
-var seqBPM = Tone.Transport.bpm;
 
 // 1D array with 16 columnss
 var sequencerMatrix = new Array(4);
@@ -32,6 +29,7 @@ var seq = new Tone.Sequence(function(time, col)
     {
       sampler.triggerAttack(sequencerMatrix[i][col]);
     }
+    console.log(col);
   }
 },[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
 
@@ -45,11 +43,7 @@ var seq = new Tone.Sequence(function(time, col)
 
 export class SequencerComponent implements OnInit {
 
-  ngOnInit()
-  {
-    var sliderBPM = new Nexus.Slider("#sliderBPM", {
-      'size': [120,0], 'mode': 'relative', 'min': 60, 
-      'max': 240, 'step': .5,'value': 80});
+  ngOnInit(){
 
   }
   public notes: Array<string>;
@@ -74,10 +68,6 @@ export class SequencerComponent implements OnInit {
       console.log('play stopped');
     }
     return;
-  }
-
-  bpm(){
-
   }
 
   toggleCell(event)

@@ -5,6 +5,12 @@
       [attr.data-note]="note" [attr.data-x]="i" [attr.data-y]="j">
       </div>
   </div>
-  <button class = "column" (click) = play()>PLAY</button>
-  <div id="sliderBPM"></div>
+  
+  <div>
+    <button (click) = play()>PLAY</button>
+    <div> 
+      <p>BPM Slider</p>
+      <input id="sliderBPM" type="range" min="60" max="200" value="50"> 
+    </div>
+  </div>
 </div>
