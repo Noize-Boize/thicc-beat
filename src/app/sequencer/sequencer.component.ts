@@ -33,7 +33,6 @@ var seq = new Tone.Sequence(function(time, col)
   }
 },[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n");
 
-
 @Component({
   selector: 'app-sequencer',
   templateUrl: './sequencer.component.html',
@@ -43,8 +42,17 @@ var seq = new Tone.Sequence(function(time, col)
 
 export class SequencerComponent implements OnInit {
 
-  ngOnInit(){
 
+
+  ngOnInit(){
+    //Nexus.context = Tone.context;
+
+    //Slider for BPM init
+    var BpmSlider = new Nexus.Slider("#BpmSlider", {'min': 60, 'max': 240, 'step': 1});
+    BpmSlider.colorize("accent","#000");
+    BpmSlider.colorize("fill","#ff0");
+    BpmSlider.value = 90;
+    BpmSlider.on('change', function(v) {Tone.Transport.bpm.value = v;});
   }
   public notes: Array<string>;
   public columns: Array<string>;
@@ -86,5 +94,9 @@ export class SequencerComponent implements OnInit {
       document.getElementById(id).style.backgroundColor = "black";
       sequencerMatrix[event.target.dataset.y][event.target.dataset.x] = ''
     }
+  }
+
+  seqBPM(){
+    
   }
 }
