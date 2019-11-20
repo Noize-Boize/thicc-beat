@@ -205,9 +205,11 @@ pitchToggle.on('change', function(v){
   if (v=true) {
     sampler.disconnect(Tone.Master);
     sampler.connect(pitch);
-  } else if (v=false){
+    console.log("pitch toggle on");
+  } else {
     sampler.disconnect(pitch);
     sampler.connect(Tone.Master);
+    console.log("pitch toggle off");
   }
 })
 
@@ -264,7 +266,7 @@ chorusOFF(){
 	sampler.disconnect(chorus);
 	sampler.connect(Tone.Master);
 }
- */
+ 
 reverbON(){
   sampler.connect(reverb);
 }
@@ -279,6 +281,7 @@ pitchOFF(){
 	sampler.disconnect(pitch);
 	sampler.connect(Tone.Master);
 }
+*/
 
 //background music
 BGON(){
