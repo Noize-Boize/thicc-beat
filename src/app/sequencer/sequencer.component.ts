@@ -45,14 +45,16 @@ export class SequencerComponent implements OnInit {
 
 
   ngOnInit(){
-    //Nexus.context = Tone.context;
-
     //Slider for BPM init
     var BpmSlider = new Nexus.Slider("#BpmSlider", {'min': 60, 'max': 240, 'step': 1});
     BpmSlider.colorize("accent","#000");
     BpmSlider.colorize("fill","#ff0");
     BpmSlider.value = 90;
     BpmSlider.on('change', function(v) {Tone.Transport.bpm.value = v;});
+    //text output of the current bpm inputted on slider
+    var BpmNumDisplay= new Nexus.Number("#BpmNumDisplay");
+    BpmNumDisplay.link(BpmSlider);
+
   }
   public notes: Array<string>;
   public columns: Array<string>;

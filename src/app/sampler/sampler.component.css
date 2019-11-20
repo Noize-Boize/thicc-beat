@@ -16,11 +16,15 @@
   text-decoration-color: white;
 }
 .pad:hover{
-  background: blue;
+  background: yellow;
 }
 
 .soundList{
 
+}
+
+.soundList:focus{
+  background: yellow;
 }
 
 /*ID's*/
@@ -34,7 +38,7 @@
   border-style: groove;
   height: 200px;
   width: 250px;
-  background-color: green;
+  background-color: grey;
 }
 
 #backgroundMusic{
