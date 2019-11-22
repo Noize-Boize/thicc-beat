@@ -1,0 +1,21 @@
+<ng-template #modalData let-modal>
+<div class="signupContainer">
+  <form [formGroup] = 'signupForm'>
+    <label>Email Address</label>
+    <input type="email" formControlName="email">
+    <label>Password</label>
+    <input type="password" formControlName="password">
+    <button type="submit" (click) =  validateSignup(signupForm.value)>Signup</button>
+  </form>
+  <button type="button" (click) = 'validateGoogleSignup()'>Signup with Google</button>
+
+  <div class="alreadyhaveAccount">
+    <p>already have an account?</p>
+    <button (click) = switchModal()> Sign in</button>
+
+  </div>
+</div>
+</ng-template>
+
+
+<button (click) = openModal(modalData)>Open Signup</button>

@@ -168,53 +168,6 @@ export class SamplerComponent implements OnInit {
     'step': 1,
     'value': 0
 })
-
-var chorusToggle = new Nexus.Button("#chorusToggle", {
-  'size': [40,40],
-  'mode': 'toggle', 
-  'state': false
-});
-var reverbToggle = new Nexus.Button("#reverbToggle", {
-  'size': [40,40],
-  'mode': 'toggle', 
-  'state': false
-});
-var pitchToggle = new Nexus.Button("#pitchToggle", {
-  'size': [40,40],
-  'mode': 'toggle', 
-  'state': false
-});
-
-chorusToggle.on('change', function(v){
-  if (v=true) {
-    sampler.disconnect(Tone.Master);
-    sampler.connect(chorus);
-  } else if (v=false){
-    sampler.disconnect(chorus);
-    sampler.connect(Tone.Master);
-  }
-});
-reverbToggle.on('change', function(v){
-  if (v=true) {
-    sampler.connect(reverb);
-  } else if (v=false){
-    sampler.disconnect(reverb);
-  }
-})
-pitchToggle.on('change', function(v){
-  if (v=true) {
-    sampler.disconnect(Tone.Master);
-    sampler.connect(pitch);
-    console.log("pitch toggle on");
-  } else {
-    sampler.disconnect(pitch);
-    sampler.connect(Tone.Master);
-    console.log("pitch toggle off");
-  }
-})
-
-
-
 		playbackDial.on('change',function(v) {
 		  // v holds the new numeric value of the dial
 			player.playbackRate = v;
@@ -228,7 +181,7 @@ pitchToggle.on('change', function(v){
 		pitchSlider.on('on',function(v){
 			pitch.feedback =v;
 		});
-		
+
 
 }
 
@@ -256,7 +209,6 @@ playSound(){
 	sampler.triggerAttack(clickedId).toMaster();
 }
 
-/**
 //sampler effects
 chorusON(){
 	sampler.disconnect(Tone.Master);
@@ -266,7 +218,6 @@ chorusOFF(){
 	sampler.disconnect(chorus);
 	sampler.connect(Tone.Master);
 }
- 
 reverbON(){
   sampler.connect(reverb);
 }
@@ -281,7 +232,6 @@ pitchOFF(){
 	sampler.disconnect(pitch);
 	sampler.connect(Tone.Master);
 }
-*/
 
 //background music
 BGON(){

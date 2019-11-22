@@ -46,7 +46,7 @@ export class WaveformComponent implements OnInit {
         TimelinePlugin.create({
           container:"#wave-timeline"
         })
-        
+
       ]
     });
     if(counter>0){

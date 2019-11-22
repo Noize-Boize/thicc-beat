@@ -1,0 +1,10 @@
+.fileList{
+  background-color: lightblue;
+  overflow-y: auto;
+  height: 300px;
+  width: 250px;
+  position:relative;
+}
+.files:hover{
+  background-color: red;
+}

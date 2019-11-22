@@ -1,0 +1,22 @@
+<ng-template #modalData let-modal>
+<div class="loginContainer">
+  <form [formGroup] = 'loginForm'>
+    <label>Email Address</label>
+    <input type="email" formControlName = "email">
+    <label>Password</label>
+    <input type = 'password' formControlname = 'password'>
+    <button type="submit" (click) = validateLogin(loginForm.value)>Login</button>
+
+  </form>
+  <button type="button" (click) = 'ValidateGoogleLogin()'>Log in with Google</button>
+
+  <div class="noAccount">
+    <p>no account? </p>
+    <button (click) = switchModal()>create account</button>
+
+  </div>
+</div>
+</ng-template>
+
+
+<button (click) = openModal(modalData)>Open Login</button>
