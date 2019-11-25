@@ -20,6 +20,7 @@ var sampler = new Tone.Sampler({
 },{
   "baseUrl": "./../../assets/CamAudioSample/"
 }).toMaster();
+//
 
 var seq = new Tone.Sequence(function(time, col)
 {
