@@ -19,6 +19,10 @@ export class UserService {
       'email',this.currentUser.email,'\n'
     )
   }
+  getLoggedInName()
+  {
+    return this.currentUser.name;
+  }
 
   newUser(res){
     console.log('in new user');

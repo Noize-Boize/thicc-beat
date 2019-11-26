@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       // console.log(res.additionalUserInfo.profile.name);
       // this.UserService.printUser();
       this.UserService.newUser(res);
-      this.ListService.userLogin();
+      //this.ListService.userLogin();
     })
   }
 
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   openModal(modalData) {
     console.log('in open modal');
     this.modalLib.open(modalData, { centered: true });
-    this.UserService.printUserInfo();
+    //this.UserService.printUserInfo();
   }
 
   switchModal(){

@@ -8,3 +8,7 @@
 .files:hover{
   background-color: red;
 }
+.sequencerFiles
+{
+  border-style: ridge;
+}

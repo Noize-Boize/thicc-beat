@@ -17,4 +17,14 @@ export class ListService {
     this.List.loadUserList()
 
   }
+
+  loadList()
+  {
+    this.List.refreshList();
+  }
+
+  addToList(files)
+  {
+    this.List.addList(files);
+  }
 }

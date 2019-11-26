@@ -1,5 +1,4 @@
 export class File {
-  public id: string;
 
   public fileName: string;
 
