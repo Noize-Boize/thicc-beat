@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       // console.log(res.additionalUserInfo.profile.name);
       // this.UserService.printUser();
       this.UserService.newUser(res);
-      //this.ListService.userLogin();
+      this.ListService.userLogin();
     })
   }
 

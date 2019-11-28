@@ -11,7 +11,10 @@ import{FSequencer} from '../files/f-sequencer.model';
 import {UserService} from '../user/user.service';
 
 
-////// need to add logic to make sure that the user cannot reclick to keep adding to the list.
+import {AngularFirestore } from '@angular/fire/firestore';
+
+
+////// need to add logic to make sure that the user cannot re-click to keep adding to the list.
 
 
 @Component({
@@ -24,7 +27,7 @@ export class ListComponent implements OnInit {
 
   public userFiles: Array<FSequencer>;
 
-  public displayList: Array<string>;
+  public recList: Array<FSequencer>;
 
   //public userFiles: Array<string>;
 
@@ -38,8 +41,21 @@ export class ListComponent implements OnInit {
 
   constructor(private firebaseService: FirebaseService,
               public appRef: ApplicationRef,
-              public user: UserService) {
+              public user: UserService,
+              private firestore: AngularFirestore) {
   this.userFiles=[this.defaultFile];
+
+  this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
+  .subscribe(v => {
+    for (var i = 0; i<v.length;i++)
+    {
+
+      console.log(v[i]);
+      var temp = new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds);
+      this.userFiles.push(temp);
+    }
+  });
+  console.log(this.userFiles);
   //this.userFiles.push('ass');
   //console.log('list comp const defaultFile',this.defaultFile);
   // console.log('list comp const userFiles 0.fielName: ',this.userFiles[0].fileName);
@@ -60,6 +76,8 @@ export class ListComponent implements OnInit {
  }
 
   ngOnInit() {
+
+
   }
 
   addList(files)
@@ -135,7 +153,39 @@ export class ListComponent implements OnInit {
   loadUserList()
   {
 
-    this.firebaseService.loadUserSeqFiles();
+
+
+
+    this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
+    .subscribe(v => {
+      for (var i = 0; i<v.length;i++)
+      {
+
+        console.log(v[i]);
+        var temp = new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds);
+        this.userFiles.push(temp);
+      }
+    });
+    console.log(this.userFiles);
+    //return this.userFiles;
+
+
+
+
+
+
+
+    // console.log("before api call: ", this.userFiles);
+    // this.userFiles = this.firebaseService.loadUserSeqFiles();
+    // console.log("after api call: ", this.userFiles);
+
+
+
+
+
+
+
+
     // .subscribe(val =>{
     //   for(var i = 0;i<val.length;i++){
     //     console.log('in subscribe',val);

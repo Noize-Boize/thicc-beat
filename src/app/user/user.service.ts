@@ -25,8 +25,8 @@ export class UserService {
   }
 
   newUser(res){
-    console.log('in new user');
-    console.log(res);
+    // console.log('in new user');
+    // console.log(res);
     this.currentUser.email = res.additionalUserInfo.profile.email;
     this.currentUser.name = res.additionalUserInfo.profile.name;
     this.currentUser.id = res.user.uid;

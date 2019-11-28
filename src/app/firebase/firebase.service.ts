@@ -22,14 +22,17 @@ export class FirebaseService {
 
   loadUserSeqFiles()
   {
-    this.firestore.collection("sequencerFiles").valueChanges()
+    this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
     .subscribe(v => {
       for (var i = 0; i<v.length;i++)
       {
+
         console.log(v[i]);
+        this.recFiles.push(new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds));
       }
     });
-    return
+    console.log(this.recFiles);
+    return this.recFiles
   }
 }
 
