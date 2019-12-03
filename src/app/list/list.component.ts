@@ -43,7 +43,12 @@ export class ListComponent implements OnInit {
               public appRef: ApplicationRef,
               public user: UserService,
               private firestore: AngularFirestore) {
-  this.userFiles=[this.defaultFile];
+                this.defaultAudio=['defaultAudio'];
+                this.loaded=['defaultTrack'];
+                this.cuts=['defaultCut'];
+                this.userFiles=[this.defaultFile];
+
+
 
   this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
   .subscribe(v => {

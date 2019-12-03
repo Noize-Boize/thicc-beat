@@ -2,10 +2,32 @@
 
 
 <div class="fileList">
-  <div class='sequencerFiles'>
+
+  <div class = 'defaultAudio'>Audio Samples
+    <div class="files" *ngFor = "let file of defaultAudio">
+      {{file}}
+    </div>
+  </div>
+
+  <div class = 'loadedTracks'> Your Tracks
+    <div class="files" *ngFor = "let track of loaded">
+      {{track}}
+    </div>
+  </div>
+
+  <div class = 'cuts'>Session Cuts
+    <div class="files" *ngFor = "let cut of cuts">
+      {{cut}}
+    </div>
+  </div>
+
+
+  <div class='sequencerFiles'> Projects
     <div class="files" *ngFor = "let file of userFiles" (click)='displayItem(file.fileName)'>
       {{file.fileName}}
     </div>
   </div>
+
+
 
 </div>
