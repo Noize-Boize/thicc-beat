@@ -1,0 +1,34 @@
+.fileList{
+  background-color: lightblue;
+  overflow-y: auto;
+  height: 300px;
+  width: 250px;
+  position:relative;
+}
+.files {
+  background-color: orange;
+  width: 40%;
+}
+.files:hover{
+  background-color: red;
+}
+.defaultAudio
+{
+  border-style: ridge;
+  padding-bottom: 10px;
+}
+.loadedTracks
+{
+  border-style: ridge;
+  padding-bottom: 10px;
+}
+.cuts
+{
+  border-style: ridge;
+  padding-bottom: 10px;
+}
+.sequencerFiles
+{
+  border-style: ridge;
+  padding-bottom: 10px;
+}

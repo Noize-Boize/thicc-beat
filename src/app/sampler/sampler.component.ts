@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as Tone from 'tone';
 import * as Nexus from 'nexusui';
-
+import { WaveformComponent } from '../waveform/waveform.component';
+import { ChangeDetectorRef } from '@angular/core';
+import { AudioBufferToWav } from '../../../audiobuffer-to-wav';
 
 
 var clickedId = "B5";
 var path = "./../../assets/audioSamples/"
-
+var waveformComponent = new WaveformComponent;
 //Sampler
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
@@ -63,74 +65,15 @@ wet: 1,
 })
 
 export class SamplerComponent implements OnInit {
-
+  
+  wavebuffer: any;
 	public sounds: Array<string>;
 	constructor(){
 
 
-	this.sounds = [
-'FAIL SOUND EFFECT.mp3',
-'PUNCH.mp3',
-'DRUM ROLL.mp3',
-'DUN DUN DUNNN.mp3',
-'LIGHTSABER.mp3',
-'EXPLOSION.mp3',
-'HEY WHAT HAPPENED.mp3',
-'FALLING.mp3',
-'FAIL.mp3',
-'DENIED.mp3',
-'TOASTY.mp3',
-'MONSTER KILL.mp3',
-'TO INFINITY AND BEYOND.mp3',
-'ZACH GALIFIANAKIS LAUGH.mp3',
-'EVIL LAUGH.mp3',
-'RECORD SCRATCH 2.mp3',
-'HA GAY.mp3',
-'SAD MUSIC 2.mp3',
-'LIGHTSABER 2.mp3',
-'RECORD SCRATCH.mp3',
-'HA HA (NELSON).mp3',
-'EVERYBODY PUT YOUR HANDS IN THE AIR.mp3',
-'INCEPTION FOG HORN.mp3',
-'FART.mp3',
-'MGS ALERT.mp3',
-'QUAD.mp3',
-'YOU SUCK.mp3',
-'NOPE.mp3',
-'PUNCH 2.mp3',
-'DING.mp3',
-'SAD MUSIC.mp3',
-'SWOOSH.mp3',
-'FAIL 2.mp3',
-'TOMAHAWK HITMARKER.mp3',
-'I GOTTA BAD FEELING ABOUT THIS (HAN SOLO).mp3',
-'VICTORY.mp3',
-'DSR SLOW MO.mp3',
-'RELOADING.mp3',
-'ILLUMINATI.mp3',
-'SWOOSH 3.mp3',
-'WILHELM.mp3',
-'SWOOSH 2.mp3',
-'SPLAT.mp3',
-'RUBBER DUCK.mp3',
-'HEAVENLY CHOIR.mp3',
-'SUSPENSE 1.mp3',
-'SCREAM.mp3',
-'SUDDEN SUSPENSE.mp3',
-'THROWING KNIFE HITMARKER.mp3',
-'SUSPENSE 2.mp3',
-'SLIP.mp3',
-'BOOM SWOOSH.mp3',
-'GET OVER HERE.mp3',
-'DOLPHIN.mp3',
-'FUS RO DAH.mp3',
-'EPIC CHOIR SUSPENSE.mp3',
-'SAY WHAT.mp3',
-'BOXING GLOVES BY JULIO KLADNIEW.mp3',
-'BACKGROUNDMUSIC.mp3',
-'THROWING.mp3',
-];
+
 }
+
 
 
 
@@ -168,53 +111,6 @@ export class SamplerComponent implements OnInit {
     'step': 1,
     'value': 0
 })
-
-var chorusToggle = new Nexus.Button("#chorusToggle", {
-  'size': [40,40],
-  'mode': 'toggle', 
-  'state': false
-});
-var reverbToggle = new Nexus.Button("#reverbToggle", {
-  'size': [40,40],
-  'mode': 'toggle', 
-  'state': false
-});
-var pitchToggle = new Nexus.Button("#pitchToggle", {
-  'size': [40,40],
-  'mode': 'toggle', 
-  'state': false
-});
-
-chorusToggle.on('change', function(v){
-  if (v=true) {
-    sampler.disconnect(Tone.Master);
-    sampler.connect(chorus);
-  } else if (v=false){
-    sampler.disconnect(chorus);
-    sampler.connect(Tone.Master);
-  }
-});
-reverbToggle.on('change', function(v){
-  if (v=true) {
-    sampler.connect(reverb);
-  } else if (v=false){
-    sampler.disconnect(reverb);
-  }
-})
-pitchToggle.on('change', function(v){
-  if (v=true) {
-    sampler.disconnect(Tone.Master);
-    sampler.connect(pitch);
-    console.log("pitch toggle on");
-  } else {
-    sampler.disconnect(pitch);
-    sampler.connect(Tone.Master);
-    console.log("pitch toggle off");
-  }
-})
-
-
-
 		playbackDial.on('change',function(v) {
 		  // v holds the new numeric value of the dial
 			player.playbackRate = v;
@@ -230,6 +126,144 @@ pitchToggle.on('change', function(v){
 		});
 		
 
+}
+
+//this corresponds to the buffer button in the sampler
+getWaveBuffer(){
+  //create object to convert buffer to wav
+  var toWav = AudioBufferToWav;
+  //calls the waveform component to get the audiobuffer from the waveform region
+  this.wavebuffer = waveformComponent.getBuffer();
+  console.log("IN SAMPLER", this.wavebuffer);
+
+
+
+  // var ffmpeg = require('ffmpeg');
+  // try{
+  //   var process = new ffmpeg(this.wavebuffer);
+  //   process.then(function (audio){
+  //     audio.fnExtractSoundToMP3('../../assets/audioSamples/wavebuffer.mp3'), function (error, file) {
+  //       if(!error)
+  //         console.log('Audio file:' + file);
+          
+  //     });
+  //   }, function (err) {
+  //       console.log('error' + err);
+  //   });
+  //   }
+  //   catch(e) {
+  //     console.log(e.code);
+  //     console.log(e.msg);
+  //   }
+  
+
+
+
+ // var wav = toWav.audioBufferToWav(this.wavebuffer);
+  
+ //function to convert an audiobuffer to wav
+ function bufferToWave(abuffer, len) {
+  var numOfChan = abuffer.numberOfChannels,
+      length = len * numOfChan * 2 + 44,
+      buffer = new ArrayBuffer(length),
+      view = new DataView(buffer),
+      channels = [], i, sample,
+      offset = 0,
+      pos = 0;
+
+  // write WAVE header
+  setUint32(0x46464952);                         // "RIFF"
+  setUint32(length - 8);                         // file length - 8
+  setUint32(0x45564157);                         // "WAVE"
+
+  setUint32(0x20746d66);                         // "fmt " chunk
+  setUint32(16);                                 // length = 16
+  setUint16(1);                                  // PCM (uncompressed)
+  setUint16(numOfChan);
+  setUint32(abuffer.sampleRate);
+  setUint32(abuffer.sampleRate * 2 * numOfChan); // avg. bytes/sec
+  setUint16(numOfChan * 2);                      // block-align
+  setUint16(16);                                 // 16-bit (hardcoded in this demo)
+
+  setUint32(0x61746164);                         // "data" - chunk
+  setUint32(length - pos - 4);                   // chunk length
+
+  // write interleaved data
+  for(i = 0; i < abuffer.numberOfChannels; i++)
+    channels.push(abuffer.getChannelData(i));
+
+  while(pos < length) {
+    for(i = 0; i < numOfChan; i++) {             // interleave channels
+      sample = Math.max(-1, Math.min(1, channels[i][offset])); // clamp
+      sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767)|0; // scale to 16-bit signed int
+      view.setInt16(pos, sample, true);          // write 16-bit sample
+      pos += 2;
+    }
+    offset++                                     // next source sample
+  }
+
+  // create Blob
+  return new Blob([buffer], {type: "audio/wav"});
+
+  function setUint16(data) {
+    view.setUint16(pos, data, true);
+    pos += 2;
+  }
+
+  function setUint32(data) {
+    view.setUint32(pos, data, true);
+    pos += 4;
+  }
+}
+//~~~~~~~~~~~~~~~~ end audio buffer to wav function ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  //call buffter to wav function to convert wavebuffer to wav
+  var wav = bufferToWave(this.wavebuffer, this.wavebuffer.length);
+  console.log("converted wav buffer", wav);
+
+
+  var new_file = URL.createObjectURL(wav);
+  console.log("URL:", new_file);
+
+  sampler.add('C3', new Tone.Buffer(new_file));
+
+
+  //trying things here
+
+  // var new_file = new File(wav,);
+  // console.log("file", new_file);
+  // new_file.Move("../../assets/audioSamples");
+ 
+  
+  //trying to store the new wav in the sampler's assets folder (think this is unsuccessful)
+
+  //var myFile: any = this.blobToFile(wav, "./../../assets/audioSamples/wavaudio.wav")
+  //this.sounds.push("./../../assets/audioSamples/wavaudio.wav");
+  //console.log("file: ", myFile);
+  
+
+  //trying things here
+
+  // var new_file = URL.createObjectURL(wav);
+  // console.log("urlfile: ", new_file);
+//   var reader = new FileReader();
+//   reader.readAsDataURL(wav); 
+//   reader.onloadend = function() {
+//       var base64data = reader.result;                
+//       console.log("This is converted: ", base64data);
+//  }
+  
+}
+
+//method to convert audio wav blob to a file
+public blobToFile = (theBlob: Blob, fileName:string): File => {
+  var b: any = theBlob;
+  //A Blob() is almost a File() - it's just missing the two properties below which we will add
+  b.lastModifiedDate = new Date();
+  b.name = fileName;
+
+  //Cast to a File() type
+  return <File>theBlob;
 }
 
 sendId(event){
@@ -256,7 +290,6 @@ playSound(){
 	sampler.triggerAttack(clickedId).toMaster();
 }
 
-/**
 //sampler effects
 chorusON(){
 	sampler.disconnect(Tone.Master);
@@ -266,7 +299,6 @@ chorusOFF(){
 	sampler.disconnect(chorus);
 	sampler.connect(Tone.Master);
 }
- 
 reverbON(){
   sampler.connect(reverb);
 }
@@ -281,7 +313,6 @@ pitchOFF(){
 	sampler.disconnect(pitch);
 	sampler.connect(Tone.Master);
 }
-*/
 
 //background music
 BGON(){

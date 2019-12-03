@@ -1,17 +1,16 @@
-
 <div id ="seqContainer">
   <div class="column" *ngFor="let column of columns; let i = index">
       <div class="cell" id="{{i}}_{{j}}" *ngFor="let note of notes; let j = index" (click) = toggleCell($event)
       [attr.data-note]="note" [attr.data-x]="i" [attr.data-y]="j">
       </div>
   </div>
-  
+
   <div>
     <!-- <button (click) = play()>PLAY</button> -->
     <h4>Play Pause Button</h4>
     <span id="playButton"></span>
-    
-    <div style="padding: 40px"> 
+
+    <div style="padding: 40px">
       <h4>BPM Slider</h4>
       <span id="BpmSlider" style="width:200px;height:30px"></span>
       <div id="BpmNumDisplay"></div>
