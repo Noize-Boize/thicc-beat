@@ -40,7 +40,7 @@
 #backgroundMusic{
   background-color: blue;
   height:auto;
-  width: auto;
+  width: 50%;
 }
 
 #pads{
@@ -54,6 +54,10 @@
   height: 300px;
   width: 250px;
   position:relative;
+}
+#wholeting
+{
+
 }
 
 /*divs*/
