@@ -17,6 +17,7 @@ var sampler = new Tone.Sampler({
   "D4" : "HH-ER1-909open.wav",
   "E4" : "cam-clap.wav",
   "F4" : "cam-snare.wav"
+
 },{
   "baseUrl": "./../../assets/CamAudioSample/"
 }).toMaster();
@@ -42,6 +43,8 @@ var seq = new Tone.Sequence(function(time, col)
 
 
 export class SequencerComponent implements OnInit {
+
+
 
 
 
@@ -80,6 +83,9 @@ export class SequencerComponent implements OnInit {
   }
   public notes: Array<string>;
   public columns: Array<string>;
+  public clickedNote: any;
+  public listSound: any;
+
 
   constructor()
   {
@@ -87,8 +93,25 @@ export class SequencerComponent implements OnInit {
 
     this.columns = ['00','01','02','03','04','05','06','07',
                     '08','09','10','11','12','13','14','15'];
+
   }
   //play pause functionality implemented in nexusui oninit
+  passNote(note){
+    this.clickedNote = note;
+    console.log("this is the note", this.clickedNote);
+  }
+
+  assignSound(sound){
+    this.listSound = sound;
+    console.log("in sequencer:", sound);
+    //sampler.add(this.clickedNote, new Tone.Buffer(sound));
+  }
+  readySound(){
+    console.log("sequencer clickedNote: ", this.clickedNote);
+    console.log("sequencer listSound: ", this.listSound);
+    sampler.add(this.clickedNote, new Tone.Buffer(this.listSound));
+  }
+
   play(){
     if(seq.state=="stopped"){
       seq.start();
@@ -101,7 +124,7 @@ export class SequencerComponent implements OnInit {
     }
     return;
   }
-  
+
 
   toggleCell(event)
   {
@@ -123,5 +146,43 @@ export class SequencerComponent implements OnInit {
 
   seqBPM(){
 
+  }
+
+  load(matrix)
+  {
+
+    for (var i = 0;i < 4;i++)
+    {
+      for(var j = 0;j<16;j++)
+      {
+        var id=j+'_'+i;
+        sequencerMatrix[i][j] = matrix[j+(i*16)];
+        //console.log(id);
+        if(sequencerMatrix[i][j]!=1)
+        {
+          document.getElementById(id).style.backgroundColor = "black";
+          sequencerMatrix[i][j] = '';
+
+        }
+        else
+        {
+          document.getElementById(id).style.backgroundColor = "#faed27";
+          sequencerMatrix[i][j] = this.notes[i];
+        }
+      }
+
+    }
+  }
+  clearMatrix()
+  {
+    for (var i = 0;i < 4;i++)
+    {
+      for(var j = 0;j<16;j++)
+      {
+        sequencerMatrix[i][j] = '';
+        document.getElementById(j+'_'+i).style.background = 'black';
+      }
+
+    }
   }
 }

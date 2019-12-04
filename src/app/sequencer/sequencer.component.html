@@ -1,6 +1,6 @@
 <div id ="seqContainer">
   <div class="column" *ngFor="let column of columns; let i = index">
-      <div class="cell" id="{{i}}_{{j}}" *ngFor="let note of notes; let j = index" (click) = toggleCell($event)
+      <div class="cell" id="{{i}}_{{j}}" *ngFor="let note of notes; let j = index" (click) = toggleCell($event) (click) = passNote(note)
       [attr.data-note]="note" [attr.data-x]="i" [attr.data-y]="j">
       </div>
   </div>
@@ -14,6 +14,8 @@
     <span style="padding:40px; margin: 20px; float: right;">
       <h4>BPM Slider</h4>
       <span id="BpmSlider" style="width:200px;height:30px"></span>
+
       <br><span id="BpmNumDisplay" style="margin-left: 75px; margin-top: 275px;"></span>
     </span>
   </div>
+

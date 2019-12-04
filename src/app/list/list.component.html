@@ -1,10 +1,11 @@
 <button type="button" (click) = getWaveBuffer()> buffer</button>
 
 <div class="fileList">
-  
-  <div class = 'defaultAudio'>Audio Samples
-    <div class="files" *ngFor = "let file of defaultAudio">
-      {{file}}
+
+
+  <div class = 'defaultAudio' (click)='displayAfList()'>Audio Samples
+    <div class="files" *ngFor = "let file of defaultAudio" (click)=holdName(file)>
+      {{file.fileName}}
     </div>
   </div>
 
@@ -15,16 +16,19 @@
   </div>
 
   <div class = 'cuts'>Session Cuts
-    <div class="files" *ngFor = "let cut of cuts">
+    <div class="files" *ngFor = "let cut of cuts" (click)= listClick(cut)>
+
       {{cut}}
     </div>
   </div>
 
 
-  <div class='sequencerFiles'> Projects
+  <div class='sequencerFiles' (click)='displayList()'> Projects
     <div class="files" *ngFor = "let file of userFiles" (click)='displayItem(file.fileName)'>
       {{file.fileName}}
     </div>
   </div>
+
+
 
 </div>

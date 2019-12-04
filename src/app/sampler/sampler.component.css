@@ -32,12 +32,14 @@
   float: right; clear: right;
   height: 200px;
   width: 250px;  
+
 }
 
 #backgroundMusic{
   background-color: blue;
   height:auto;
   width: 50%;
+
 }
 
 #pads

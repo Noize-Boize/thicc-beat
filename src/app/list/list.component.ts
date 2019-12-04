@@ -1,4 +1,4 @@
-import { Component, OnInit, ApplicationRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Injectable, ApplicationRef, ChangeDetectionStrategy } from '@angular/core';
 
 import {FirebaseService} from '../firebase/firebase.service';
 
@@ -6,21 +6,38 @@ import { Observable } from 'rxjs';
 
 import { WaveformComponent } from '../waveform/waveform.component';
 
+import { SamplerComponent } from '../sampler/sampler.component';
+
+import { SequencerComponent } from '../sequencer/sequencer.component';
+
 import { AudioBufferToWav } from '../../../audiobuffer-to-wav';
 
 import { map } from 'rxjs/operators';
 
 import{FSequencer} from '../files/f-sequencer.model';
 
+import{AudioFile} from '../files/audio-file.model';
+
 import {UserService} from '../user/user.service';
+
+import {SequencerService} from '../sequencer/sequencer.service';
+
+import {SamplerService} from '../sampler/sampler.service';
 
 
 import {AngularFirestore } from '@angular/fire/firestore';
+
+import {AngularFireStorageModule, StorageBucket} from '@angular/fire/storage';
+
+import { AngularFireStorage } from '@angular/fire/storage';
+//
 
 
 ////// need to add logic to make sure that the user cannot re-click to keep adding to the list.
 
 var waveformComponent = new WaveformComponent;
+var samplerComponent = new SamplerComponent;
+var sequencerComponent = new SequencerComponent;
 
 
 @Component({
@@ -29,9 +46,14 @@ var waveformComponent = new WaveformComponent;
   styleUrls: ['./list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@Injectable()
 export class ListComponent implements OnInit {
 
+
   wavebuffer: any;
+
+  clickedItem: any;
+
 
   public userFiles: Array<FSequencer>;
 
@@ -39,24 +61,31 @@ export class ListComponent implements OnInit {
 
   //public userFiles: Array<string>;
 
-  private defaultAudio:Array<any>;
+  private defaultAudio:Array<AudioFile>;
 
   private cuts:Array<any>;
+
 
   private loaded:Array<any>;
 
   private defaultFile = new FSequencer('defaultFile','jak','[1,0,1,0,0,0]','[pad1,pad2,pad3]');
 
-  constructor(private firebaseService: FirebaseService,
-              public appRef: ApplicationRef,
-              public user: UserService,
-              private firestore: AngularFirestore) {
+  private exampleAudio = new AudioFile('sampName','theCoolerestFucker',32,["kick"],'path')
 
-                this.defaultAudio=['defaultAudio'];
-                this.loaded=['defaultTrack'];
-                this.cuts=['defaultCut'];
-                this.userFiles=[this.defaultFile];
+  public profileUrl: Observable<string | null>;
 
+  constructor(private firebaseService?: FirebaseService,
+              public appRef?: ApplicationRef,
+              public user?: UserService,
+              private firestore?: AngularFirestore,
+              private samp?: SamplerService,
+              private seq?: SequencerService) {
+
+                this.defaultAudio=[];
+                this.loaded=[];
+                this.cuts=[];
+                this.userFiles=[];
+  if(this.firestore != undefined){
   this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
   .subscribe(v => {
     for (var i = 0; i<v.length;i++)
@@ -67,6 +96,7 @@ export class ListComponent implements OnInit {
       this.userFiles.push(temp);
     }
   });
+}
   console.log(this.userFiles);
   //this.userFiles.push('ass');
   //console.log('list comp const defaultFile',this.defaultFile);
@@ -77,10 +107,13 @@ export class ListComponent implements OnInit {
   //    filter(stable => stable)
   // ).subscribe(() => console.log('App is stable now'));
   // interval(1000).subscribe(counter => console.log(counter));
+  if(this.user != undefined){
+
   if(this.user.getLoggedInName() != null)
   {
     console.log('user is logged in');
   }
+}
   else{
     console.log('no user logged in');
   }
@@ -102,7 +135,7 @@ export class ListComponent implements OnInit {
   //     audio.fnExtractSoundToMP3('../../assets/audioSamples/wavebuffer.mp3'), function (error, file) {
   //       if(!error)
   //         console.log('Audio file:' + file);
-          
+
   //     });
   //   }, function (err) {
   //       console.log('error' + err);
@@ -112,12 +145,12 @@ export class ListComponent implements OnInit {
   //     console.log(e.code);
   //     console.log(e.msg);
   //   }
-  
+
 
 
 
  // var wav = toWav.audioBufferToWav(this.wavebuffer);
-  
+
  //function to convert an audiobuffer to wav
  function bufferToWave(abuffer, len) {
   var numOfChan = abuffer.numberOfChannels,
@@ -162,6 +195,7 @@ export class ListComponent implements OnInit {
   // create Blob
   return new Blob([buffer], {type: "audio/wav"});
 
+
   function setUint16(data) {
     view.setUint16(pos, data, true);
     pos += 2;
@@ -191,26 +225,26 @@ export class ListComponent implements OnInit {
   // var new_file = new File(wav,);
   // console.log("file", new_file);
   // new_file.Move("../../assets/audioSamples");
- 
-  
+
+
   //trying to store the new wav in the sampler's assets folder (think this is unsuccessful)
 
   //var myFile: any = this.blobToFile(wav, "./../../assets/audioSamples/wavaudio.wav")
   //this.sounds.push("./../../assets/audioSamples/wavaudio.wav");
   //console.log("file: ", myFile);
-  
+
 
   //trying things here
 
   // var new_file = URL.createObjectURL(wav);
   // console.log("urlfile: ", new_file);
 //   var reader = new FileReader();
-//   reader.readAsDataURL(wav); 
+//   reader.readAsDataURL(wav);
 //   reader.onloadend = function() {
-//       var base64data = reader.result;                
+//       var base64data = reader.result;
 //       console.log("This is converted: ", base64data);
 //  }
-  
+
 }
 
 //method to convert audio wav blob to a file
@@ -223,87 +257,47 @@ public blobToFile = (theBlob: Blob, fileName:string): File => {
   //Cast to a File() type
   return <File>theBlob;
 }
+listClick(clicked){
+  console.log("you clicked a list", clicked);
+  this.clickedItem = clicked;
+  console.log("in listClicked", this.clickedItem)
+  samplerComponent.getSound(this.clickedItem);
+  sequencerComponent.assignSound(this.clickedItem);
+}
+
+public getClicked(){
+  console.log("in getClicked", this.clickedItem);
+  return this.clickedItem;
+}
 
   ngOnInit() {
 
+    this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
+    .subscribe(v => {
+      for (var i = 0; i<v.length;i++)
+      {
 
+        //console.log(v[i]);
+        var temp = new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds);
+        this.userFiles.push(temp);
+      }
+    });
+    this.firestore.collection<AudioFile>('AudioFiles').valueChanges()
+    .subscribe(v=> {
+      for (var i = 0; i<v.length;i++)
+      {
+        var temp = new AudioFile(v[i].fileName, v[i].owner, v[i].fLength, v[i].tags, v[i].path);
+        this.defaultAudio.push(temp);
+      }
+    })
   }
 
   addList(files)
   {
     return;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   loadUserList()
   {
-
-
-
 
     this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
     .subscribe(v => {
@@ -316,78 +310,80 @@ public blobToFile = (theBlob: Blob, fileName:string): File => {
       }
     });
     console.log(this.userFiles);
-    //return this.userFiles;
 
-
-
-
-
-
-
-    // console.log("before api call: ", this.userFiles);
-    // this.userFiles = this.firebaseService.loadUserSeqFiles();
-    // console.log("after api call: ", this.userFiles);
-
-
-
-
-
-
-
-
-    // .subscribe(val =>{
-    //   for(var i = 0;i<val.length;i++){
-    //     console.log('in subscribe',val);
-    //     //console.log('here is i: ',i)
-    //     // console.log(i);
-    //     // console.log(val[i].name)
-    //     // console.log('valI 0',val[i]);
-    //     // var tempFile = new FSequencer(val[0]);
-    //     // console.log(tempFile);
-    //     //this.newFile(val[i])
-    //     //this.userFiles.push(new FSequencer(val[i].fileName,val[i].owner,'',''));
-    //     //this.userFiles.push(new FSequencer());
-    //   }
-    //   //console.log('ListComponent sub',val);
-    //
-    // });
-    // console.log('listCompLoadUserList 0:\n',this.userFiles[0]);
-    // console.log('listCompLoadUserList 1:\n',this.userFiles[1]);
-    // console.log('listCompLoadUserList 2:\n',this.userFiles[2]);
-    // console.log('listCompLoadUserList 3:\n',this.userFiles[3]);
-    // console.log('listCompLoadUserList all:\n',this.userFiles);
-    // this.userFiles.forEach(function(ele){
-    //   //console.log(ele);
-    // })
-
-
-    //this.appRef.tick();
   }
 
   newFile(obj)
   {
-    // var temp = new FSequencer(obj.fileName,obj.owner,obj.pattern,obj.sounds);
-    // console.log('newFile: \n','fileName',temp.fileName)
-    // console.log('list comp newFile temp complete: ',temp);
+
     this.userFiles.push(new FSequencer(obj.fileName,obj.owner,obj.pattern,obj.sounds)); // = [this.userFiles, temp];
     console.log('newFile print userFiles',this.userFiles)
 
-    //return temp;
+  }
+  loadDefaultList(){
+    for(var i = 0; i<this.userFiles.length; i++)
+    {
+
+    }
+
   }
 
   displayItem(evt)
   {
     for(var i = 0; i<this.userFiles.length; i++)
     {
+      //console.log(this.userFiles[i].fileName==evt)
       if(this.userFiles[i].fileName == evt)
       {
-        console.log(this.userFiles);
+        // console.log(this.userFiles[i].fileName);
+        // console.log(this.userFiles[i].owner);
+        // console.log(this.userFiles[i].pattern);
+        // console.log(this.userFiles[i].sounds);
+        this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
+        this.samp.loadPads(this.userFiles[i].sounds);
       }
       else
       {
-        console.log('no matching list items for: ',evt);
+        //console.log('no matching list items for: ',evt);
+
       }
     }
+  }
+
+  displayList()
+  {
+    for(var i = 0; i<this.userFiles.length; i++)
+    {
+      if(this.userFiles[i].fileName != null)
+      {
+
+      }
+      else
+      {
+
+      }
+    }
+  }
+  displayAfList()
+  {
+    for(var i = 0; i<this.defaultAudio.length; i++)
+    {
+      if(this.defaultAudio[i].fileName != null)
+      {
+
+      }
+      else
+      {
+
+      }
+    }
+  }
+
+  holdName(evt)
+  {
+    // console.log(typeof evt);
+    // console.log(evt.path);
+    this.samp.audioClicked(evt);
   }
 
   refreshList()
