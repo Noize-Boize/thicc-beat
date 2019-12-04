@@ -1,14 +1,14 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyD35md60LcLaabPd21TOrXNpzX7jSUBsO4",
-    authDomain: "thicc-beat-bb7a7.firebaseapp.com",
-    databaseURL: "https://thicc-beat-bb7a7.firebaseio.com",
-    projectId: "thicc-beat-bb7a7",
-    storageBucket: "thicc-beat-bb7a7.appspot.com",
-    messagingSenderId: "392129506784",
-    appId: "1:392129506784:web:c1cac7853ee16b9b4b0f85",
-    measurementId: "G-G5QMYJ2G49"
+    apiKey: "AIzaSyDcR65BOVrdP6zWazCwDpEkX-pEJp-sti4",
+    authDomain: "oncemorewithfeeling.firebaseapp.com",
+    databaseURL: "https://oncemorewithfeeling.firebaseio.com",
+    projectId: "oncemorewithfeeling",
+    storageBucket: "oncemorewithfeeling.appspot.com",
+    messagingSenderId: "44395608587",
+    appId: "1:44395608587:web:c741129953aec5836fa50e",
+    measurementId: "G-1V28QWR127"
     }
 
 };
