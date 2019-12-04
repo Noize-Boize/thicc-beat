@@ -1,43 +1,22 @@
 <p>waveform works!</p>
-
-
-<div class = "waveTrackBox">
-  <div class = "buttonBox">
-    <button class = "trackBox" (click) = "showList($event, 'trackList')" id ="defaultOpen">Tracks</button>
-    <button class = "trackBox" (click) = "showList($event, 'sampleList')">Samples</button>
-  </div>
-
-
-  <div id = "trackList" class = "list">
-    <div id = "tracks" class = "listElements" *ngFor = "let track of loadedTracks" (click) = "loadToWaveForm(track)" >
-      {{track}}</div> <!-- add the correct click function create a list to be served -->
-  </div>
-
-  <div id = "sampleList" class = "list">
-    <div id = "samples" class = "listElements" *ngFor = "let sample of trackSamples" (click) = "applyToPad(sample)" >
-      {{sample}}</div> <!-- add the correct click function create a list to be served -->
-  </div>
-
-</div>
-
-<div id = "tracks" class = "list" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
-  {{sound}}</div> <!-- add the correct click function create a list to be served -->
-
-<div id = "samples" class = "list" *ngFor = "let sound of sounds" (click) = "getSound(sound)" >
-  {{sound}}</div> <!-- add the correct click function create a list to be served -->
-
 <div class = "loadTracks">
   <label for="file">Choose File</label>
   <input type="file"
           id="file"
           (change) = "loadFile($event.target.files)" ></div>
 <div id = "wavePlay" (click) = playTrack()>play</div>
-<button type="button" (click) = initWavesurfer()> WAVEFORM</button>
 
 <div>
     <div id="waveform">
         <div id='wave-timeline'></div>
-        
+
       </div>
+
     </div>
-    
+  
+  <div class="btn-group">
+    <button type="button" (click) = destroyWaveform()> STOP</button>
+    <button type="button" (click) = pauseWaveform()> PAUSE/PLAY </button>
+    <button type="button" (click) = initWavesurfer()> WAVEFORM</button>
+  </div>
+

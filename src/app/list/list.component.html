@@ -1,0 +1,36 @@
+<p>list works!</p>
+
+<button type="button" (click) = getWaveBuffer()> buffer</button>
+
+<div class="fileList">
+
+
+  <div class = 'defaultAudio' (click)='displayAfList()'>Audio Samples
+    <div class="files" *ngFor = "let file of defaultAudio" (click)=holdName(file)>
+      {{file.fileName}}
+    </div>
+  </div>
+
+  <div class = 'loadedTracks'> Your Tracks
+    <div class="files" *ngFor = "let track of loaded">
+      {{track}}
+    </div>
+  </div>
+
+  <div class = 'cuts'>Session Cuts
+    <div class="files" *ngFor = "let cut of cuts" (click)= listClick(cut)>
+
+      {{cut}}
+    </div>
+  </div>
+
+
+  <div class='sequencerFiles' (click)='displayList()'> Projects
+    <div class="files" *ngFor = "let file of userFiles" (click)='displayItem(file.fileName)'>
+      {{file.fileName}}
+    </div>
+  </div>
+
+
+
+</div>
