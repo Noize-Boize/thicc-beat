@@ -1,7 +1,32 @@
-SAMPLER
-<button type="button" (click) = getWaveBuffer()> buffer</button>
-<div id = 'wholething'>
-<span id = "pads">
+<span id = "samplerEffects">
+  CHORUS:
+  <div>
+    <button type="button" (click) = chorusON()>ON</button>
+    <button type="button" (click) = chorusOFF()>OFF</button>
+    <div id='chorusSlider'></div>
+  </div>
+  <br>
+  REVERB:
+  <div>
+    <button type="button" (click) = reverbON()>ON</button>
+    <button type="button" (click) = reverbOFF()>OFF</button>
+    <div id='reverbSlider'></div>
+  </div>  
+  <br>
+  PITCH SHIFT:
+  <div>
+    <button type="button" (click) = pitchON()>ON</button>
+    <button type="button" (click) = pitchOFF()>OFF</button>
+    <div id='pitchSlider'></div>
+  </div>
+</span>
+
+
+
+
+
+<div id = "pads">
+    <button type="button" (click) = getWaveBuffer()> buffer</button>
   <div class="row">
     <span class="pad" id = "C3" (click)=sendId($event) (click) = playSound()>  1 </span>
     <span class="pad" id = "D3" (click)=sendId($event) (click) = playSound()>  2 </span>
@@ -18,31 +43,12 @@ SAMPLER
     <span class="pad" id = "D4" (click)=sendId($event) (click) = playSound()>  9 </span>
   </div>
   <div id="waveform1"></div>
-</span>
+</div>
+
+<br>
 
 
-
-
-
-<span>
-  <div id = "samplerEffects">
-    CHORUS:
-    <button type="button" (click) = chorusON()>ON</button>
-    <button type="button" (click) = chorusOFF()>OFF</button>
-    <span id='chorusSlider'></span>
-    <br>
-    REVERB:
-    <button type="button" (click) = reverbON()>ON</button>
-    <button type="button" (click) = reverbOFF()>OFF</button>
-    <span id='reverbSlider'></span>
-    <br>
-    PITCH SHIFT:
-    <button type="button" (click) = pitchON()>ON</button>
-    <button type="button" (click) = pitchOFF()>OFF</button>
-    <span id='pitchSlider'></span>
-  </div>
-</span>
-
+<!-- 
 <span>
   <div id = "backgroundMusic">
     Background Music:
@@ -51,5 +57,4 @@ SAMPLER
     <br>
     <span id="playbackDial"></span>
     </div>
-</span>
-</div>
+</span> -->

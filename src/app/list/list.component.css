@@ -1,8 +1,8 @@
 .fileList{
   background-color: lightblue;
   overflow-y: auto;
-  height: 300px;
-  width: 250px;
+  height: 800px;
+  width: 300px;
   position:relative;
 }
 .files {

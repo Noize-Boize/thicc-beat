@@ -1,29 +1,34 @@
+<!-- 
 <app-signup></app-signup>
 <app-login></app-login>
-<!--The instrument is the thing-->
-<div class="id">
-  <app-list></app-list>
-</div>
-<div id = "thing">
-
-  <div class="instrument" id="sampler">
-<!--put sampler tag here-->
-<app-sampler></app-sampler>
-  </div>
-
-  <div class="instrument" id="waveform">
-WAVEFORM
-<app-waveform></app-waveform>
-  </div>
-
-  <div class="instrument" id="sequencer">
-SEQUENCER
+<app-list></app-list>
 <app-sequencer></app-sequencer>
-  </div>
-
+<app-sampler></app-sampler>
+<app-waveform></app-waveform>
+ -->
+<app-signup></app-signup>
+<app-login></app-login>
+<div id="mainbody">
+  
+  <span id="List">
+    <app-list></app-list>
+  </span>
+  <span>
+    <span id="Sampler">
+      <app-sampler></app-sampler>
+    </span>
+    <span id="Sequencer">
+      <app-sequencer></app-sequencer>
+    </span>
+    <div id="Waveform">
+      <app-waveform></app-waveform>
+    </div>
+  </span>
 </div>
 
-<div class = "testbuttons" id = "testButtons">
+  
+
+<!-- <div class = "testbuttons" id = "testButtons">
   Test buttons:
   <br>
   <button type="button" (click) = "playC()">C</button>
@@ -41,4 +46,4 @@ SEQUENCER
   <button type="button" (click) = stopIt()>Stop</button>
   <button type="button" (click) = logPosition()>log</button>
   <br>
-</div>
+</div> -->
