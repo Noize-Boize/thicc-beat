@@ -1,10 +1,14 @@
-import { Component, OnInit, ApplicationRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Injectable, ApplicationRef, ChangeDetectionStrategy } from '@angular/core';
 
 import {FirebaseService} from '../firebase/firebase.service';
 
 import { Observable } from 'rxjs';
 
 import { WaveformComponent } from '../waveform/waveform.component';
+
+import { SamplerComponent } from '../sampler/sampler.component';
+
+import { SequencerComponent } from '../sequencer/sequencer.component';
 
 import { AudioBufferToWav } from '../../../audiobuffer-to-wav';
 
@@ -21,6 +25,8 @@ import {AngularFirestore } from '@angular/fire/firestore';
 ////// need to add logic to make sure that the user cannot re-click to keep adding to the list.
 
 var waveformComponent = new WaveformComponent;
+var samplerComponent = new SamplerComponent;
+var sequencerComponent = new SequencerComponent;
 
 
 @Component({
@@ -29,9 +35,14 @@ var waveformComponent = new WaveformComponent;
   styleUrls: ['./list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@Injectable()
 export class ListComponent implements OnInit {
 
+
   wavebuffer: any;
+
+  clickedItem: any;
+
 
   public userFiles: Array<FSequencer>;
 
@@ -43,20 +54,22 @@ export class ListComponent implements OnInit {
 
   private cuts:Array<any>;
 
+
   private loaded:Array<any>;
 
   private defaultFile = new FSequencer('defaultFile','jak','[1,0,1,0,0,0]','[pad1,pad2,pad3]');
 
-  constructor(private firebaseService: FirebaseService,
-              public appRef: ApplicationRef,
-              public user: UserService,
-              private firestore: AngularFirestore) {
+  
+  constructor(private firebaseService?: FirebaseService,
+              public appRef?: ApplicationRef,
+              public user?: UserService,
+              private firestore?: AngularFirestore) {
 
                 this.defaultAudio=['defaultAudio'];
                 this.loaded=['defaultTrack'];
                 this.cuts=['defaultCut'];
                 this.userFiles=[this.defaultFile];
-
+  if(this.firestore != undefined){
   this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
   .subscribe(v => {
     for (var i = 0; i<v.length;i++)
@@ -67,6 +80,7 @@ export class ListComponent implements OnInit {
       this.userFiles.push(temp);
     }
   });
+}
   console.log(this.userFiles);
   //this.userFiles.push('ass');
   //console.log('list comp const defaultFile',this.defaultFile);
@@ -77,10 +91,12 @@ export class ListComponent implements OnInit {
   //    filter(stable => stable)
   // ).subscribe(() => console.log('App is stable now'));
   // interval(1000).subscribe(counter => console.log(counter));
+  if(this.user != undefined){
   if(this.user.getLoggedInName() != null)
   {
     console.log('user is logged in');
   }
+}
   else{
     console.log('no user logged in');
   }
@@ -223,6 +239,18 @@ public blobToFile = (theBlob: Blob, fileName:string): File => {
   //Cast to a File() type
   return <File>theBlob;
 }
+listClick(clicked){
+  console.log("you clicked a list", clicked);
+  this.clickedItem = clicked;
+  console.log("in listClicked", this.clickedItem)
+  samplerComponent.getSound(this.clickedItem);
+  sequencerComponent.assignSound(this.clickedItem);
+}
+
+public getClicked(){
+  console.log("in getClicked", this.clickedItem);
+  return this.clickedItem;
+}
 
   ngOnInit() {
 
@@ -234,76 +262,8 @@ public blobToFile = (theBlob: Blob, fileName:string): File => {
     return;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   loadUserList()
   {
-
-
-
 
     this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
     .subscribe(v => {

@@ -80,6 +80,9 @@ export class SequencerComponent implements OnInit {
   }
   public notes: Array<string>;
   public columns: Array<string>;
+  public clickedNote: any;
+  public listSound: any;
+
 
   constructor()
   {
@@ -89,6 +92,22 @@ export class SequencerComponent implements OnInit {
                     '08','09','10','11','12','13','14','15'];
   }
   //play pause functionality implemented in nexusui oninit
+  passNote(note){
+    this.clickedNote = note;
+    console.log("this is the note", this.clickedNote);
+  }
+
+  assignSound(sound){
+    this.listSound = sound;
+    console.log("in sequencer:", sound);
+    //sampler.add(this.clickedNote, new Tone.Buffer(sound));
+  }
+  readySound(){
+    console.log("sequencer clickedNote: ", this.clickedNote);
+    console.log("sequencer listSound: ", this.listSound);
+    sampler.add(this.clickedNote, new Tone.Buffer(this.listSound));
+  }
+
   play(){
     if(seq.state=="stopped"){
       seq.start();

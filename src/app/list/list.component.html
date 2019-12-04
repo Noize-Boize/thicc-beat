@@ -17,7 +17,7 @@
   </div>
 
   <div class = 'cuts'>Session Cuts
-    <div class="files" *ngFor = "let cut of cuts">
+    <div class="files" *ngFor = "let cut of cuts" (click)= listClick(cut)>
       {{cut}}
     </div>
   </div>
