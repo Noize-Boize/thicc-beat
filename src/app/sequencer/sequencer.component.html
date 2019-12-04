@@ -4,18 +4,18 @@
       [attr.data-note]="note" [attr.data-x]="i" [attr.data-y]="j">
       </div>
   </div>
+</div>
 
-  <div>
-    <!-- <button (click) = play()>PLAY</button> -->
-    <h4>Play Pause Button</h4>
-    <span id="playButton"></span>
-
-    <div style="padding: 40px">
+<div id="trnsprt">
+    <span id="playButton" style= "padding:40px; margin: 20px; float:left; clear:left;">
+      <h4>Play/Pause</h4>
+    </span>
+  
+    <span style="padding:40px; margin: 20px; float: right;">
       <h4>BPM Slider</h4>
       <span id="BpmSlider" style="width:200px;height:30px"></span>
-      <div id="BpmNumDisplay"></div>
-    </div>
-    <button type="button" (click) = readySound()> assign</button>
+
+      <br><span id="BpmNumDisplay" style="margin-left: 75px; margin-top: 275px;"></span>
+    </span>
   </div>
-  <button type="button" name="button" (click) = clearMatrix()>clear</button>
-</div>
+
