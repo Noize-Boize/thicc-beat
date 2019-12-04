@@ -1,19 +1,22 @@
 <p>waveform works!</p>
-
-
-
-
 <div class = "loadTracks">
   <label for="file">Choose File</label>
   <input type="file"
           id="file"
           (change) = "loadFile($event.target.files)" ></div>
 <div id = "wavePlay" (click) = playTrack()>play</div>
-<button type="button" (click) = initWavesurfer()> WAVEFORM</button>
 
 <div>
     <div id="waveform">
         <div id='wave-timeline'></div>
 
       </div>
+
     </div>
+  
+  <div class="btn-group">
+    <button type="button" (click) = destroyWaveform()> STOP</button>
+    <button type="button" (click) = pauseWaveform()> PAUSE/PLAY </button>
+    <button type="button" (click) = initWavesurfer()> WAVEFORM</button>
+  </div>
+

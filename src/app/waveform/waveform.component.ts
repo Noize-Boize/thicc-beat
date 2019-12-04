@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, Injectable, OnInit } from '@angular/core';
 import * as WaveSurfer from 'wavesurfer.js'
 import * as Tone from 'tone';
 import RegionPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.min.js';
@@ -8,22 +8,43 @@ var wavePlayer = new Tone.Player("./../../assets/audioSamples/NOPE.mp3").toMaste
 var item = null;
 var loadedTrackPath = "";
 var counter = 0;
+var region1;
+var wavesurfer;
 
+export function copy(region, instance){
+  var segmentDuration = region.end - region.start
 
+  var originalBuffer = instance.backend.buffer;
+  var emptySegment = instance.backend.ac.createBuffer(
+      originalBuffer.numberOfChannels,
+      segmentDuration * originalBuffer.sampleRate,
+      originalBuffer.sampleRate
+  );
+  for (var i = 0; i < originalBuffer.numberOfChannels; i++) {
+      var chanData = originalBuffer.getChannelData(i);
+      var emptySegmentData = emptySegment.getChannelData(i);
+      var mid_data = chanData.subarray( region.start * originalBuffer.sampleRate, region.end * originalBuffer.sampleRate);
+      console.log("mid_data: ", mid_data);
+      emptySegmentData.set(mid_data);
+  }
+
+  return emptySegment
+}
 
 
 @Component({
   selector: 'app-waveform',
   templateUrl: './waveform.component.html',
-  styleUrls: ['./waveform.component.css']
+  styleUrls: ['./waveform.component.css'],
 })
 
-
+@Injectable()
 export class WaveformComponent implements OnInit {
-
+  buffer: any;
   public loadedTracks: Array<string>;
 
   public trackSamples: Array<string>;
+
 
   constructor() {
 
@@ -31,13 +52,19 @@ export class WaveformComponent implements OnInit {
 
     this.trackSamples = ['sample1','sample2','sample3',];
 
+
    }
 
   ngOnInit() {
     //document.getElementById("defaultOpen").click();
   }
-  initWavesurfer(){
-    var wavesurfer = WaveSurfer.create({
+
+
+
+
+
+initWavesurfer(){
+      wavesurfer = WaveSurfer.create({
       container: '#waveform',
       waveColor: 'violet',
       progressColor: 'purple',
@@ -46,31 +73,50 @@ export class WaveformComponent implements OnInit {
         TimelinePlugin.create({
           container:"#wave-timeline"
         })
-
       ]
     });
     if(counter>0){
       wavesurfer.destroy();
     }
 
-  wavesurfer.load(loadedTrackPath);
+    wavesurfer.load(loadedTrackPath);
 
-  wavesurfer.on('ready', function () {
+    wavesurfer.on('ready', function () {
     wavesurfer.enableDragSelection({});
     wavesurfer.play();
 });
-wavesurfer.on('region-click', function() {
-  console.log(Object.keys(wavesurfer.regions.list)[0]);
-  wavesurfer.regions.list[Object.keys(wavesurfer.regions.list)[Object.keys(wavesurfer.regions.list).length-1]].playLoop();
+    wavesurfer.on('region-click', function() {
+      region1 = wavesurfer.regions.list[Object.keys(wavesurfer.regions.list)[Object.keys(wavesurfer.regions.list).length-1]];
+      region1.playLoop();
 
 });
-wavesurfer.on('dblclick', function(){
-  wavesurfer.play();
+    wavesurfer.on('dblclick', function(){
+    wavesurfer.play();
 });
-counter++;
+    counter++;
   }
+  //this corresponds to the waveform copy button
+copythis(){
+  console.log("I made it to copythig()");
+  this.buffer = copy(region1, wavesurfer);
+  console.log(this.buffer);
 
-  loadFile(file){
+}
+destroyWaveform(){
+  wavesurfer.destroy();
+  counter--;
+}
+pauseWaveform(){
+  wavesurfer.playPause();
+}
+
+getBuffer(){
+  this.buffer = copy(region1, wavesurfer);
+  console.log("in waveform getbuffer", this.buffer)
+  return this.buffer;
+}
+
+loadFile(file){
     if (file != null){
 
       console.log("here in playTrack: not null")
@@ -91,7 +137,7 @@ counter++;
     }
   }
 
-  playTrack(){
+playTrack(){
     if(loadedTrackPath == "")
     {
 
@@ -126,11 +172,11 @@ showList(evt, cityName) {
   }
 
 
-  loadToWaveForm(track)
-  {
+loadToWaveForm(track)
+{
     console.log(track);
   }
-  applyToPad(sample){
+applyToPad(sample){
     console.log(sample);
   }
 

@@ -1,7 +1,9 @@
 <p>list works!</p>
 
+<button type="button" (click) = getWaveBuffer()> buffer</button>
 
 <div class="fileList">
+
 
   <div class = 'defaultAudio' (click)='displayAfList()'>Audio Samples
     <div class="files" *ngFor = "let file of defaultAudio" (click)=holdName(file)>
@@ -16,7 +18,8 @@
   </div>
 
   <div class = 'cuts'>Session Cuts
-    <div class="files" *ngFor = "let cut of cuts">
+    <div class="files" *ngFor = "let cut of cuts" (click)= listClick(cut)>
+
       {{cut}}
     </div>
   </div>
