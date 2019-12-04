@@ -22,7 +22,7 @@
   </div>
 
 
-  <div class='sequencerFiles'> Projects
+  <div class='sequencerFiles' (click)='displayList()'> Projects
     <div class="files" *ngFor = "let file of userFiles" (click)='displayItem(file.fileName)'>
       {{file.fileName}}
     </div>

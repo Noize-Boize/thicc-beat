@@ -66,7 +66,7 @@ import { UserService} from './user/user.service';
     // this allows for modal forms
     NgbModule
   ],
-  providers: [UserService,ListComponent],
+  providers: [UserService,ListComponent,SequencerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

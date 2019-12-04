@@ -10,6 +10,8 @@ import{FSequencer} from '../files/f-sequencer.model';
 
 import {UserService} from '../user/user.service';
 
+import {SequencerService} from '../sequencer/sequencer.service';
+
 
 import {AngularFirestore } from '@angular/fire/firestore';
 
@@ -42,34 +44,13 @@ export class ListComponent implements OnInit {
   constructor(private firebaseService: FirebaseService,
               public appRef: ApplicationRef,
               public user: UserService,
+              private seq: SequencerService,
               private firestore: AngularFirestore) {
-                this.defaultAudio=['defaultAudio'];
-                this.loaded=['defaultTrack'];
-                this.cuts=['defaultCut'];
-                this.userFiles=[this.defaultFile];
+                this.defaultAudio=[];
+                this.loaded=[];
+                this.cuts=[];
+                this.userFiles=[];
 
-
-
-  this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
-  .subscribe(v => {
-    for (var i = 0; i<v.length;i++)
-    {
-
-      console.log(v[i]);
-      var temp = new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds);
-      this.userFiles.push(temp);
-    }
-  });
-  console.log(this.userFiles);
-  //this.userFiles.push('ass');
-  //console.log('list comp const defaultFile',this.defaultFile);
-  // console.log('list comp const userFiles 0.fielName: ',this.userFiles[0].fileName);
-  // console.log('list comp const userFiles 0 type: ',typeof this.userFiles[0].fileName);
-
-  // appRef.isStable.pipe(
-  //    filter(stable => stable)
-  // ).subscribe(() => console.log('App is stable now'));
-  // interval(1000).subscribe(counter => console.log(counter));
   if(this.user.getLoggedInName() != null)
   {
     console.log('user is logged in');
@@ -82,6 +63,19 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
+    .subscribe(v => {
+      for (var i = 0; i<v.length;i++)
+      {
+
+        //console.log(v[i]);
+        var temp = new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds);
+        this.userFiles.push(temp);
+      }
+    });
+
+    this.loadDefaultList();
+
 
   }
 
@@ -89,71 +83,6 @@ export class ListComponent implements OnInit {
   {
     return;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   loadUserList()
   {
@@ -172,76 +101,61 @@ export class ListComponent implements OnInit {
       }
     });
     console.log(this.userFiles);
-    //return this.userFiles;
 
-
-
-
-
-
-
-    // console.log("before api call: ", this.userFiles);
-    // this.userFiles = this.firebaseService.loadUserSeqFiles();
-    // console.log("after api call: ", this.userFiles);
-
-
-
-
-
-
-
-
-    // .subscribe(val =>{
-    //   for(var i = 0;i<val.length;i++){
-    //     console.log('in subscribe',val);
-    //     //console.log('here is i: ',i)
-    //     // console.log(i);
-    //     // console.log(val[i].name)
-    //     // console.log('valI 0',val[i]);
-    //     // var tempFile = new FSequencer(val[0]);
-    //     // console.log(tempFile);
-    //     //this.newFile(val[i])
-    //     //this.userFiles.push(new FSequencer(val[i].fileName,val[i].owner,'',''));
-    //     //this.userFiles.push(new FSequencer());
-    //   }
-    //   //console.log('ListComponent sub',val);
-    //
-    // });
-    // console.log('listCompLoadUserList 0:\n',this.userFiles[0]);
-    // console.log('listCompLoadUserList 1:\n',this.userFiles[1]);
-    // console.log('listCompLoadUserList 2:\n',this.userFiles[2]);
-    // console.log('listCompLoadUserList 3:\n',this.userFiles[3]);
-    // console.log('listCompLoadUserList all:\n',this.userFiles);
-    // this.userFiles.forEach(function(ele){
-    //   //console.log(ele);
-    // })
-
-
-    //this.appRef.tick();
   }
 
   newFile(obj)
   {
-    // var temp = new FSequencer(obj.fileName,obj.owner,obj.pattern,obj.sounds);
-    // console.log('newFile: \n','fileName',temp.fileName)
-    // console.log('list comp newFile temp complete: ',temp);
+
     this.userFiles.push(new FSequencer(obj.fileName,obj.owner,obj.pattern,obj.sounds)); // = [this.userFiles, temp];
     console.log('newFile print userFiles',this.userFiles)
 
-    //return temp;
+  }
+  loadDefaultList(){
+    for(var i = 0; i<this.userFiles.length; i++)
+    {
+
+    }
+
   }
 
   displayItem(evt)
   {
     for(var i = 0; i<this.userFiles.length; i++)
     {
+      //console.log(this.userFiles[i].fileName==evt)
       if(this.userFiles[i].fileName == evt)
       {
-        console.log(this.userFiles);
+        // console.log(this.userFiles[i].fileName);
+        // console.log(this.userFiles[i].owner);
+        // console.log(this.userFiles[i].pattern);
+        // console.log(this.userFiles[i].sounds);
+        this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
       }
       else
       {
-        console.log('no matching list items for: ',evt);
+        //console.log('no matching list items for: ',evt);
+
+      }
+    }
+  }
+
+  displayList()
+  {
+    for(var i = 0; i<this.userFiles.length; i++)
+    {
+      if(this.userFiles[i].fileName != null)
+      {
+        // console.log(this.userFiles[i].fileName);
+        // console.log(this.userFiles[i].owner);
+        // console.log(this.userFiles[i].pattern);
+        // console.log(this.userFiles[i].sounds);
+        // this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
+      }
+      else
+      {
+        //console.log('no matching list items for: ',evt);
+
       }
     }
   }
