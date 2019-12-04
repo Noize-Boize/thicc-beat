@@ -16,9 +16,8 @@ var sampler = new Tone.Sampler({
   "C4" : "BD-ER1-908-uhhhhhhh.wav",
   "D4" : "HH-ER1-909open.wav",
   "E4" : "cam-clap.wav",
-  "F4" : "cam-snare.wav",
-  "1" : "cam-snare.wav",
-  "0" : "cam-snare.wav"
+  "F4" : "cam-snare.wav"
+
 },{
   "baseUrl": "./../../assets/CamAudioSample/"
 }).toMaster();
@@ -132,31 +131,37 @@ export class SequencerComponent implements OnInit {
 
   load(matrix)
   {
-    console.log("thisFucker")
-    console.log(matrix.length);
+
     for (var i = 0;i < 4;i++)
     {
       for(var j = 0;j<16;j++)
       {
         var id=j+'_'+i;
-        sequencerMatrix[i][j] = matrix[j%16];
-        console.log(id);
-        if(sequencerMatrix[i][j]==0)
+        sequencerMatrix[i][j] = matrix[j+(i*16)];
+        //console.log(id);
+        if(sequencerMatrix[i][j]!=1)
         {
           document.getElementById(id).style.backgroundColor = "black";
+          sequencerMatrix[i][j] = '';
+
         }
         else
         {
           document.getElementById(id).style.backgroundColor = "#faed27";
+          sequencerMatrix[i][j] = this.notes[i];
         }
-        //console.log("i,j",sequencerMatrix[i][j]);
-        // if(matrix[j%16]==0){
-        //   console.log('zero');
-        // }
-        // else
-        // {
-        //   console.log('one');
-        // }
+      }
+
+    }
+  }
+  clearMatrix()
+  {
+    for (var i = 0;i < 4;i++)
+    {
+      for(var j = 0;j<16;j++)
+      {
+        sequencerMatrix[i][j] = '';
+        document.getElementById(j+'_'+i).style.background = 'black';
       }
 
     }
