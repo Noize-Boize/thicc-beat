@@ -16,6 +16,7 @@ import { ListComponent } from './list/list.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 
@@ -58,6 +59,8 @@ import { UserService} from './user/user.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireStorageModule,
+
 
 
     // for the use of forms for the login information.
@@ -66,7 +69,11 @@ import { UserService} from './user/user.service';
     // this allows for modal forms
     NgbModule
   ],
-  providers: [UserService,ListComponent,SequencerComponent],
+  providers: [UserService,
+              ListComponent,
+              SequencerComponent,
+              SamplerComponent,
+              {provide: StorageBucket, useValue:'gs://oncemorewithfeeling.appspot.com'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

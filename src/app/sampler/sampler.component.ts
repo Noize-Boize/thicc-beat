@@ -180,6 +180,15 @@ BGOFF(){
 	player.stop();
 }
 
+loadPads(padArray)
+{
+
+}
+
+setClicked(evt){
+	console.log('In Sampler, clicked audio file is',evt);
+}
+
 
 
 }

@@ -8,12 +8,21 @@ import { map } from 'rxjs/operators';
 
 import{FSequencer} from '../files/f-sequencer.model';
 
+import{AudioFile} from '../files/audio-file.model';
+
 import {UserService} from '../user/user.service';
 
 import {SequencerService} from '../sequencer/sequencer.service';
 
+import {SamplerService} from '../sampler/sampler.service';
+
 
 import {AngularFirestore } from '@angular/fire/firestore';
+
+import {AngularFireStorageModule, StorageBucket} from '@angular/fire/storage';
+
+import { AngularFireStorage } from '@angular/fire/storage';
+//
 
 
 ////// need to add logic to make sure that the user cannot re-click to keep adding to the list.
@@ -33,7 +42,7 @@ export class ListComponent implements OnInit {
 
   //public userFiles: Array<string>;
 
-  private defaultAudio:Array<any>;
+  private defaultAudio:Array<AudioFile>;
 
   private cuts:Array<any>;
 
@@ -41,15 +50,26 @@ export class ListComponent implements OnInit {
 
   private defaultFile = new FSequencer('defaultFile','jak','[1,0,1,0,0,0]','[pad1,pad2,pad3]');
 
+  private exampleAudio = new AudioFile('sampName','theCoolerestFucker',32,["kick"],'path')
+
+  public profileUrl: Observable<string | null>;
+
   constructor(private firebaseService: FirebaseService,
               public appRef: ApplicationRef,
               public user: UserService,
               private seq: SequencerService,
-              private firestore: AngularFirestore) {
-                this.defaultAudio=[];
-                this.loaded=[];
-                this.cuts=[];
-                this.userFiles=[];
+              private samp: SamplerService,
+              private firestore: AngularFirestore,
+              private storage: AngularFireStorage) {
+
+  //var afPath = 'gs://oncemorewithfeeling.appspot.com'
+  const ref = this.storage.ref('/oncemorewithfeeling.appspot.com/deep house.wav');
+  this.profileUrl=ref.getDownloadURL()
+  console.log(this.profileUrl);
+  this.defaultAudio=[];
+  this.loaded=[];
+  this.cuts=[];
+  this.userFiles=[];
 
   if(this.user.getLoggedInName() != null)
   {
@@ -73,8 +93,15 @@ export class ListComponent implements OnInit {
         this.userFiles.push(temp);
       }
     });
+    this.firestore.collection<AudioFile>('AudioFiles').valueChanges()
+    .subscribe(v=> {
+      for (var i = 0; i<v.length;i++)
+      {
+        var temp = new AudioFile(v[i].fileName, v[i].owner, v[i].fLength, v[i].tags, v[i].path);
+        this.defaultAudio.push(temp);
+      }
+    })
 
-    this.loadDefaultList();
 
 
   }
@@ -131,6 +158,7 @@ export class ListComponent implements OnInit {
         // console.log(this.userFiles[i].pattern);
         // console.log(this.userFiles[i].sounds);
         this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
+        this.samp.loadPads(this.userFiles[i].sounds);
       }
       else
       {
@@ -146,18 +174,34 @@ export class ListComponent implements OnInit {
     {
       if(this.userFiles[i].fileName != null)
       {
-        // console.log(this.userFiles[i].fileName);
-        // console.log(this.userFiles[i].owner);
-        // console.log(this.userFiles[i].pattern);
-        // console.log(this.userFiles[i].sounds);
-        // this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
+
       }
       else
       {
-        //console.log('no matching list items for: ',evt);
 
       }
     }
+  }
+  displayAfList()
+  {
+    for(var i = 0; i<this.defaultAudio.length; i++)
+    {
+      if(this.defaultAudio[i].fileName != null)
+      {
+
+      }
+      else
+      {
+
+      }
+    }
+  }
+
+  holdName(evt)
+  {
+    // console.log(typeof evt);
+    // console.log(evt.path);
+    this.samp.audioClicked(evt);
   }
 
   refreshList()
