@@ -16,10 +16,21 @@ import { map } from 'rxjs/operators';
 
 import{FSequencer} from '../files/f-sequencer.model';
 
+import{AudioFile} from '../files/audio-file.model';
+
 import {UserService} from '../user/user.service';
+
+import {SequencerService} from '../sequencer/sequencer.service';
+
+import {SamplerService} from '../sampler/sampler.service';
 
 
 import {AngularFirestore } from '@angular/fire/firestore';
+
+import {AngularFireStorageModule, StorageBucket} from '@angular/fire/storage';
+
+import { AngularFireStorage } from '@angular/fire/storage';
+//
 
 
 ////// need to add logic to make sure that the user cannot re-click to keep adding to the list.
@@ -50,7 +61,7 @@ export class ListComponent implements OnInit {
 
   //public userFiles: Array<string>;
 
-  private defaultAudio:Array<any>;
+  private defaultAudio:Array<AudioFile>;
 
   private cuts:Array<any>;
 
@@ -59,6 +70,9 @@ export class ListComponent implements OnInit {
 
   private defaultFile = new FSequencer('defaultFile','jak','[1,0,1,0,0,0]','[pad1,pad2,pad3]');
 
+  private exampleAudio = new AudioFile('sampName','theCoolerestFucker',32,["kick"],'path')
+
+  public profileUrl: Observable<string | null>;
   
   constructor(private firebaseService?: FirebaseService,
               public appRef?: ApplicationRef,
@@ -92,6 +106,7 @@ export class ListComponent implements OnInit {
   // ).subscribe(() => console.log('App is stable now'));
   // interval(1000).subscribe(counter => console.log(counter));
   if(this.user != undefined){
+
   if(this.user.getLoggedInName() != null)
   {
     console.log('user is logged in');
@@ -178,6 +193,7 @@ export class ListComponent implements OnInit {
   // create Blob
   return new Blob([buffer], {type: "audio/wav"});
 
+
   function setUint16(data) {
     view.setUint16(pos, data, true);
     pos += 2;
@@ -254,14 +270,29 @@ public getClicked(){
 
   ngOnInit() {
 
+    this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
+    .subscribe(v => {
+      for (var i = 0; i<v.length;i++)
+      {
 
-  }
+        //console.log(v[i]);
+        var temp = new FSequencer(v[i].fileName, v[i].owner, v[i].pattern, v[i].sounds);
+        this.userFiles.push(temp);
+      }
+    });
+    this.firestore.collection<AudioFile>('AudioFiles').valueChanges()
+    .subscribe(v=> {
+      for (var i = 0; i<v.length;i++)
+      {
+        var temp = new AudioFile(v[i].fileName, v[i].owner, v[i].fLength, v[i].tags, v[i].path);
+        this.defaultAudio.push(temp);
+      }
+    })
 
   addList(files)
   {
     return;
   }
-
   loadUserList()
   {
 
@@ -276,78 +307,80 @@ public getClicked(){
       }
     });
     console.log(this.userFiles);
-    //return this.userFiles;
 
-
-
-
-
-
-
-    // console.log("before api call: ", this.userFiles);
-    // this.userFiles = this.firebaseService.loadUserSeqFiles();
-    // console.log("after api call: ", this.userFiles);
-
-
-
-
-
-
-
-
-    // .subscribe(val =>{
-    //   for(var i = 0;i<val.length;i++){
-    //     console.log('in subscribe',val);
-    //     //console.log('here is i: ',i)
-    //     // console.log(i);
-    //     // console.log(val[i].name)
-    //     // console.log('valI 0',val[i]);
-    //     // var tempFile = new FSequencer(val[0]);
-    //     // console.log(tempFile);
-    //     //this.newFile(val[i])
-    //     //this.userFiles.push(new FSequencer(val[i].fileName,val[i].owner,'',''));
-    //     //this.userFiles.push(new FSequencer());
-    //   }
-    //   //console.log('ListComponent sub',val);
-    //
-    // });
-    // console.log('listCompLoadUserList 0:\n',this.userFiles[0]);
-    // console.log('listCompLoadUserList 1:\n',this.userFiles[1]);
-    // console.log('listCompLoadUserList 2:\n',this.userFiles[2]);
-    // console.log('listCompLoadUserList 3:\n',this.userFiles[3]);
-    // console.log('listCompLoadUserList all:\n',this.userFiles);
-    // this.userFiles.forEach(function(ele){
-    //   //console.log(ele);
-    // })
-
-
-    //this.appRef.tick();
   }
 
   newFile(obj)
   {
-    // var temp = new FSequencer(obj.fileName,obj.owner,obj.pattern,obj.sounds);
-    // console.log('newFile: \n','fileName',temp.fileName)
-    // console.log('list comp newFile temp complete: ',temp);
+
     this.userFiles.push(new FSequencer(obj.fileName,obj.owner,obj.pattern,obj.sounds)); // = [this.userFiles, temp];
     console.log('newFile print userFiles',this.userFiles)
 
-    //return temp;
+  }
+  loadDefaultList(){
+    for(var i = 0; i<this.userFiles.length; i++)
+    {
+
+    }
+
   }
 
   displayItem(evt)
   {
     for(var i = 0; i<this.userFiles.length; i++)
     {
+      //console.log(this.userFiles[i].fileName==evt)
       if(this.userFiles[i].fileName == evt)
       {
-        console.log(this.userFiles);
+        // console.log(this.userFiles[i].fileName);
+        // console.log(this.userFiles[i].owner);
+        // console.log(this.userFiles[i].pattern);
+        // console.log(this.userFiles[i].sounds);
+        this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
+        this.samp.loadPads(this.userFiles[i].sounds);
       }
       else
       {
-        console.log('no matching list items for: ',evt);
+        //console.log('no matching list items for: ',evt);
+
       }
     }
+  }
+
+  displayList()
+  {
+    for(var i = 0; i<this.userFiles.length; i++)
+    {
+      if(this.userFiles[i].fileName != null)
+      {
+
+      }
+      else
+      {
+
+      }
+    }
+  }
+  displayAfList()
+  {
+    for(var i = 0; i<this.defaultAudio.length; i++)
+    {
+      if(this.defaultAudio[i].fileName != null)
+      {
+
+      }
+      else
+      {
+
+      }
+    }
+  }
+
+  holdName(evt)
+  {
+    // console.log(typeof evt);
+    // console.log(evt.path);
+    this.samp.audioClicked(evt);
   }
 
   refreshList()

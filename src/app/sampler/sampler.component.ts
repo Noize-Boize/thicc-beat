@@ -336,5 +336,15 @@ clickCut(cut){
   sampler.add('C3', new Tone.Buffer(cut));
 }
 
+loadPads(padArray)
+{
+
+}
+
+setClicked(evt){
+	console.log('In Sampler, clicked audio file is',evt);
+}
+
+
 
 }
