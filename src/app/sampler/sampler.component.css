@@ -6,9 +6,9 @@
   width: auto;
 }
 .pad{
-  background: null;
-  height: 50px;
-  width: 50px;
+  background-color: #b300b3;
+  height: 65px;
+  width: 65px;
   margin: 5px;
   border-style: dashed;
   text-align: center;
@@ -18,7 +18,7 @@
 }
 
 .pad:hover{
-  background: blue;
+  background: #b19cd9;
 }
 
 /*ID's*/

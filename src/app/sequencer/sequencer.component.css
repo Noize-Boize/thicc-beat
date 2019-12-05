@@ -8,6 +8,7 @@
 .cell{
   border:2px;
   border-style: solid;
+  border-color: #B19CD9;
   margin: 2px;
   height: 40px;
   width: 30px;
@@ -16,7 +17,7 @@
 
 }
 .cell:hover{
-  border-color: #faed27;
+  border-color: #B300B3;
 }
 
 .column {
@@ -29,10 +30,10 @@
 }
 .clearButton
 {
-  background-color: #712bc2;
+  background-color: #B19CD9;
 }
 .clearButton:hover{
-  background-color: #9438ff;
+  background-color: #B300B3;
 }
 
 #seqContainer {

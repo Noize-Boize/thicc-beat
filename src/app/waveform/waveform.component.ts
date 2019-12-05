@@ -66,8 +66,8 @@ export class WaveformComponent implements OnInit {
 initWavesurfer(){
       wavesurfer = WaveSurfer.create({
       container: '#waveform',
-      waveColor: 'violet',
-      progressColor: 'purple',
+      waveColor: '#b19cd9',
+      progressColor: '#8D021F',
       plugins: [
         RegionPlugin.create(),
         TimelinePlugin.create({
@@ -82,7 +82,9 @@ initWavesurfer(){
     wavesurfer.load(loadedTrackPath);
 
     wavesurfer.on('ready', function () {
-    wavesurfer.enableDragSelection({});
+    wavesurfer.enableDragSelection({
+      color: "rgba(179, 0, 179, .5)"
+    });
     wavesurfer.play();
 });
     wavesurfer.on('region-click', function() {
