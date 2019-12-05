@@ -17,19 +17,19 @@ var waveformComponent = new WaveformComponent;
 var sampler = new Tone.Sampler({
   //call sampler.triggerAttack("note") to execute audio file associated w it
   //should be able to incorporate sharps so we have up to 12 triggerable audio files
-	"C3" : "EVERYBODY PUT YOUR HANDS IN THE AIR.mp3",
-  "D3" : "DOLPHIN.mp3",
-  "E3" : "EPIC CHOIR SUSPENSE.mp3",
-  "F3" : "RUBBER DUCK.mp3",
-  "G3" : "SCREAM.mp3",
-  "A3" : "SPLAT.mp3",
-  "B3" : "TOASTY.mp3",
-  "C4" : "RECORD SCRATCH.mp3",
-	"D4" : "HEY WHAT HAPPENED.mp3",
-	"B5" : "NOPE.mp3", //This is a default for the global variable. please dont touch it.
+	"C3" : "world-music_pantheon-steel-halo-low-c_pitched-percussion_one_shot_.wav",
+  "D3" : "world-music_pantheon-steel-halo-f-sharp_pitched-percussion_one_shot_.wav.wav",
+  "E3" : "world-music_pantheon-steel-halo-g_pitched-percussion_one_shot_.wav.wav",
+  "F3" : "machinedrum_juno-22_synths_one_shot_.wav.wav",
+  "G3" : "machinedrum_juno-8_synths_one_shot_.wav.wav",
+  "A3" : "das-ding_full-synth-2_synths_one_shot_114.wav.wav",
+  "B3" : "qubit-electronix_8-bit-synth-31_synths_one_shot_.wav",
+  "C4" : "qubit-electronix_analogue-82_synths_one_shot_.wav.wav",
+	"D4" : "das-ding_synth-18_synths_one_shot_114.wav.wav",
+	"B5" : "CHORD-FisherMan.wav", //This is a default for the global variable. please dont touch it.
 },{
   //this is prepended to all the other paths
-  "baseUrl": "./../../assets/audioSamples/"
+  "baseUrl": "./../../assets/CamAudioSample/"
 }).toMaster();
 
 
@@ -71,7 +71,7 @@ wet: 1,
 
 export class SamplerComponent implements OnInit {
 
-  @HostListener('window:keypress', ['$event']) kybPlayPad(event:any){
+  @HostListener('window:keydown', ['$event']) kybPlayPad(event:any){
     console.log(event.key);
     if (event.key == 1) {sampler.triggerAttack("C3").toMaster();}
     if (event.key == 2) {sampler.triggerAttack("D3").toMaster();}
