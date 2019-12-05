@@ -32,7 +32,8 @@
 
 #Waveform{
   margin: 30px;
-  float: left;
-  clear: right;
-}
 
+  position: absolute;
+  bottom: 100px;
+  left: 300px;
+}
