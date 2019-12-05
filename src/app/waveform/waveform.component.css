@@ -1,8 +1,8 @@
 /*classes*/
 .waveTrackBox{
   background-color: orange;
-  width: 200px;
-  height: 300px;
+  width: 1000px;
+  height: 500px;
   position: relative;
 }
 
@@ -23,7 +23,8 @@
 
 #wavePlay {
   background-color: #c17afa;
-  width: 50px;
+  width: 1110px;
+  visibility: hidden
 }
 #wavePlay:hover{
   background-color: #794c9e;
@@ -32,15 +33,6 @@
 #file {
   display: none;
 }
-
-
-
-
-
-
-
-
-
 
 
 /* Style the buttonBox */
