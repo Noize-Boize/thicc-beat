@@ -4,13 +4,14 @@
       [attr.data-note]="note" [attr.data-x]="i" [attr.data-y]="j">
       </div>
   </div>
+  <div class = "clearButton" (click)='clearMatrix()'>Clear</div>
 </div>
 
 <div id="trnsprt">
     <span id="playButton" style= "padding:40px; margin: 20px; float:left; clear:left;">
       <h4>Play/Pause</h4>
     </span>
-  
+
     <span style="padding:40px; margin: 20px; float: right;">
       <h4>BPM Slider</h4>
       <span id="BpmSlider" style="width:200px;height:30px"></span>
@@ -18,4 +19,3 @@
       <br><span id="BpmNumDisplay" style="margin-left: 75px; margin-top: 275px;"></span>
     </span>
   </div>
-

@@ -25,7 +25,14 @@
     flex-direction: column;
 }
 .playButton {
-  
+
+}
+.clearButton
+{
+  background-color: #712bc2;
+}
+.clearButton:hover{
+  background-color: #9438ff;
 }
 
 #seqContainer {

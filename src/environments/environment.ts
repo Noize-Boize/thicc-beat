@@ -1,14 +1,15 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyD35md60LcLaabPd21TOrXNpzX7jSUBsO4",
-    authDomain: "thicc-beat-bb7a7.firebaseapp.com",
-    databaseURL: "https://thicc-beat-bb7a7.firebaseio.com",
-    projectId: "thicc-beat-bb7a7",
-    storageBucket: "thicc-beat-bb7a7.appspot.com",
-    messagingSenderId: "392129506784",
-    appId: "1:392129506784:web:c1cac7853ee16b9b4b0f85",
-    measurementId: "G-G5QMYJ2G49"
+    apiKey: "AIzaSyC50t_TKDuS8hcjTojpvv4Q5wA1SwGaxTI",
+    authDomain: "thicc-beat-b7547.firebaseapp.com",
+    databaseURL: "https://thicc-beat-b7547.firebaseio.com",
+    projectId: "thicc-beat-b7547",
+    storageBucket: "thicc-beat-b7547.appspot.com",
+    messagingSenderId: "836260905549",
+    appId: "1:836260905549:web:516a5c7bec94d727fc1204",
+    measurementId: "G-GMPVGYWY4E"
+
     }
 
 };
