@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import * as Tone from 'tone';
 import * as Nexus from 'nexusui';
 import { WaveformComponent } from '../waveform/waveform.component';
@@ -37,6 +37,7 @@ var sampler = new Tone.Sampler({
 
 //player for background music
 var player = new Tone.Player("./../../assets/audioSamples/BACKGROUNDMUSIC.mp3").toMaster();
+
 //sampler effects
 var chorus = new Tone.Chorus(
 {frequency : 4 ,
@@ -69,14 +70,24 @@ wet: 1,
 })
 
 export class SamplerComponent implements OnInit {
+
+  @HostListener('window:keypress', ['$event']) kybPlayPad(event:any){
+    console.log(event.key);
+    if (event.key == 1) {sampler.triggerAttack("C3").toMaster();}
+    if (event.key == 2) {sampler.triggerAttack("D3").toMaster();}
+    if (event.key == 3) {sampler.triggerAttack("E3").toMaster();}
+    if (event.key == 4) {sampler.triggerAttack("F3").toMaster();}
+    if (event.key == 5) {sampler.triggerAttack("G3").toMaster();}
+    if (event.key == 6) {sampler.triggerAttack("A3").toMaster();}
+    if (event.key == 7) {sampler.triggerAttack("C4").toMaster();}
+    if (event.key == 8) {sampler.triggerAttack("D4").toMaster();}
+    if (event.key == 9) {sampler.triggerAttack("B5").toMaster();}
+  }
+  keyPressed: number;
   
   wavebuffer: any;
 	public sounds: Array<string>;
-	constructor(){
-
-
-
-}
+	constructor(){}
 
 
 
@@ -128,9 +139,48 @@ export class SamplerComponent implements OnInit {
 		pitchSlider.on('on',function(v){
 			pitch.feedback =v;
 		});
-		
-
 }
+
+  sendId(event){
+    console.log("sendId "+clickedId);
+    var target = event.target || event.srcElement || event.currentTarget;
+    console.log(event.target.attributes.id.textContent);
+    clickedId = target.attributes.id.textContent;
+    //target.attributes.id.textContent);
+  }
+
+  getSound(sound){sampler.add(clickedId, new Tone.Buffer(sound));}
+
+  getClickedSound(clickedSound){
+    console.log("getClickedSound", clickedSound);
+    sampler.add(clickedId, new Tone.Buffer(clickedSound));
+    console.log("clickedID", clickedId);
+  }
+
+  playSound(){
+    console.log("playSound");   
+    sampler.triggerAttack(clickedId).toMaster();
+  }
+
+  //sampler effects
+  chorusON(){sampler.disconnect(Tone.Master);sampler.connect(chorus);}
+  chorusOFF(){sampler.disconnect(chorus);sampler.connect(Tone.Master);}
+
+  reverbON(){sampler.connect(reverb);}
+  reverbOFF(){sampler.disconnect(reverb);}
+
+  pitchON(){sampler.disconnect(Tone.Master);sampler.connect(pitch);}
+  pitchOFF(){sampler.disconnect(pitch);sampler.connect(Tone.Master);}
+
+  //background music
+  BGON(){player.start();}
+  BGOFF(){player.stop();}
+
+  clickCut(cut){sampler.add('C3', new Tone.Buffer(cut));}
+
+  loadPads(padArray){}
+
+  setClicked(evt){console.log('In Sampler, clicked audio file is',evt);}
 
 //this corresponds to the buffer button in the sampler
 // getWaveBuffer(){
@@ -270,81 +320,46 @@ export class SamplerComponent implements OnInit {
 //   return <File>theBlob;
 // }
 
-sendId(event){
+  /**
+  sendId(event){
+    console.log("sendId "+clickedId);
+    var target = event.target || event.srcElement || event.currentTarget;
+    console.log(event.target.attributes.id.textContent);
+    clickedId = target.attributes.id.textContent;
+    //target.attributes.id.textContent);
+  }
 
+  getSound(sound){sampler.add(clickedId, new Tone.Buffer(sound));}
 
-	console.log("sendId "+clickedId);
-	var target = event.target || event.srcElement || event.currentTarget;
+  getClickedSound(clickedSound){
+    console.log("getClickedSound", clickedSound);
+    sampler.add(clickedId, new Tone.Buffer(clickedSound));
+    console.log("clickedID", clickedId);
+  }
 
-	console.log(event.target.attributes.id.textContent);
-	clickedId = target.attributes.id.textContent;
+  playSound(){
+    console.log("playSound");   
+    sampler.triggerAttack(clickedId).toMaster();
+  }
 
-		//target.attributes.id.textContent);
+  //sampler effects
+  chorusON(){sampler.disconnect(Tone.Master);sampler.connect(chorus);}
+  chorusOFF(){sampler.disconnect(chorus);sampler.connect(Tone.Master);}
 
-}
+  reverbON(){sampler.connect(reverb);}
+  reverbOFF(){sampler.disconnect(reverb);}
 
-getSound(sound){
+  pitchON(){sampler.disconnect(Tone.Master);sampler.connect(pitch);}
+  pitchOFF(){sampler.disconnect(pitch);sampler.connect(Tone.Master);}
 
-	sampler.add(clickedId, new Tone.Buffer(sound));
-}
+  //background music
+  BGON(){player.start();}
+  BGOFF(){player.stop();}
 
-getClickedSound(clickedSound){
-  console.log("getClickedSound", clickedSound);
-  sampler.add(clickedId, new Tone.Buffer(clickedSound));
-  console.log("clickedID", clickedId);
-}
+  clickCut(cut){sampler.add('C3', new Tone.Buffer(cut));}
 
-playSound(){
-  console.log("playSound");
-  
-	sampler.triggerAttack(clickedId).toMaster();
-}
+  loadPads(padArray){}
 
-//sampler effects
-chorusON(){
-	sampler.disconnect(Tone.Master);
-  sampler.connect(chorus);
-}
-chorusOFF(){
-	sampler.disconnect(chorus);
-	sampler.connect(Tone.Master);
-}
-reverbON(){
-  sampler.connect(reverb);
-}
-reverbOFF(){
-	sampler.disconnect(reverb);
-}
-pitchON(){
-  sampler.disconnect(Tone.Master);
-  sampler.connect(pitch);
-}
-pitchOFF(){
-	sampler.disconnect(pitch);
-	sampler.connect(Tone.Master);
-}
-
-//background music
-BGON(){
-	player.start();
-}
-BGOFF(){
-	player.stop();
-}
-
-clickCut(cut){
-  sampler.add('C3', new Tone.Buffer(cut));
-}
-
-loadPads(padArray)
-{
-
-}
-
-setClicked(evt){
-	console.log('In Sampler, clicked audio file is',evt);
-}
-
-
-
+  setClicked(evt){console.log('In Sampler, clicked audio file is',evt);}
+   */
 }
