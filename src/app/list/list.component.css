@@ -1,16 +1,15 @@
 .fileList{
-  background-color: lightblue;
+  background-color: #B19CD9;
   overflow-y: auto;
   height: 700px;
   width: 300px;
   position:relative;
 }
 .files {
-  background-color: orange;
   width: 40%;
 }
 .files:hover{
-  background-color: red;
+  background-color: #b300b3;
 }
 .defaultAudio
 {

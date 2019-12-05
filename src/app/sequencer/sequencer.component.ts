@@ -13,10 +13,10 @@ for(var i=0;i<4;i++){
 }
 
 var sampler = new Tone.Sampler({
-  "C4" : "BD-ER1-908-uhhhhhhh.wav",
-  "D4" : "HH-ER1-909open.wav",
-  "E4" : "cam-clap.wav",
-  "F4" : "cam-snare.wav"
+  "C4" : "kick-11.wav",
+  "D4" : "snare-12.wav",
+  "E4" : "hat-02.wav",
+  "F4" : "analog-bell_E_minor.wav"
 
 },{
   "baseUrl": "./../../assets/CamAudioSample/"
@@ -70,14 +70,14 @@ export class SequencerComponent implements OnInit {
     //Slider for BPM init
     var BpmSlider = new Nexus.Slider("#BpmSlider", {'min': 60, 'max': 240, 'step': 1});
     BpmSlider.colorize("accent","#000");
-    BpmSlider.colorize("fill","#ff0");
+    BpmSlider.colorize("fill","#B19CD9");
     BpmSlider.value = 90;
     //assign slider to transport bpm
     BpmSlider.on('change', function(v) {Tone.Transport.bpm.value = v;});
     //text output of the current bpm inputted on slider
     var BpmNumDisplay= new Nexus.Number("#BpmNumDisplay");
     BpmNumDisplay.colorize("accent","#000");
-    BpmNumDisplay.colorize("fill","#ff0");
+    BpmNumDisplay.colorize("fill","#B19CD9");
     BpmNumDisplay.link(BpmSlider);
 
   }
@@ -134,7 +134,7 @@ export class SequencerComponent implements OnInit {
 
     if(cellValue == '')
     {
-      document.getElementById(id).style.backgroundColor = "#faed27";
+      document.getElementById(id).style.backgroundColor = "#b300b3";
       sequencerMatrix[event.target.dataset.y][event.target.dataset.x] = event.target.dataset.note;
     }
     else

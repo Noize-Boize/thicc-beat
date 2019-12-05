@@ -6,7 +6,7 @@
   width: auto;
 }
 .pad{
-  background: null;
+  background-color: #b300b3;
   height: 65px;
   width: 65px;
   margin: 5px;
@@ -18,7 +18,7 @@
 }
 
 .pad:hover{
-  background: blue;
+  background: #b19cd9;
 }
 
 /*ID's*/
