@@ -84,9 +84,10 @@ export class SamplerComponent implements OnInit {
     if (event.key == 9) {sampler.triggerAttack("B5").toMaster();}
   }
   keyPressed: number;
-  
+
   wavebuffer: any;
 	public sounds: Array<string>;
+	//private clickedId: any;
 	constructor(){}
 
 
@@ -158,7 +159,7 @@ export class SamplerComponent implements OnInit {
   }
 
   playSound(){
-    console.log("playSound");   
+    console.log("playSound");
     sampler.triggerAttack(clickedId).toMaster();
   }
 
@@ -180,7 +181,11 @@ export class SamplerComponent implements OnInit {
 
   loadPads(padArray){}
 
-  setClicked(evt){console.log('In Sampler, clicked audio file is',evt);}
+  setClicked(evt)
+	{
+		console.log('In Sampler, clicked audio file is',evt);
+		sampler.add(clickedId,evt);
+	}
 
 //this corresponds to the buffer button in the sampler
 // getWaveBuffer(){
@@ -199,7 +204,7 @@ export class SamplerComponent implements OnInit {
 //   //     audio.fnExtractSoundToMP3('../../assets/audioSamples/wavebuffer.mp3'), function (error, file) {
 //   //       if(!error)
 //   //         console.log('Audio file:' + file);
-          
+
 //   //     });
 //   //   }, function (err) {
 //   //       console.log('error' + err);
@@ -209,12 +214,12 @@ export class SamplerComponent implements OnInit {
 //   //     console.log(e.code);
 //   //     console.log(e.msg);
 //   //   }
-  
+
 
 
 
 //  // var wav = toWav.audioBufferToWav(this.wavebuffer);
-  
+
 //  //function to convert an audiobuffer to wav
 //  function bufferToWave(abuffer, len) {
 //   var numOfChan = abuffer.numberOfChannels,
@@ -287,26 +292,26 @@ export class SamplerComponent implements OnInit {
 //   // var new_file = new File(wav,);
 //   // console.log("file", new_file);
 //   // new_file.Move("../../assets/audioSamples");
- 
-  
+
+
 //   //trying to store the new wav in the sampler's assets folder (think this is unsuccessful)
 
 //   //var myFile: any = this.blobToFile(wav, "./../../assets/audioSamples/wavaudio.wav")
 //   //this.sounds.push("./../../assets/audioSamples/wavaudio.wav");
 //   //console.log("file: ", myFile);
-  
+
 
 //   //trying things here
 
 //   // var new_file = URL.createObjectURL(wav);
 //   // console.log("urlfile: ", new_file);
 // //   var reader = new FileReader();
-// //   reader.readAsDataURL(wav); 
+// //   reader.readAsDataURL(wav);
 // //   reader.onloadend = function() {
-// //       var base64data = reader.result;                
+// //       var base64data = reader.result;
 // //       console.log("This is converted: ", base64data);
 // //  }
-  
+
 // }
 
 // //method to convert audio wav blob to a file
@@ -338,7 +343,7 @@ export class SamplerComponent implements OnInit {
   }
 
   playSound(){
-    console.log("playSound");   
+    console.log("playSound");
     sampler.triggerAttack(clickedId).toMaster();
   }
 

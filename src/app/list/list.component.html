@@ -3,9 +3,9 @@
 <div class="fileList">
 
 
-  <div class = 'defaultAudio' (click)='displayAfList()'>Audio Samples
+  <div class = 'defaultAudio' >Audio Samples
     <div class="files" *ngFor = "let file of defaultAudio" (click)=holdName(file)>
-      {{file.fileName}}
+      {{file}}
     </div>
   </div>
 

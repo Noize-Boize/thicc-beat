@@ -61,16 +61,14 @@ export class ListComponent implements OnInit {
 
   //public userFiles: Array<string>;
 
-  private defaultAudio:Array<AudioFile>;
+  private defaultAudio:Array<string>;
 
   private cuts:Array<any>;
 
 
   private loaded:Array<any>;
 
-  private defaultFile = new FSequencer('defaultFile','jak','[1,0,1,0,0,0]','[pad1,pad2,pad3]');
-
-  private exampleAudio = new AudioFile('sampName','theCoolerestFucker',32,["kick"],'path')
+  private path = "./../../assets/AudioSample/";
 
   public profileUrl: Observable<string | null>;
 
@@ -85,6 +83,56 @@ export class ListComponent implements OnInit {
                 this.loaded=[];
                 this.cuts=[];
                 this.userFiles=[];
+                this.defaultAudio = [
+                  'das-ding_synth-18_synths_one_shot_114.wav.wav',
+'das-ding_woodblock-2_drums_one_shot_114.wav.wav',
+'analog-bell_E_minor.wav',
+'high hats.wav',
+'CHORD-FisherMan.wav',
+'das-ding_bass-synth-26_synths_one_shot_114.wav.wav',
+'devonté-hynes_synth-chord-3_synths_one_shot_.wav.wav',
+'cam-bass.wav',
+'.DS_Store',
+'cam-snare.wav',
+'kick ride.wav',
+'SD-ER1-DigitalClaptrap2.wav',
+'kick cymbal.wav',
+'kick 5.wav',
+'kick 4.wav',
+'world-music_pantheon-steel-halo-low-e_pitched-percussion_one_shot_.wav.wav',
+'kick 6.wav',
+'cam-kick.wav',
+'kick 7.wav',
+'Pad-Caboverdullium.wav',
+'cam-clap.wav',
+'kick 3.wav',
+'kick 2.wav',
+'SD-ER1-ClappishSnare1.wav',
+'qubit-electronix_8-bit-synth-31_synths_one_shot_.wav',
+'qubit-electronix_analogue-82_synths_one_shot_.wav.wav',
+'machinedrum_juno-8_synths_one_shot_.wav.wav',
+'snare-12.wav',
+'das-ding_full-synth-2_synths_one_shot_114.wav.wav',
+'devonté-hynes_synth-chord-4_synths_one_shot_.wav.wav',
+'world-music_pantheon-steel-halo-f-sharp_pitched-percussion_one_shot_.wav.wav',
+'world-music_pantheon-steel-halo-low-g_pitched-percussion_one_shot_.wav.wav',
+'kick 9.wav',
+'BD-ER1-908-uhhhhhhh.wav',
+'kick 8.wav',
+'world-music_pantheon-steel-halo-low-c_pitched-percussion_one_shot_.wav',
+'HH-ER1-Beatbox.wav',
+'kick snare.wav',
+'crash hit 2.wav',
+'CHORD-LochNessishSharper.wav',
+'crash hit.wav',
+'machinedrum_juno-22_synths_one_shot_.wav.wav',
+'BD-ER1-GoaKickLongDecay.wav',
+'kick-11.wav',
+'HH-ER1-909open.wav',
+'hat-02.wav',
+'world-music_pantheon-steel-halo-g_pitched-percussion_one_shot_.wav.wav',
+];
+  var path = "./../../assets/audioSamples/"
   if(this.firestore != undefined){
   this.firestore.collection<FSequencer>('sequencerFiles').valueChanges()
   .subscribe(v => {
@@ -282,14 +330,6 @@ public getClicked(){
         this.userFiles.push(temp);
       }
     });
-    this.firestore.collection<AudioFile>('AudioFiles').valueChanges()
-    .subscribe(v=> {
-      for (var i = 0; i<v.length;i++)
-      {
-        var temp = new AudioFile(v[i].fileName, v[i].owner, v[i].fLength, v[i].tags, v[i].path);
-        this.defaultAudio.push(temp);
-      }
-    })
   }
 
   addList(files)
@@ -332,19 +372,14 @@ public getClicked(){
   {
     for(var i = 0; i<this.userFiles.length; i++)
     {
-      //console.log(this.userFiles[i].fileName==evt)
       if(this.userFiles[i].fileName == evt)
       {
-        // console.log(this.userFiles[i].fileName);
-        // console.log(this.userFiles[i].owner);
-        // console.log(this.userFiles[i].pattern);
-        // console.log(this.userFiles[i].sounds);
+
         this.seq.loadSequencerMatrix(this.userFiles[i].pattern);
         this.samp.loadPads(this.userFiles[i].sounds);
       }
       else
       {
-        //console.log('no matching list items for: ',evt);
 
       }
     }
@@ -364,30 +399,12 @@ public getClicked(){
       }
     }
   }
-  displayAfList()
-  {
-    for(var i = 0; i<this.defaultAudio.length; i++)
-    {
-      if(this.defaultAudio[i].fileName != null)
-      {
-
-      }
-      else
-      {
-
-      }
-    }
-  }
 
   holdName(evt)
   {
     // console.log(typeof evt);
     // console.log(evt.path);
-    this.samp.audioClicked(evt);
-  }
-
-  refreshList()
-  {
-
+    console.log(this.path+evt);
+    this.samp.audioClicked(this.path+evt);
   }
 }

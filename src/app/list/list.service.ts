@@ -18,10 +18,7 @@ export class ListService {
 
   }
 
-  loadList()
-  {
-    this.List.refreshList();
-  }
+
 
   addToList(files)
   {
