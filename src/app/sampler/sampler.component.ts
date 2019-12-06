@@ -29,7 +29,7 @@ var sampler = new Tone.Sampler({
 	"B5" : "CHORD-FisherMan.wav", //This is a default for the global variable. please dont touch it.
 },{
   //this is prepended to all the other paths
-  "baseUrl": "./../../assets/CamAudioSample/"
+  "baseUrl": "./../../assets/AudioSample/"
 }).toMaster();
 
 

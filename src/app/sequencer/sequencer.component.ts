@@ -19,7 +19,7 @@ var sampler = new Tone.Sampler({
   "F4" : "analog-bell_E_minor.wav"
 
 },{
-  "baseUrl": "./../../assets/CamAudioSample/"
+  "baseUrl": "./../../assets/AudioSample/"
 }).toMaster();
 //
 
