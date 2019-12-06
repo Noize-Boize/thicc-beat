@@ -12,7 +12,7 @@ var region1;
 var wavesurfer;
 
 export function copy(region, instance){
-  var segmentDuration = region.end - region.start
+  var segmentDuration = region.end.toFixed(6) - region.start.toFixed(6)
 
   var originalBuffer = instance.backend.buffer;
   var emptySegment = instance.backend.ac.createBuffer(
@@ -23,7 +23,10 @@ export function copy(region, instance){
   for (var i = 0; i < originalBuffer.numberOfChannels; i++) {
       var chanData = originalBuffer.getChannelData(i);
       var emptySegmentData = emptySegment.getChannelData(i);
-      var mid_data = chanData.subarray( region.start * originalBuffer.sampleRate, region.end * originalBuffer.sampleRate);
+      console.log(region.start.toFixed(6))
+      console.log(originalBuffer.sampleRate)
+      console.log(region.end.toFixed(6))
+      var mid_data = chanData.subarray( region.start.toFixed(6) * originalBuffer.sampleRate, region.end.toFixed(6) * originalBuffer.sampleRate);
       console.log("mid_data: ", mid_data);
       emptySegmentData.set(mid_data);
   }
