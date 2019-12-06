@@ -1,6 +1,6 @@
 <div class = "loadTracks">
   <label for="file">Choose File</label>
-  <input type="file"
+  <input type="file" accept="audio/*"
           id="file"
           (change) = "loadFile($event.target.files)" ></div>
 <div id = "wavePlay" (click) = playTrack()>play</div>
